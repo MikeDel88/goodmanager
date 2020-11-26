@@ -1,10 +1,11 @@
 <?
+$active_group = "production";
 $db['production'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'goodmanager',
+	'hostname' => HOSTNAME,
+	'username' => USERNAME,
+	'password' => PASSWORD,
+	'database' => DATABASE,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
