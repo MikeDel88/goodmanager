@@ -54,7 +54,10 @@ $route['inscription'] = 'inscription/index';
 $route['validation/(:any)'] = 'inscription/validation/$1';
 
 $route['connexion'] = 'connexion/index';
+$route['connexion/reset-password'] = 'connexion/reset';
+$route['reset/(:any)'] = 'connexion/modification/$1';
 
-$route['default_controller'] = 'welcome';
+
+$route['default_controller'] = 'accueil/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

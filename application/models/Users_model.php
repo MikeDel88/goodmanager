@@ -24,5 +24,11 @@ class Users_model extends MY_Model {
         $this->db->update($this->table);
     }
 
+    public function reset($email, $data){
+        $this->db->set($data);
+        $this->db->where('email', $email);
+        $this->db->update($this->table);
+    }
+
 
 }

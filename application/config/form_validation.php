@@ -34,6 +34,25 @@ $config = array(
                         'label' => 'password',
                         'rules' => 'trim|required'
                 ),
+        ),
+        'connexion/reset' => array(
+                array(
+                        'field' => 'email',
+                        'label' => 'email',
+                        'rules' => 'trim|required|valid_email' 
+                ),
+        ),
+        'connexion/modification' => array(
+                array(
+                        'field' => 'password',
+                        'label' => 'password',
+                        'rules' => 'trim|required|min_length[8]|max_length[16]'
+                ),
+                array(
+                        'field' => 'password_repeat',
+                        'label' => 'password_repeat',
+                        'rules' => 'trim|required|matches[password]'
+                )
         )
 
 );

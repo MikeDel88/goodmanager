@@ -26,7 +26,7 @@ class Inscription extends MY_Controller {
     }
 
      // Enregistrement de l'entreprise avec son nom et on retourne l'id
-    private function registerEntreprise(){
+    private function registerEntreprise(): int{
 
        
         $data['name'] = html_escape($this->input->post("entreprise"));
@@ -35,7 +35,7 @@ class Inscription extends MY_Controller {
     }
 
     // Enregistrement de l'utilisateur, envoi d'email et création d'un token de validité valable 24 heures. 
-    private function register($entreprise_id){
+    private function register(int $entreprise_id): bool {
 
             $token = md5(microtime(TRUE)*100000);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
