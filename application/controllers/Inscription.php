@@ -14,9 +14,8 @@ class Inscription extends MY_Controller {
         $data = [];
         if ($this->form_validation->run())
         {
-            $entrepriseId = $this->registerEntreprise();
-            $data['confirm'] = $this->register($entrepriseId);
-
+            $entreprise_id = $this->registerEntreprise();
+            $data['confirm'] = $this->register($entreprise_id);
         }
 
         $this->layout->set_title("GoodManager | Inscription");
@@ -36,27 +35,27 @@ class Inscription extends MY_Controller {
     }
 
     // Enregistrement de l'utilisateur, envoi d'email et création d'un token de validité valable 24 heures. 
-    private function register($entrepriseId){
+    private function register($entreprise_id){
 
             $token = md5(microtime(TRUE)*100000);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
-            $passwordHash = password_hash(html_escape($this->input->post('password_repeat')), PASSWORD_DEFAULT);
+            $password_hash = password_hash(html_escape($this->input->post('password_repeat')), PASSWORD_DEFAULT);
             $email = html_escape($this->input->post('email'));
 
             $data = array(
             'email' => $email,
             'token' => $token,
-            'entreprise_id' => $entrepriseId,
+            'entreprise_id' => $entreprise_id,
             'token_validation' => $token_validation,
-            'password' => $passwordHash,
+            'password' => $password_hash,
             'activate' => '0',
             );
 
             // Enregistrement de l'utilisateur
-            $registerUser = $this->Users_model->insert($data);
+            $register_user = $this->Users_model->insert($data);
 
             $lien = BASE_URL . "validation/" . $token;
-            $this->email->from('mikedel@alwaysdata.net', 'No-Reply');
+            $this->email->from(SMTP_USER, 'No-Reply');
 		    $this->email->to($email);
 		    $this->email->subject('Validation GoodManager');
 		    $this->email->message("<a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>");
@@ -70,9 +69,9 @@ class Inscription extends MY_Controller {
     public function validation($token){
 
         $verification = $this->Users_model->selectToken($token);
-        $dateTime = date("Y-m-d H:i:s");
+        $date_time = date("Y-m-d H:i:s");
 
-        if($token === $verification->token && $dateTime <= $verification->token_validation){
+        if($token === $verification->token && $date_time <= $verification->token_validation){
             $this->Users_model->activation($verification->id);
             redirect('connexion');
         }else{

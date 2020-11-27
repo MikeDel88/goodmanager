@@ -17,10 +17,9 @@ class Connexion extends MY_Controller {
             $email = html_escape($this->input->post('email'));
             $password = html_escape($this->input->post('password'));
             $result = $this->Users_model->select('email', $email);
-            $verif = (password_verify($password, $result->password)) ? true : false;   
-            // Tester si compte actif ou non 
-            if($verif == true && !empty($result) && $result->activation == 1){
-                //déclaration de session/ cookies...
+            $verif = password_verify($password, $result->password);
+
+            if($verif && !empty($result) && $result->activate == 1){
                 redirect('inscription');
             }else{
                 $data['msg'] = 'Erreur de connexion, merci de réessayer';

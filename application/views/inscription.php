@@ -7,12 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?= form_open('inscription/index') ?>
 <div class="input-field col s12">
-    <label for="email">Adresse mail</label>
+    <label for="email">E-mail</label>
     <input type="email" name="email" class="validate" required>
     <span class="helper-text" data-error="mail incorrect" data-success="mail correct">Une adresse mail valide</span>
 </div>
 <div class="input-field col s12">
-    <label for="entreprise">Nom de l'entreprise</label>
+    <label for="entreprise">Entreprise</label>
     <input id="entreprise" type="text" name="entreprise" required>
     <span class="helper-text">Le nom de votre entreprise</span>
 </div>
@@ -31,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="messages">
     <?= validation_errors('<div class="chip teal lighten-1 white-text">', '<i class="close material-icons">close</i></div><br>'); ?>
-    <?= (isset($confirm)) ? "Un mail vient d'être envoyé" : '' ?>
+    <?= (isset($confirm)) ? "<p class='chip teal ligthen-1 white-text'>Un mail vient d'être envoyé</p>" : '' ?>
 </div>
 
 <?= form_close(); ?>
@@ -50,7 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             helper.style.color = 'red';
         }else{
             helper.innerHTML = "";
-            helper.style.color = 'green';
         }
 
     })

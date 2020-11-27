@@ -32,7 +32,7 @@ $config = array(
                 array(
                         'field' => 'password',
                         'label' => 'password',
-                        'rules' => 'trim|required|min_length[8]|max_length[16]'
+                        'rules' => 'trim|required'
                 ),
         )
 
