@@ -58,4 +58,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .messages{
         margin-top: 10px;
     }
+    @media screen and (max-width:600px){
+        .form-submit{
+            text-align: center;
+        }
+    }
 </style>

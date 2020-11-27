@@ -1,8 +1,12 @@
 <?
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+ * Layout
+ * Le Layout de l'application
+ */
 class Layout {
-
+    
     private $CI;
     private $var = array();
     private $theme = "";

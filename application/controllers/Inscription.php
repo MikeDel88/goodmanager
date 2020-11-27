@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
+/**
+ * Inscription
+ * Permet l'inscription de l'utilisateur et de son entreprise avec un mail de validation
+ */
 class Inscription extends MY_Controller {
 
 
@@ -9,8 +13,12 @@ class Inscription extends MY_Controller {
 		parent::__construct();
     }
     
-    // Affiche la page d'inscription
-    public function index(){
+    /**
+     * index
+     *
+     * @return void Affiche la page d'inscription   
+     */
+    public function index() :void{
         $data = [];
         if ($this->form_validation->run())
         {
@@ -24,8 +32,12 @@ class Inscription extends MY_Controller {
                     ->views("inscription", $data)
                     ->view('partials/footer.inc.php');
     }
-
-     // Enregistrement de l'entreprise avec son nom et on retourne l'id
+ 
+    /**
+     * registerEntreprise
+     *
+     * @return int Enregistrement de l'entreprise avec son nom et on retourne l'id 
+     */
     private function registerEntreprise(): int{
 
        
@@ -34,7 +46,12 @@ class Inscription extends MY_Controller {
 
     }
 
-    // Enregistrement de l'utilisateur, envoi d'email et création d'un token de validité valable 24 heures. 
+    /**
+     * register
+     *
+     * @param  mixed $entreprise_id
+     * @return bool Enregistrement de l'utilisateur, envoi d'email et création d'un token de validité valable 24 heures. 
+     */
     private function register(int $entreprise_id): bool {
 
             $token = md5(microtime(TRUE)*100000);
@@ -64,9 +81,14 @@ class Inscription extends MY_Controller {
 		    return ($this->email->send(FALSE)) ? false : true;
 
     }
-
-    // Récupère le lien avec le token et vérifie pour activer le compte
-    public function validation($token){
+   
+    /**
+     * validation
+     *
+     * @param  mixed $token
+     * @return void Récupère le lien avec le token et vérifie pour activer le compte 
+     */
+    public function validation($token):void{
 
         $verification = $this->Users_model->selectToken($token);
         $date_time = date("Y-m-d H:i:s");

@@ -2,15 +2,23 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
+/**
+ * Connexion
+ * Permet la connexion de l'utilisateur une fois que son inscription a été validé
+ */
 class Connexion extends MY_Controller {
 
 
     public function __construct(){
 		parent::__construct();
     }
-
-    // Affiche la page de connexion et permet de se connecter
-    public function index(){
+   
+    /**
+     * index
+     *  
+     * @return void Affiche la page de connexion et permet de se connecter 
+     */
+    public function index() :void{
         $data = [];
         if ($this->form_validation->run())
         {
@@ -34,8 +42,13 @@ class Connexion extends MY_Controller {
                     ->view('partials/footer.inc.php');
     }
 
-    // Vérification de l'e-mail et envoi d'un lien pour réinitialiser le mot de passe
-    public function reset(){
+      
+    /**
+     * reset
+     *
+     * @return void Vérification de l'e-mail et envoi d'un lien pour réinitialiser le mot de passe 
+     */
+    public function reset() :void{
         if ($this->form_validation->run())
         {
             $email = html_escape($this->input->post('email'));
@@ -68,9 +81,14 @@ class Connexion extends MY_Controller {
             }
         }
     }
-    
-    // Page qui récupère le lien de reset et modifie le mot de passe
-    public function modification(string $token){
+      
+    /**
+     * modification
+     *
+     * @param  mixed $token
+     * @return void Page qui récupère le lien de reset et modifie le mot de passe 
+     */
+    public function modification(string $token) :void{
 
         $result = $this->Users_model->selectToken(html_escape($token));
         $date_time = date("Y-m-d H:i:s");

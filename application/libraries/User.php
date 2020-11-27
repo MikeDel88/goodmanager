@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
+/**
+ * User
+ * Cette classe représente le model de construction pour un utilisateur
+ */
 class User extends Utilities {
 
 	private int $id;
@@ -16,27 +20,6 @@ class User extends Utilities {
 	private string $created_at;
 	private string $updated_at;
 
-
-
-	public function inscription(){
-		// inscription de l'utilisateur
-	}
-
-	public function connexion(){
-		// connexion de l'utilisateur
-	}
-
-	public function modification(){
-		// modifier les informations de l'utilisateur
-	}
-
-	public function suppression(){
-		// supprime l'utilisateur
-	}
-
-	public function ajout(){
-		// ajoute un utilisateur
-	}
 
 	/**
 	 * Get the value of id
