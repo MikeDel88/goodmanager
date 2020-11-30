@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <main id="page_inscription" class="row valign-wrapper">
 <div class="col m6  hide-on-small-only">
-    <img src="./assets/images/inscription.jpg" alt="logo inscription" class="img-inscription">
+    <img src="<?= base_url() ?>/assets/images/inscription.jpg" alt="logo inscription" class="img-inscription">
 </div>
 <div class="col m6">
     <h3 class="center-align h1">Rejoignez-nous !</h3>
@@ -40,58 +40,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <?= form_close(); ?>
 </div>
-
-
 </main>
-<script>
-    let password_repeat = document.querySelector("#password_repeat");
-    let password = document.querySelector("#password");
 
-    password_repeat.addEventListener('change', function(){
 
-        let helper = document.querySelector("#helper_password_repeat");
-        
-        if(password.value !== password_repeat.value){
-            helper.innerHTML = "Les mots de passe ne correspondent pas";
-            helper.style.color = 'red';
-        }else{
-            helper.innerHTML = "";
-        }
-
-    })
-
-    password.addEventListener('keypress', function(){
-
-        let helper = document.querySelector("#helper_password");
-
-        if(password.value.length >= 8 && password.value.length <= 16){
-            helper.innerHTML = "Mot de passe correct";
-            helper.style.color = 'green';
-        }else{
-            helper.innerHTML = "Mot de passe incorrect";
-            helper.style.color = 'red';
-        }
-    })
-
-</script>
-<style>
-    #page_inscription{
-        display:flex;
-    }
-    .img-inscription{
-        width:80%;
-        height:auto;
-    }
-    .messages{
-        margin-top: 10px;
-    }
-    .form-submit{
-        text-align:right;
-        width:100%;
-    }
-    @media screen and (max-width:600px){
-        .form-submit{
-            text-align: center;
-        }
-    }
-</style>

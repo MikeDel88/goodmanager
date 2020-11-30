@@ -6,11 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Connexion
  * Permet la connexion de l'utilisateur une fois que son inscription a été validé
  */
-class Connexion extends MY_Controller {
+class Connexion extends CI_Controller {
 
 
     public function __construct(){
-		parent::__construct();
+        parent::__construct();
+        $base = base_url();
+        $this->layout->set_css($base . "assets/css/layout1.css");
+        $this->layout->set_js($base . "assets/js/layout1.js");
+        $this->layout->set_theme('front-office');
     }
    
     /**
@@ -24,22 +28,24 @@ class Connexion extends MY_Controller {
         {
             $email = html_escape($this->input->post('email'));
             $password = html_escape($this->input->post('password'));
-            $result = $this->Users_model->select('email', $email);
+            $result = $this->Users_model->select('email', $email, 'User');
             $verif = password_verify($password, $result->password);
 
             if($verif && !empty($result) && $result->activate == 1){
-                // mettre en place les sessions, voir cookies, délai d'inactivité et redirection vers l'espace admin
-                redirect('inscription');
+                $this->session->session_id = $result->id;
+                $this->session->session_logged = true;
+                redirect('espace-personnel');
             }else{
                 $data['msg'] = 'Erreur de connexion, merci de réessayer';
             }
         }
 
         $this->layout->set_title("GoodManager | Connexion");
-        $this->layout
-                    ->views('partials/header.inc.php')
-                    ->views("connexion", $data)
-                    ->view('partials/footer.inc.php');
+
+        $this->layout->view("connexion", $data);
+                    
+                    
+                    
     }
 
       
@@ -52,7 +58,7 @@ class Connexion extends MY_Controller {
         if ($this->form_validation->run())
         {
             $email = html_escape($this->input->post('email'));
-            $result = $this->Users_model->select('email', $email);
+            $result = $this->Users_model->select('email', $email, 'User');
   
             if(!empty($result) && $result->activate == 1){
 
@@ -104,10 +110,8 @@ class Connexion extends MY_Controller {
             }
 
             $this->layout->set_title("GoodManager | Modification du mot de passe");
-            $this->layout
-                    ->views('partials/header.inc.php')
-                    ->views("reset", $data)
-                    ->view('partials/footer.inc.php');
+            $this->layout->view("reset", $data);
+ 
 
         }else{
             redirect('inscription');

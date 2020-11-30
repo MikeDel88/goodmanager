@@ -57,6 +57,8 @@ $route['connexion'] = 'connexion/index';
 $route['connexion/reset-password'] = 'connexion/reset';
 $route['reset/(:any)'] = 'connexion/modification/$1';
 
+$route['espace-personnel'] = 'profile/index';
+
 
 $route['default_controller'] = 'accueil/index';
 $route['404_override'] = '';

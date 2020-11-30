@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Entreprise_model extends MY_Model {
 
-    public string $table;
+    private string $table = 'entreprise';
     
     /**
      * __construct
@@ -17,19 +17,32 @@ class Entreprise_model extends MY_Model {
      */
     public function __construct(){
         parent::__construct();
-        $this->table = 'entreprise';
     }
+    
     
     /**
      * register
      *
-     * @param  array $data
-     * @return void Permet d'enregistrer un utilisateur
+     * @param  mixed $data
+     * @return int 
+     * Permet d'enregistrer une entreprise lors de la création d'un utilisateur
      */
-    public function register(array $data): int{
+    public function register(array $data) :int{
         $this->insert($data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
+    
+    
+    /**
+     * getTable
+     *
+     * @return string
+     * Retourne le nom de la table
+     */
+    public function getTable() :string{
+        return $this->table;
+    }
+
 
 }

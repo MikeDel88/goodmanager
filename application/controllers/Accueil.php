@@ -6,10 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Accueil
  * Permet d'afficher la page d'accueil
  */
-class Accueil extends MY_Controller {
+class Accueil extends CI_Controller {
 
     public function __construct(){
-		parent::__construct();
+      parent::__construct();
+      $base = base_url();
+      $this->layout->set_css("$base/assets/css/layout1.css");
+      $this->layout->set_theme('front-office');
     }
  
     /**
@@ -20,9 +23,7 @@ class Accueil extends MY_Controller {
     public function index() :void{
      
         $this->layout->set_title("GoodManager | Accueil");
-        $this->layout
-                    ->views('partials/header.inc.php')
-                    ->views("accueil")
-                    ->view('partials/footer.inc.php');
+        $this->layout->view("accueil");
+
     }
 }

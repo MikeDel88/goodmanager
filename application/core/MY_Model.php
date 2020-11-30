@@ -11,12 +11,27 @@ class MY_Model extends CI_Model {
     public function __construct(){
         parent::__construct();
     }
-
-    public function insert($fields = []){
-        return $this->db->set($fields)->insert($this->table);
+    
+    /**
+     * insert
+     *
+     * @param  array $fields
+     * @return void
+     */
+    public function insert(array $fields = []) :void{
+        $this->db->set($fields)->insert($this->getTable());
     }
-
-    public function select($fields, $data){
-        return $this->db->select('*')->from($this->table)->where($fields, $data)->get()->row();
+    
+    
+    /**
+     * select
+     *
+     * @param  string $fields
+     * @param  string $data
+     * @param  string $class
+     * @return object
+     */
+    public function select(string $fields, string $data, string $class) :object{
+        return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
 }

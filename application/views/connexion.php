@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?= form_close(); ?>
 
     <div class="password_reset right-align">
-        <a href="#modal1" class="modal-trigger">Mot de passe oublié ?</a>
+        <a href="#modal_password_reset" class="modal-trigger">Mot de passe oublié ?</a>
     </div>
     <? if(isset($msg)){?>
         <div class="chip teal lighten-1 white-text">
@@ -32,10 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div>
 <div class="col m6  hide-on-small-only">
-    <img src="./assets/images/connexion.jpg" alt="logo connexion" class="img-connexion">
+    <img src="<?= base_url() ?>/assets/images/connexion.jpg" alt="logo connexion" class="img-connexion">
 </div>
 </main>
-<div id="modal1" class="modal">
+<div id="modal_password_reset" class="modal">
     <?= form_open('connexion/reset-password') ?>
         <div class="modal-content container">
             <h4 class="center-align">Réinitialiser le mot de passe</h4>
@@ -49,33 +49,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     <?= form_close() ?>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let elems = document.querySelectorAll('.modal');
-        let instances = M.Modal.init(elems);
-    });
-</script>
-<style>
-    #page_connexion{
-        display:flex;
-    }
-    .img-connexion{
-        width:100%;
-        height:auto;
-    }
-    .password_reset{
-        margin-top: 10px;
-    }
-    .modal .modal-footer{
-        text-align:center;
-    }
-    .form-submit{
-        width:100%;
-    }
-    @media screen and (max-width:600px){
-        .form-submit, .password_reset{
-            text-align: center;
-            margin: 10px 0;
-        }
-    }
-</style>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<main class="container">
+<main id="page_reset" class="container">
     <h3 class="center-align">Réinitialisaton du mot de passe</h3>
     <?= form_open("reset/$token") ?>
     <div class="input-field col s12">
@@ -22,45 +22,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <?= form_close() ?>
 </main>
-<script>
-
-    let password_repeat = document.querySelector("#password_repeat");
-    let password = document.querySelector("#password");
-
-    password_repeat.addEventListener('change', function(){
-
-        let helper = document.querySelector("#helper_password_repeat");
-        
-        if(password.value !== password_repeat.value){
-            helper.innerHTML = "Les mots de passe ne correspondent pas";
-            helper.style.color = 'red';
-        }else{
-            helper.innerHTML = "";
-        }
-
-    })
-
-    password.addEventListener('keypress', function(){
-
-        let helper = document.querySelector("#helper_password");
-
-        if(password.value.length >= 8 && password.value.length <= 16){
-            helper.innerHTML = "Mot de passe correct";
-            helper.style.color = 'green';
-        }else{
-            helper.innerHTML = "Mot de passe incorrect";
-            helper.style.color = 'red';
-        }
-    })
-
-</script>
-<style>
-    .messages{
-        margin-top: 10px;
-    }
-    @media screen and (max-width:600px){
-        .form-submit{
-            text-align: center;
-        }
-    }
-</style>
