@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -71,7 +72,8 @@ class Connexion extends CI_Controller {
   
             if(!empty($result) && $result->activate == 1){
 
-                $token = md5(microtime(TRUE)*100000);
+                $string_token = strval(microtime(TRUE)*100000);
+                $token = md5($string_token);
                 $token_validation = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime(date("Y-m-d H:i:s"))));
 
                 $data = array(

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -31,7 +32,7 @@ class MY_Model extends CI_Model {
      * @param  string $class
      * @return object
      */
-    public function select(string $fields, string $data, string $class){
+    public function select(string $fields, $data, string $class){
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
         

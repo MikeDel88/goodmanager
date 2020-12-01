@@ -58,6 +58,7 @@ $route['connexion/reset-password'] = 'connexion/reset';
 $route['reset/(:any)'] = 'connexion/modification/$1';
 
 $route['espace-personnel'] = 'profile/index';
+$route['espace-personnel/(:any)'] = 'profile/index/$1';
 $route['profil/entreprise'] = 'profile/miseAJourEntreprise';
 $route['profil/user'] = 'profile/miseAJourUser';
 $route['profil/delete'] = 'profile/deleteUser';

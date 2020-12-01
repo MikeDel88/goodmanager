@@ -71,12 +71,23 @@ main header .settings-menu{
     top:70px;
     min-width: 150px;
     margin: 0;
+    background-color: white;
     box-shadow: 1px 4px 6px 0px var(--main-bg-color);
 }
 main header .settings-menu a{
     color: var(--main-bg-color);
+    background-color: white;
     display: inline-block;
     width:100%;
     padding: 10px 20px;
+}
+.form-submit{
+    margin: 10px 0;
+}
+@media screen and (max-width:600px){
+    .form-submit{
+        text-align: center;
+        margin: 10px 0;
+    }
 }
 

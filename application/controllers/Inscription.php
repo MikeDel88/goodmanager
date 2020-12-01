@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -56,8 +57,9 @@ class Inscription extends CI_Controller {
      * @return bool Enregistrement de l'utilisateur, envoi d'email et création d'un token de validité valable 24 heures. 
      */
     private function register(int $entreprise_id): bool {
-
-            $token = md5(microtime(TRUE)*100000);
+        
+            $string_token = strval(microtime(TRUE)*100000);
+            $token = md5($string_token);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
             $password_hash = password_hash(html_escape($this->input->post('password_repeat')), PASSWORD_DEFAULT);
             $email = html_escape($this->input->post('email'));

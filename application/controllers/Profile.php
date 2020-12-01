@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -16,28 +17,43 @@ class Profile extends MY_Controller {
         $this->layout->set_js(base_url() . "assets/js/layout2.js");
         $this->layout->set_theme("back-office");
     }
-
-    public function index(){
+    
+    /**
+     * index
+     *
+     * @return void Affiche la page de profil de l'utilisateur
+     */
+    public function index() :void{
 
         $data['user'] = $this->getUser();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
-
         $this->layout->set_title("GoodManager | Espace Personnel");
         $this->layout->set_page("Mon Profil");
         $this->layout->view('profile', $data);
 
     }
-
-    public function miseAJourEntreprise(){
+    
+    /**
+     * miseAJourEntreprise
+     *
+     * @return void Met à jour l'entreprise et redirige vers la page profil
+     */
+    public function miseAJourEntreprise() :void{
         if($this->form_validation->run())
         {
             $data = $this->post();
             $this->Entreprise_model->update($data, $this->session->entreprise_id);
+            $msg = 'modif-entreprise-ok';
             redirect("/espace-personnel");
         }
     }
-
-    public function miseAJourUser(){
+    
+    /**
+     * miseAJourUser
+     *
+     * @return void Met à jour l'utlisateur et redirige vers la page profil
+     */
+    public function miseAJourUser() :void{
         if($this->form_validation->run())
         {
             $data = $this->post();
