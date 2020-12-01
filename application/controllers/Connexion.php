@@ -29,12 +29,21 @@ class Connexion extends CI_Controller {
             $email = html_escape($this->input->post('email'));
             $password = html_escape($this->input->post('password'));
             $result = $this->Users_model->select('email', $email, 'User');
-            $verif = password_verify($password, $result->password);
 
-            if($verif && !empty($result) && $result->activate == 1){
-                $this->session->session_id = $result->id;
-                $this->session->session_logged = true;
-                redirect('espace-personnel');
+            if(!empty($result)){
+
+                $verif = password_verify($password, $result->password);
+
+                if($verif && $result->activate == 1){
+                    
+                    $this->session->session_id = $result->id;
+                    $this->session->entreprise_id = $result->entreprise_id;
+                    $this->session->session_logged = true;
+                    redirect('espace-personnel');
+
+                }else{
+                    $data['msg'] = 'Erreur de connexion, merci de réessayer';
+                }
             }else{
                 $data['msg'] = 'Erreur de connexion, merci de réessayer';
             }

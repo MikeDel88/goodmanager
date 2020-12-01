@@ -31,7 +31,26 @@ class MY_Model extends CI_Model {
      * @param  string $class
      * @return object
      */
-    public function select(string $fields, string $data, string $class) :object{
+    public function select(string $fields, string $data, string $class){
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
+    }
+        
+    /**
+     * update
+     *
+     * @param  array $data
+     * @param  int $id
+     * @return void
+     */
+    public function update(array $data, int $id) :void{
+        $this->db->set($data);
+        $this->db->set('updated_at', date('Y-m-d H:i:s'));
+        $this->db->where('id', $id);
+        $this->db->update($this->getTable());
+    }
+
+    public function delete(int $id){
+        $this->db->where('id', $id);
+        $this->db->delete($this->getTable());
     }
 }

@@ -18,6 +18,7 @@ class Layout {
         $this->var['title'] = '';
         $this->var['css'] = '';
         $this->var['js'] = ''; 
+        $this->var['page'] = '';
     }
 
     public function view($name, $data = array()) {
@@ -72,6 +73,14 @@ class Layout {
     public function set_js($js) {
         if(is_string($js) AND !empty($js)) {
             $this->var['js'] = $js;
+        return true;
+        }
+        return false;
+    }
+
+    public function set_page($page) {
+        if(is_string($page) AND !empty($page)) {
+            $this->var['page'] = $page;
         return true;
         }
         return false;

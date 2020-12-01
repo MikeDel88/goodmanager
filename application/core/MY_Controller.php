@@ -16,4 +16,19 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    protected function getUser(){
+        return $this->Users_model->select('id', $this->session->session_id, 'User');
+    }
+
+    protected function getEntreprise($id){
+        return $this->Entreprise_model->select('id', $id, 'Entreprise');
+    }
+
+    protected function post(){
+        $posts = $this->input->post();
+        foreach($posts as $post => $value){
+            $data[$post] = $value;
+        }
+        return $data;
+    }
 }
