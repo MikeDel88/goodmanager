@@ -43,13 +43,16 @@
             <?= form_close() ?>
         </div>
         <div id="delete-client" class="modal">
+            <?= form_open("fiche-client/delete") ?>
             <div class="modal-content">
+                <input type="hidden" name="id" value="<?= $client->id ?>">
                 <h4>Suppression du client</h4>
                 <p>La suppression du client sera définitive</p>
             </div>
             <div class="modal-footer">
-            <a href="/fiche-client/delete" class="waves-effect waves-green btn-flat">Confirmer</a>
+                <button type="submit" class="waves-effect waves-green btn-flat">Confirmer</button>
             </div>
+            <?= form_close() ?>
         </div>
     </fieldset>
 </section>

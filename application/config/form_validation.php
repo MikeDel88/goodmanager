@@ -178,6 +178,13 @@ $config = array(
                         'label' => 'phone',
                         'rules' => 'trim|exact_length[10]' 
                 ),
+        ),
+        'fiche/delete' => array(
+                array(
+                        'field' => 'id',
+                        'label' => 'id',
+                        'rules' => 'trim|required' 
+                ),  
         )
 
 );

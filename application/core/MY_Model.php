@@ -35,8 +35,14 @@ class MY_Model extends CI_Model {
     public function select(string $fields, $data, string $class){
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
-
-    public function selectAll($data){
+    
+    /**
+     * selectAll
+     *
+     * @param  array $data
+     * @return void
+     */
+    public function selectAll(array $data){
         return $this->db->select('*')->from($this->getTable())->where($data)->get()->result();
     }
         
@@ -53,8 +59,14 @@ class MY_Model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update($this->getTable());
     }
-
-    public function delete(int $id){
+    
+    /**
+     * delete
+     *
+     * @param  int $id
+     * @return void
+     */
+    public function delete(int $id) :void{
         $this->db->where('id', $id);
         $this->db->delete($this->getTable());
     }

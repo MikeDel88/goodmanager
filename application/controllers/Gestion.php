@@ -23,8 +23,13 @@ class Gestion extends MY_Controller {
         $this->layout->set_theme("back-office");
     }
 
-
-    public function index(){
+    
+    /**
+     * index
+     *  Affiche la page de gestion client, permet la recherche et l'ajout d'un client
+     * @return void
+     */
+    public function index() :void{
 
         $data['user'] = $this->getUser();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
@@ -34,8 +39,13 @@ class Gestion extends MY_Controller {
         $this->layout->view('gestion', $data);
 
     }
-
-    public function add(){
+    
+    /**
+     * add
+     *  Validation du formulaire d'ajout d'un client 
+     * @return void
+     */
+    public function add() :void{
         if ($this->form_validation->run()){
 
             $data = $this->post();
@@ -46,8 +56,14 @@ class Gestion extends MY_Controller {
             redirect('gestion-clients');
         }
     }
-
-    public function api($search){
+    
+    /**
+     * api
+     *  Récupère le nom d'un client et renvoi du JSON pour un traiment en AJAX
+     * @param  string $search
+     * @return void
+     */
+    public function api(string $search) :void{
         $data = [
             'entreprise_id' => $this->session->entreprise_id,
             'last_name' => urldecode(html_escape($search))

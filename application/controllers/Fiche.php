@@ -57,4 +57,17 @@ class Fiche extends MY_Controller {
             redirect('gestion-clients');
         }
     }
+    
+    /**
+     * delete
+     * Supprime un client
+     * @return void
+     */
+    public function delete() :void{
+        if ($this->form_validation->run()){
+            $id = intval($this->input->post('id'));
+            $this->Client_model->delete($id);
+            redirect('gestion-clients');
+        }
+    }
 }
