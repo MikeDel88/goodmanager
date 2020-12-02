@@ -18,7 +18,7 @@
             <ul class="list-nav">
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">home</i><span class="nav-text">Dashboard</span></a></li>
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">person</i><span class="nav-text">Gestion des comptes</span></a></li>
-                <li class="list-item"><a href="#"><i class="material-icons nav-icon">people</i><span class="nav-text">Gestion clients</span></a></li>
+                <li class="list-item"><a href="/gestion-clients"><i class="material-icons nav-icon">people</i><span class="nav-text">Gestion clients</span></a></li>
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">list</i><span class="nav-text">Liste clients</span></a></li>
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">event_available</i><span class="nav-text">Rendez-vous</span></a></li>
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">map</i><span class="nav-text">Géolocalisation</span></a></li>
@@ -37,7 +37,7 @@
                 </a>
                 <ul class="settings-menu invisible">
                     <li><a href="/espace-personnel">Mon profil</a></li>
-                    <li><a href="#">Déconnexion</a></li>
+                    <li><a href="/deconnexion">Déconnexion</a></li>
                 </ul>
             </div>
         </header>

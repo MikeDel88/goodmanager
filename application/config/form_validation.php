@@ -93,6 +93,49 @@ $config = array(
                         'label' => 'first_name',
                         'rules' => 'trim|required' 
                 ),
+        ),
+        'gestion/add' => array(
+                array(
+                        'field' => 'last_name',
+                        'label' => 'last_name',
+                        'rules' => 'trim|required' 
+                ),
+                array(
+                        'field' => 'first_name',
+                        'label' => 'first_name',
+                        'rules' => 'trim|required' 
+                ),
+                array(
+                        'field' => 'birthday',
+                        'label' => 'birthday',
+                        'rules' => 'trim|required' 
+                ),
+                array(
+                        'field' => 'address',
+                        'label' => 'address',
+                        'rules' => 'trim' 
+                ),
+                array(
+                        'field' => 'zipcode',
+                        'label' => 'zipcode',
+                        'rules' => 'trim|exact_length[5]'
+                ),
+                array(
+                        'field' => 'city',
+                        'label' => 'city',
+                        'rules' => 'trim'
+                ),
+                array(
+                        'field' => 'email',
+                        'label' => 'email',
+                        'rules' => 'trim|valid_email' 
+                ),
+                array(
+                        'field' => 'phone',
+                        'label' => 'phone',
+                        'rules' => 'trim|exact_length[10]' 
+                ),
+
         )
 
 );

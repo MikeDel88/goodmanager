@@ -10,7 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Profile extends MY_Controller {
 
-
+    
+    /**
+     * __construct
+     *  Défini le css, js et le layout 
+     * @return void
+     */
     public function __construct(){
         parent::__construct();
         $this->layout->set_css(base_url() . "assets/css/layout2.css");
@@ -43,9 +48,9 @@ class Profile extends MY_Controller {
         {
             $data = $this->post();
             $this->Entreprise_model->update($data, $this->session->entreprise_id);
-            $msg = 'modif-entreprise-ok';
-            redirect("/espace-personnel");
-        }
+
+        }            
+        redirect("/espace-personnel");
     }
     
     /**
@@ -58,14 +63,30 @@ class Profile extends MY_Controller {
         {
             $data = $this->post();
             $this->Users_model->update($data, $this->session->session_id);
-            redirect("/espace-personnel");
+            
         }
+        redirect("/espace-personnel");
     }
-
-    public function deleteUser(){
+    
+    /**
+     * deleteUser
+     * Suppression d'un utilisateur et de son entreprise
+     * @return void
+     */
+    public function deleteUser() :void{
         $this->Users_model->delete($this->session->session_id);
         $this->Entreprise_model->delete($this->session->entreprise_id);
         redirect('/');
+    }
+    
+    /**
+     * deconnexion
+     *  Supprime la session et renvoi sur la page d'accueil
+     * @return void
+     */
+    public function deconnexion() :void{
+        $this->session->sess_destroy();
+        redirect("connexion");
     }
 
 

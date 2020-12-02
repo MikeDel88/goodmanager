@@ -64,6 +64,7 @@ $autoload['libraries'] = array(
     'Utilities', 
     'User',
     'Entreprise', 
+    'Client',
     'layout', 
     'form_validation', 
     'session'
@@ -143,5 +144,6 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'Entreprise_model',
-    'Users_model'
+    'Users_model',
+    'Client_model'
 );

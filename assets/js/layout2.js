@@ -6,13 +6,35 @@ document.addEventListener('DOMContentLoaded', function () {
     let modal = document.querySelectorAll('.modal');
     M.Modal.init(modal);
 
+    let datePicker = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(datePicker, {
+        firstDay: 1,
+        format: "yyyy-mm-dd",
+        yearRange: [1930, new Date().getFullYear()],
+        i18n: {
+            months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+            weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+            weekdaysAbbrev: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            cancel: 'Fermer',
+        }
+    });
+
     let item = document.querySelectorAll('.list-item span');
     let figure = document.querySelector('aside figure');
     let aside = document.querySelector('aside');
     let icons = document.querySelectorAll('.nav-icon');
     let copyright = document.querySelector('aside footer p');
     let settings = document.querySelector('main header .settings');
+    let addCustomer = document.querySelector('#page-gestion .add-customer');
+    let gestionSearch = document.querySelector('#gestion-search');
+    let searchResult = document.querySelector('.search-result');
+    let searchClose = document.querySelector('.search-close');
+    let json;
 
+
+    // Permet de faire du responsive pour le menu de navigation
     function windowMobile(aside, figure, item, icons) {
         aside.style.width = '100px';
         figure.style.display = 'none';
@@ -42,8 +64,75 @@ document.addEventListener('DOMContentLoaded', function () {
         (window.innerWidth < 600) ? windowMobile(aside, figure, item, icons) : windowDesktop(aside, figure, item, icons);
     }
 
+    // Rend la fenêtre des paramètres visible ou non
     settings.addEventListener('click', function () {
         let settingsMenu = document.querySelector('.settings-menu');
         settingsMenu.classList.toggle("visible");
+    });
+
+    // rend le formulaire pour créer un client visible ou invisible
+    addCustomer.addEventListener('click', function () {
+        let newCustomer = document.querySelector('#add-customer');
+        newCustomer.classList.toggle("visible");
+    });
+
+    // Permet de faire une recherche par nom d'un client et affiche sous forme de liste
+    gestionSearch.addEventListener('keyup', async function (e) {
+
+        if (e.key == 'Enter') {
+
+            if (document.querySelector('.search-result ul')) {
+                document.querySelector('.search-result ul').remove();
+            }
+
+            if (gestionSearch.value !== '') {
+
+                let response = await fetch(`${window.origin}/gestion-clients/api/${gestionSearch.value}`);
+                json = await response.json();
+
+                let list = document.createElement('ul');
+                list.classList.add('collection', 'with-header');
+                searchResult.appendChild(list);
+
+                let titleResult = document.createElement('li');
+                titleResult.classList.add('collection-header');
+
+                if (json.length > 0) {
+
+                    let client = (json.length > 1) ? 'clients' : 'client';
+                    titleResult.innerHTML = `Il y a ${json.length} ${client}`;
+                    list.appendChild(titleResult);
+
+                    json.forEach(client => {
+
+                        let listResult = document.createElement('a');
+                        listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
+                        listResult.classList.add('collection-item');
+                        let birthday = new Date(client.birthday);
+                        listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
+                        list.appendChild(listResult);
+                    })
+
+                } else {
+                    titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
+                    list.appendChild(titleResult);
+                }
+
+            }
+
+
+        }
+    });
+
+    // Efface les resultats de recherche
+    searchClose.addEventListener('click', function () {
+        if (document.querySelector('.search-result ul')) {
+            document.querySelector('.search-result ul').remove();
+        }
     })
+
+
+
+
 });
+

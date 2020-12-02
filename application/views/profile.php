@@ -3,14 +3,22 @@
         <legend>L'entreprise</legend>
         <div class="container">
             <?= form_open("profil/entreprise") ?>
-                <label for="name-entreprise">Nom</label>
-                <input id="name-entreprise" type="text" name="name" value="<?= ucfirst($entreprise->name) ?>">
-                <label for="adresse-entreprise">Adresse</label>
-                <input id="adresse-entreprise" type="text" name="address" value="<?= $entreprise->address ?>">
-                <label for="code-entreprise">Code postal</label>
-                <input id="code-entreprise" type="text" name="zipcode" value="<?= $entreprise->zipcode ?>">
-                <label for="city-entreprise">Ville</label>
-                <input id="city-entreprise" type="text" name="city" value="<?= ucfirst($entreprise->city) ?>">
+                <div class="input-field">
+                    <label for="name-entreprise">Nom</label>
+                    <input id="name-entreprise" type="text" name="name" value="<?= ucfirst($entreprise->name) ?>">
+                </div>
+                <div class="input-field">
+                    <label for="adresse-entreprise">Adresse</label>
+                    <input id="adresse-entreprise" type="text" name="address" value="<?= $entreprise->address ?>">
+                </div>
+                <div class="input-field">
+                    <label for="code-entreprise">Code postal</label>
+                    <input id="code-entreprise" type="text" name="zipcode" value="<?= $entreprise->zipcode ?>">
+                </div>
+                <div class="input-field">
+                    <label for="city-entreprise">Ville</label>
+                    <input id="city-entreprise" type="text" name="city" value="<?= ucfirst($entreprise->city) ?>">
+                </div>
                 <div class="form-submit">
                     <button class="btn" type="submit">Mettre à jour</button>
                 </div>
@@ -21,12 +29,18 @@
         <legend>Mon Profil</legend>
         <div class="container">
             <?= form_open("profil/user") ?>
-                <label for="email-user">Email</label>
-                <input id="email-user" type="email" name="email" value="<?= $user->email ?>">
-                <label for="last_name-user">Nom</label>
-                <input id="last_name-user" type="text" name="last_name" value="<?= ucfirst($user->last_name) ?>">
-                <label for="first_name-user">Prénom</label>
-                <input id="first_name-user" type="text" name="first_name" value="<?= ucfirst($user->first_name) ?>">
+                <div class="input-field">
+                    <label for="email-user">Email</label>
+                    <input id="email-user" type="email" name="email" value="<?= $user->email ?>">
+                </div>
+                <div class="input-field">
+                    <label for="last_name-user">Nom</label>
+                    <input id="last_name-user" type="text" name="last_name" value="<?= ucfirst($user->last_name) ?>">
+                </div>
+                <div class="input-field">
+                    <label for="first_name-user">Prénom</label>
+                    <input id="first_name-user" type="text" name="first_name" value="<?= ucfirst($user->first_name) ?>">
+                </div>
                 <div class="form-submit">
                     <button class="btn" type="submit">Mettre à jour</button>
                 </div>

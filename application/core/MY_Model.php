@@ -35,6 +35,10 @@ class MY_Model extends CI_Model {
     public function select(string $fields, $data, string $class){
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
+
+    public function selectAll($data){
+        return $this->db->select('*')->from($this->getTable())->where($data)->get()->result();
+    }
         
     /**
      * update
