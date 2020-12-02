@@ -46,7 +46,12 @@ class MY_Controller extends CI_Controller {
     protected function post() :array{
         $posts = $this->input->post();
         foreach($posts as $post => $value){
-            $data[$post] = html_escape(strtolower($value));
+            if($post == 'birthday'){
+                $data['birthday'] = date("Y-m-d", strtotime($value));
+            }else{
+                $data[$post] = html_escape(strtolower($value));
+            }
+            
         }
         return $data;
     }

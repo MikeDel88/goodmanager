@@ -14,7 +14,7 @@
                 </div>
                 <div class="input-field">
                     <label for="birthday-client">Date de naissance</label>
-                    <input id="birthday-client" type="text" name="birthday" class="datepicker"  value="<?= $client->birthday ?>" required>
+                    <input id="birthday-client" type="text" name="birthday" class="datepicker"  value="<?= date("d-m-Y" , strtotime($client->birthday)) ?>" required>
                 </div>
                 <div class="input-field">
                     <label for="adresse-client">Adresse</label>

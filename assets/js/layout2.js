@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let datePicker = document.querySelectorAll('.datepicker');
     M.Datepicker.init(datePicker, {
         firstDay: 1,
-        format: "yyyy-mm-dd",
+        format: "dd-mm-yyyy",
         yearRange: [1930, new Date().getFullYear()],
         i18n: {
             months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
@@ -81,22 +81,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (e.key == 'Enter') {
 
+            //Reset du résultat de recherche
             if (document.querySelector('.search-result ul')) {
                 document.querySelector('.search-result ul').remove();
             }
 
+            // Si le champs est vide, je ne fais aucune requête
             if (gestionSearch.value !== '') {
 
+                // Requête de la liste des clients recherchés
                 let response = await fetch(`${window.origin}/gestion-clients/api/${gestionSearch.value}`);
                 json = await response.json();
 
+                // Création de la liste
                 let list = document.createElement('ul');
                 list.classList.add('collection', 'with-header');
                 searchResult.appendChild(list);
 
+                // Création du titre pour le résultat de la recherche
                 let titleResult = document.createElement('li');
                 titleResult.classList.add('collection-header');
 
+                // S'il y a un client ou plus alors je créé le contenu de la liste avec un lien pour accéder à la fiche
                 if (json.length > 0) {
 
                     let client = (json.length > 1) ? 'clients' : 'client';
@@ -113,14 +119,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         list.appendChild(listResult);
                     })
 
+                    // Sinon j'indique qu'il y a aucun client présent dans la recherche
                 } else {
                     titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
                     list.appendChild(titleResult);
                 }
 
             }
-
-
         }
     });
 
