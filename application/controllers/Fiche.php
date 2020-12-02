@@ -22,16 +22,39 @@ class Fiche extends MY_Controller {
         $this->layout->set_js(base_url() . "assets/js/layout2.js");
         $this->layout->set_theme("back-office");
     }
-
-    public function index($id, $nom){
+    
+    /**
+     * index
+     *  Affiche la fiche d'un client
+     * @param  int $id
+     * @param  string $nom
+     * @return void
+     */
+    public function index(?int $id, ?string $nom) :void{
 
         $data['client'] = $this->Client_model->select('id', $id, 'Client');
-        
-        $this->layout->set_title("GoodManager | Gestion Clients");
-        $this->layout->set_page("Fiche Client | " . ucFirst(urldecode($nom)));
-        echo "<pre>";
-        print_r($data['client']);
-        echo "</pre>";
 
+        $this->layout->set_title("GoodManager | Fiche Client");
+        $this->layout->set_page("Fiche Client | " . ucFirst($data['client']->last_name));
+        $this->layout->view('fiche', $data);
+
+    }
+    
+    /**
+     * update
+     *  Met à jour la fiche client
+     * @return void
+     */
+    public function update() :void{
+        if ($this->form_validation->run()){
+
+            $data = $this->post();
+            $id = intval($data['id']);
+            $this->Client_model->update($data, $id);
+            redirect("fiche-client/$id/{$data['last_name']}");
+
+        }else{
+            redirect('gestion-clients');
+        }
     }
 }

@@ -66,7 +66,10 @@ $route['profil/delete'] = 'profile/deleteUser';
 $route['gestion-clients'] = 'gestion/index';
 $route['gestion/nouveau-client'] = 'gestion/add';
 $route['gestion-clients/api/(:any)'] = 'gestion/api/$1';
+
 $route['fiche-client/(:num)/(:any)'] = 'fiche/index/$1/$2';
+$route['fiche-client/modification'] = 'fiche/update';
+$route['fiche-client/delete'] = 'fiche/delete';
 
 $route['deconnexion'] = 'profile/deconnexion';
 
