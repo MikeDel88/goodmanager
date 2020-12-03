@@ -113,3 +113,13 @@ fieldset legend{
     flex-wrap: wrap;
 }
 
+#page-listing .listing-search{
+    padding: 15px;
+}
+#page-listing th{
+    cursor: pointer;
+}
+#page-listing th:hover{
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+}

@@ -145,5 +145,6 @@ $autoload['language'] = array();
 $autoload['model'] = array(
     'Entreprise_model',
     'Users_model',
-    'Client_model'
+    'Client_model',
+    'Contact_model'
 );

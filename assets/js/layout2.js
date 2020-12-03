@@ -21,16 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    let select = document.querySelectorAll('select');
+    M.FormSelect.init(select);
+
     let item = document.querySelectorAll('.list-item span');
     let figure = document.querySelector('aside figure');
     let aside = document.querySelector('aside');
     let icons = document.querySelectorAll('.nav-icon');
     let copyright = document.querySelector('aside footer p');
     let settings = document.querySelector('main header .settings');
-    let addCustomer = document.querySelector('#page-gestion .add-customer');
-    let gestionSearch = document.querySelector('#gestion-search');
-    let searchResult = document.querySelector('.search-result');
-    let searchClose = document.querySelector('.search-close');
     let json;
 
 
@@ -70,71 +69,132 @@ document.addEventListener('DOMContentLoaded', function () {
         settingsMenu.classList.toggle("visible");
     });
 
-    // rend le formulaire pour créer un client visible ou invisible
-    addCustomer.addEventListener('click', function () {
-        let newCustomer = document.querySelector('#add-customer');
-        newCustomer.classList.toggle("visible");
-    });
+    if (document.querySelector('#page-gestion')) {
 
-    // Permet de faire une recherche par nom d'un client et affiche sous forme de liste
-    gestionSearch.addEventListener('keyup', async function (e) {
+        let addCustomer = document.querySelector('#page-gestion .add-customer');
+        let gestionSearch = document.querySelector('#gestion-search');
+        let searchResult = document.querySelector('.search-result');
+        let searchClose = document.querySelector('.search-close');
 
-        if (e.key == 'Enter') {
+        // rend le formulaire pour créer un client visible ou invisible
+        addCustomer.addEventListener('click', function () {
+            let newCustomer = document.querySelector('#add-customer');
+            newCustomer.classList.toggle("visible");
+        });
 
-            //Reset du résultat de recherche
+        // Permet de faire une recherche par nom d'un client et affiche sous forme de liste
+        gestionSearch.addEventListener('keyup', async function (e) {
+
+            if (e.key == 'Enter') {
+
+                //Reset du résultat de recherche
+                if (document.querySelector('.search-result ul')) {
+                    document.querySelector('.search-result ul').remove();
+                }
+
+                // Si le champs est vide, je ne fais aucune requête
+                if (gestionSearch.value !== '') {
+
+                    // Requête de la liste des clients recherchés
+                    let response = await fetch(`${window.origin}/gestion-clients/api/${gestionSearch.value}`);
+                    json = await response.json();
+
+                    // Création de la liste
+                    let list = document.createElement('ul');
+                    list.classList.add('collection', 'with-header');
+                    searchResult.appendChild(list);
+
+                    // Création du titre pour le résultat de la recherche
+                    let titleResult = document.createElement('li');
+                    titleResult.classList.add('collection-header');
+
+                    // S'il y a un client ou plus alors je créé le contenu de la liste avec un lien pour accéder à la fiche
+                    if (json.length > 0) {
+
+                        let client = (json.length > 1) ? 'clients' : 'client';
+                        titleResult.innerHTML = `Il y a ${json.length} ${client}`;
+                        list.appendChild(titleResult);
+
+                        json.forEach(client => {
+
+                            let listResult = document.createElement('a');
+                            listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
+                            listResult.classList.add('collection-item');
+                            let birthday = new Date(client.birthday);
+                            listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
+                            list.appendChild(listResult);
+                        })
+
+                        // Sinon j'indique qu'il y a aucun client présent dans la recherche
+                    } else {
+                        titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
+                        list.appendChild(titleResult);
+                    }
+
+                }
+            }
+        });
+
+        // Efface les resultats de recherche
+        searchClose.addEventListener('click', function () {
             if (document.querySelector('.search-result ul')) {
                 document.querySelector('.search-result ul').remove();
             }
+        })
+    }
 
-            // Si le champs est vide, je ne fais aucune requête
-            if (gestionSearch.value !== '') {
+    if (document.querySelector('#page-listing')) {
 
-                // Requête de la liste des clients recherchés
-                let response = await fetch(`${window.origin}/gestion-clients/api/${gestionSearch.value}`);
-                json = await response.json();
+        let listingSearch = document.querySelector('#select-search');
 
-                // Création de la liste
-                let list = document.createElement('ul');
-                list.classList.add('collection', 'with-header');
-                searchResult.appendChild(list);
+        listingSearch.addEventListener('change', function () {
+            document.querySelector('.form-listing').submit();
+        });
 
-                // Création du titre pour le résultat de la recherche
-                let titleResult = document.createElement('li');
-                titleResult.classList.add('collection-header');
 
-                // S'il y a un client ou plus alors je créé le contenu de la liste avec un lien pour accéder à la fiche
-                if (json.length > 0) {
+        // Tri du tableau dynamique
+        const compare = (ids, asc) => (row1, row2) => {
+            const tdValue = (row, ids) => row.children[ids].textContent;
+            const tri = (v1, v2) => v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2);
+            return tri(tdValue(asc ? row1 : row2, ids), tdValue(asc ? row2 : row1, ids));
+        };
 
-                    let client = (json.length > 1) ? 'clients' : 'client';
-                    titleResult.innerHTML = `Il y a ${json.length} ${client}`;
-                    list.appendChild(titleResult);
+        const tbody = document.querySelector('tbody');
+        const thx = document.querySelectorAll('th');
+        const trxb = tbody.querySelectorAll('tr');
+        thx.forEach(th => th.addEventListener('click', () => {
+            let classe = Array.from(trxb).sort(compare(Array.from(thx).indexOf(th), this.asc = !this.asc));
+            classe.forEach(tr => tbody.appendChild(tr));
+        }));
 
-                    json.forEach(client => {
+        // cocher ou décocher un contact client
+        let contact = document.querySelectorAll("#page-listing input[type='checkbox']");
 
-                        let listResult = document.createElement('a');
-                        listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
-                        listResult.classList.add('collection-item');
-                        let birthday = new Date(client.birthday);
-                        listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
-                        list.appendChild(listResult);
-                    })
-
-                    // Sinon j'indique qu'il y a aucun client présent dans la recherche
-                } else {
-                    titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
-                    list.appendChild(titleResult);
-                }
-
+        contact.forEach(checkbox => checkbox.addEventListener('click', async function () {
+            let clientId = this.getAttribute('data-client-id');
+            let method;
+            if (this.getAttribute('checked') == 'checked') {
+                this.removeAttribute('checked');
+                method = 'DELETE';
+            } else {
+                method = 'POST';
+                this.setAttribute('checked', 'checked');
             }
-        }
-    });
-
-    // Efface les resultats de recherche
-    searchClose.addEventListener('click', function () {
-        if (document.querySelector('.search-result ul')) {
-            document.querySelector('.search-result ul').remove();
-        }
-    })
+            let response = await fetch(
+                `${window.origin}/liste-clients/api/contact`,
+                {
+                    method: method,
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ id: clientId }),
+                }
+            );
+            let msg = await response.json();
+            console.log(msg.status);
+        }));
+    }
 
 
 

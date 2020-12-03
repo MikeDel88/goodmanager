@@ -19,7 +19,19 @@ class Client extends Utilities{
     private string $phone;
     private string $created_at;
     private string $updated_at;
-
+    
+    /**
+     * age
+     *  Retourne l'age du client en fonction de sa date de naissance
+     * @return int
+     */
+    public function age() :int { 
+        $age = date('Y') - intval($this->birthday); 
+        if (date('md') < date('md', strtotime(intval($this->birthday)))) { 
+            return $age - 1; 
+        } 
+        return $age; 
+    } 
 
     /**
      * Get the value of id

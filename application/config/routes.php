@@ -71,6 +71,11 @@ $route['fiche-client/(:num)/(:any)'] = 'fiche/index/$1/$2';
 $route['fiche-client/modification'] = 'fiche/update';
 $route['fiche-client/delete'] = 'fiche/delete';
 
+$route['liste-clients'] = 'liste/index';
+$route['liste-clients/search'] = 'liste/search';
+$route['liste-clients/api/contact'] = 'liste/contact';
+
+
 $route['deconnexion'] = 'profile/deconnexion';
 
 $route['default_controller'] = 'accueil/index';

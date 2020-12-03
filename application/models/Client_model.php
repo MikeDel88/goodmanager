@@ -29,4 +29,14 @@ class Client_model extends MY_Model {
     public function getTable() :string{
         return $this->table;
     }
+
+    public function getClientBy(string $field, string $data){
+
+        $this->db->select('*');
+        $this->db->from($this->getTable());
+        $this->db->where('entreprise_id', $this->session->entreprise_id);
+        $this->db->where($field, $data);
+        return $this->db->get()->custom_result_object('Client');
+        
+    }
 }

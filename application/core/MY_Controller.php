@@ -16,6 +16,11 @@ class MY_Controller extends CI_Controller {
             redirect('inscription');
         }
     }
+
+    public function getInput(){
+        $input_data = json_decode(trim(file_get_contents('php://input')), true);
+        return $input_data;
+    }
     
     /**
      * getUser

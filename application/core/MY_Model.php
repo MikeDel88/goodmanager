@@ -43,7 +43,10 @@ class MY_Model extends CI_Model {
      * @return void
      */
     public function selectAll(array $data){
-        return $this->db->select('*')->from($this->getTable())->where($data)->get()->result();
+        $this->db->select('*');
+        $this->db->from($this->getTable());
+        $this->db->like($data, 'before');
+        return $this->db->get()->result();
     }
         
     /**

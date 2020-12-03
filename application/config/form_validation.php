@@ -185,6 +185,16 @@ $config = array(
                         'label' => 'id',
                         'rules' => 'trim|required' 
                 ),  
+        ),
+        'liste/search' => array(
+                array(
+                        'field' => 'search',
+                        'label' => 'search',
+                        'rules' => 'trim',
+                ),
+                array(
+                        'field' => 'select-search',
+                        'label' => 'select-search'
+                )
         )
-
 );
