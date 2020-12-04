@@ -39,7 +39,7 @@
         <? if(isset($clients)) { ?>
             <tbody class="search-body">
             <? foreach($clients as $client){?>
-                <tr data-id="<?= $client->id ?>">
+                <tr data-id="<?= $client->id ?>" data-name="<?= ucFirst($client->last_name) . " " . $client->first_name?>">
                     <td class="ligne-client"><?= ucFirst($client->last_name) ?></td>
                     <td class="ligne-client"><?= ucFirst($client->first_name) ?></td>
                     <td class="ligne-client"><?= $client->age() ?></td>
@@ -64,7 +64,7 @@
                             <span></span>
                         </label>
                     </td>
-                    <td><a href="#"><i class="material-icons teal-text">event</i></a></td>
+                    <td><a href="#" class="add-event"><i class="material-icons teal-text">event</i></a></td>
                 </tr>
             <?}?>
             </tbody>
@@ -73,7 +73,7 @@
     </div>
     <div id="info-contact" class="modal">
         <div class="modal-content">
-           <h5>Liste des derniers contacts avec le client</h5>
+           
         </div>
     </div>
 </section>

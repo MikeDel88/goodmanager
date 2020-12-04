@@ -3,8 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let tooltips = document.querySelectorAll('.tooltipped');
     M.Tooltip.init(tooltips);
 
-    let modal = document.querySelectorAll('.modal');
+    let modal = document.querySelector('.modal');
     M.Modal.init(modal);
+
 
     let datePicker = document.querySelectorAll('.datepicker');
     M.Datepicker.init(datePicker, {
@@ -23,6 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let select = document.querySelectorAll('select');
     M.FormSelect.init(select);
+
+
+    function resetModal() {
+
+        if (document.querySelector('.modal-content .last-contact')) {
+            document.querySelector('.modal-content .last-contact').remove();
+        }
+        if (document.querySelector('.modal-content .rendez-vous')) {
+            document.querySelector('.modal-content .rendez-vous').remove();
+        }
+    }
 
     let item = document.querySelectorAll('.list-item span');
     let figure = document.querySelector('aside figure');
@@ -146,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (document.querySelector('#page-listing')) {
 
         let listingSearch = document.querySelector('#select-search');
+        let instanceModal = M.Modal.getInstance(modal);
 
         // Si je sélectionne un filtre dans la recherche, alors je soumets la recherche
         listingSearch.addEventListener('change', function () {
@@ -206,26 +219,27 @@ document.addEventListener('DOMContentLoaded', function () {
         let ligneClient = document.querySelectorAll('tbody tr .ligne-client');
         ligneClient.forEach(client => client.addEventListener('click', async function () {
 
-            // Reste de la liste
-            if (document.querySelector('.modal-content ul')) {
-                document.querySelector('.modal-content ul').remove();
-            }
+            resetModal();
 
             // Je selectionne le bloc modal et je l'ouvre
-            let modal = document.querySelector('.modal');
-            M.Modal.init(modal);
-            let instanceModal = M.Modal.getInstance(modal);
             instanceModal.open();
 
             // Je récupère l'id du client que je souhaite consulter
             let idClient = client.parentNode.getAttribute('data-id');
+            let nameClient = client.parentNode.getAttribute('data-name');
             let response = await fetch(`${window.origin}/liste-clients/api/history/${idClient}`);
             listeContacts = await response.json();
 
             // Je crée ma liste
             let modalContent = document.querySelector('.modal .modal-content');
+            let divContact = document.createElement('div');
+            divContact.classList.add('last-contact');
+            let title = document.createElement('h5');
+            title.innerHTML = `Liste des derniers contacts de ${nameClient}`
             let liste = document.createElement('ul');
-            modalContent.appendChild(liste);
+            modalContent.appendChild(divContact);
+            divContact.appendChild(title);
+            divContact.appendChild(liste);
 
             // Pour chaque ligne de contact dans le tableau, j'affiche un item de la liste
             listeContacts.forEach(function (contact) {
@@ -234,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 contactDateFR = contactDate.toLocaleDateString('fr-FR');
 
                 let item = document.createElement('li');
-                item.innerHTML = `Le ${contactDateFR}`;
+                item.innerHTML = `Le ${contactDateFR} par ${contact.last_name} ${contact.first_name}`;
 
                 liste.appendChild(item);
 
@@ -242,6 +256,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }));
 
+        // Clique sur ajouter un rendez-vous
+        let ligneEvent = document.querySelectorAll('tbody tr .add-event');
+        ligneEvent.forEach(event => event.addEventListener('click', function () {
+
+
+            // Reset de la liste
+            resetModal();
+            // ouverture de la modal
+            instanceModal.open();
+
+            let nameClient = event.parentNode.parentNode.getAttribute('data-name');
+            let idClient = event.parentNode.parentNode.getAttribute('data-id');
+            let modalContent = document.querySelector('.modal .modal-content');
+            let divContact = document.createElement('div');
+            divContact.classList.add('rendez-vous');
+            let title = document.createElement('h5');
+            title.innerHTML = `Prendrez rendez-vous avec ${nameClient}`
+            modalContent.appendChild(divContact)
+            divContact.appendChild(title);
+
+            let form = document.createElement('form');
+            divContact.appendChild(form);
+
+            let inputDate = document.createElement('input');
+            inputDate.setAttribute('type', 'datetime-local');
+            inputDate.setAttribute('name', 'date');
+            inputDate.classList.add('datepicker');
+            inputDate.setAttribute('required', '');
+            form.appendChild(inputDate);
+
+            let button = document.createElement('a');
+            button.innerHTML = 'Enregistrer';
+            button.classList.add('btn', 'teal');
+            form.appendChild(button);
+
+            button.addEventListener('click', async function () {
+                if (inputDate.value !== '') {
+
+                    let response = await fetch(
+
+                        `${window.origin}/rendez-vous/api/add-rdv`,
+                        {
+                            method: 'POST',
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ id: idClient, dateRDV: inputDate.value }),
+                        }
+                    );
+                    let msg = await response.json();
+                    if (msg.status == 'add_rdv') {
+                        instanceModal.close();
+                    }
+                }
+            })
+
+        }))
     }
 
 

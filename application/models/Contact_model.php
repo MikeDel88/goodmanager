@@ -46,9 +46,10 @@ class Contact_model extends MY_Model {
     }
 
     public function getHistoryContact($id){
-        $this->db->select('date');
+        $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('client_id', $id);
+        $this->db->join('users', "users.id = {$this->getTable()}.user_id");
         $this->db->order_by('date', 'DESC');
         return $this->db->get()->result();
     }

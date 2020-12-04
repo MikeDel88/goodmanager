@@ -94,7 +94,6 @@ class Liste extends MY_Controller {
 
     public function historyContact($client_id){
         $history = $this->Contact_model->getHistoryContact(html_escape($client_id));
-
         header('Content-type: application/json');
         echo json_encode($history);
     }
