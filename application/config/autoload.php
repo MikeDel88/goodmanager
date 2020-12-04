@@ -65,6 +65,7 @@ $autoload['libraries'] = array(
     'User',
     'Entreprise', 
     'Client',
+    "Contact",
     'layout', 
     'form_validation', 
     'session'

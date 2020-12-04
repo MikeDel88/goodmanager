@@ -74,6 +74,7 @@ $route['fiche-client/delete'] = 'fiche/delete';
 $route['liste-clients'] = 'liste/index';
 $route['liste-clients/search'] = 'liste/search';
 $route['liste-clients/api/contact'] = 'liste/contact';
+$route['liste-clients/api/history/(:num)'] = 'liste/historyContact/$1';
 
 
 $route['deconnexion'] = 'profile/deconnexion';

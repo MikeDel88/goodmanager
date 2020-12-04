@@ -71,6 +71,7 @@ main header .settings-menu{
     right:0;
     top:70px;
     min-width: 150px;
+    z-index: 100;
     margin: 0;
     background-color: white;
     box-shadow: 1px 4px 6px 0px var(--main-bg-color);

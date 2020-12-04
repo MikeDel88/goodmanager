@@ -28,8 +28,10 @@ class Liste extends MY_Controller {
      *  Affiche la page du listing client
      * @return void
      */
-    public function index(array $clients = NULL) :void{
+    public function index(array $clients = NULL, array $contacts = NULL) :void{
         $data['clients'] = $clients;
+        $data['contacts'] = $contacts;
+
         $this->layout->set_title("GoodManager | Liste clients");
         $this->layout->set_page("Liste Clients");
         $this->layout->view('liste', $data);
@@ -43,16 +45,25 @@ class Liste extends MY_Controller {
      */
     public function search(){
         if($this->form_validation->run()){
+            $contacts =[];
             $field = $this->input->post('select-search');
             $value = $this->input->post('search');
             $clients = $this->Client_model->getClientBy(html_escape($field), html_escape($value));
-            $this->index($clients);
+
+            $contacts = $this->Contact_model->getContact();
+            $this->index($clients, $contacts);
+
         }else{
             redirect("liste-clients");
         }
     }
-
-    public function contact(){
+    
+    /**
+     * contact
+     *  Enregistre ou efface le contact d'un client du jour et renvoie du JSON
+     * @return void
+     */
+    public function contact() :void{
 
         $input_data = $this->getInput();
         $response = [];
@@ -79,5 +90,12 @@ class Liste extends MY_Controller {
 
         echo json_encode($response);
 
+    }
+
+    public function historyContact($client_id){
+        $history = $this->Contact_model->getHistoryContact(html_escape($client_id));
+
+        header('Content-type: application/json');
+        echo json_encode($history);
     }
 }

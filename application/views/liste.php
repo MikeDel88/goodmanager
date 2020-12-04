@@ -24,7 +24,7 @@
         <table class="responsive-table highlight centered">
             <thead>
               <tr>
-                  <th><span>Nom</span></th>
+                  <th><span>Nom</span><i class="material-icons">swap_vert</i></th>
                   <th><span>Prénom</span><i class="material-icons">swap_vert</i></th>
                   <th><span>Age</span><i class="material-icons">swap_vert</i></th>
                   <th><span>Adresse</span><i class="material-icons">swap_vert</i></th>
@@ -39,13 +39,13 @@
         <? if(isset($clients)) { ?>
             <tbody class="search-body">
             <? foreach($clients as $client){?>
-                <tr>
-                    <td><?= ucFirst($client->last_name) ?></td>
-                    <td><?= ucFirst($client->first_name) ?></td>
-                    <td><?= $client->age() ?></td>
-                    <td><?= $client->address ?></td>
-                    <td><?= $client->zipcode  ?></td>
-                    <td><?= ucFirst($client->city)  ?></td>
+                <tr data-id="<?= $client->id ?>">
+                    <td class="ligne-client"><?= ucFirst($client->last_name) ?></td>
+                    <td class="ligne-client"><?= ucFirst($client->first_name) ?></td>
+                    <td class="ligne-client"><?= $client->age() ?></td>
+                    <td class="ligne-client"><?= $client->address ?></td>
+                    <td class="ligne-client"><?= $client->zipcode  ?></td>
+                    <td class="ligne-client"><?= ucFirst($client->city)  ?></td>
                     <td>
                         <a href="tel:<?= $client->phone ?>" title="<?= $client->phone ?>"><?= ($client->phone !== '') ? '<i class="material-icons">phone_forwarded</i>' : '<i class="material-icons red-text">phonelink_erase</i>' ?></a>
                     </td>
@@ -54,7 +54,13 @@
                     </td>
                     <td>
                         <label>
-                            <input type="checkbox" class="check-contact" data-client-id="<?= $client->id ?>" />
+                            <input type="checkbox" class="check-contact" data-client-id="<?= $client->id ?>"
+                                    <? if(!empty($contacts)){
+                                        foreach($contacts as $contact) {
+                                            echo ($contact->client_id == $client->id) ? 'checked=checked' : "";
+                                        }
+                                    }?>
+                             />
                             <span></span>
                         </label>
                     </td>
@@ -64,5 +70,10 @@
             </tbody>
         <?}?>
         </table>
+    </div>
+    <div id="info-contact" class="modal">
+        <div class="modal-content">
+           <h5>Liste des derniers contacts avec le client</h5>
+        </div>
     </div>
 </section>
