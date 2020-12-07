@@ -13,6 +13,7 @@ class Accueil extends CI_Controller {
       parent::__construct();
       $base = base_url();
       $this->layout->set_css("$base/assets/css/layout1.css");
+      $this->layout->set_js($base . "assets/js/layout1.js");
       $this->layout->set_theme('front-office');
     }
  
