@@ -60,4 +60,16 @@ class RendezVous extends MY_Controller {
         $result = $this->RendezVous_model->selectAllRdv();
         echo json_encode($result);
     }
+
+    public function delete(){
+        $input_data = $this->getInput();
+        $response = [];
+
+        $this->RendezVous_model->deleteRDV(intval($input_data['id']));
+
+        $response['status'] = 'delete_rdv';
+        
+        echo json_encode($response);
+
+    }
 }

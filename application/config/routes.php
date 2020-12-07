@@ -79,6 +79,7 @@ $route['liste-clients/api/history/(:num)'] = 'liste/historyContact/$1';
 $route['rendez-vous/api/add-rdv'] = 'rendezVous/add';
 $route['rendez-vous/api/liste'] = 'rendezVous/getAll';
 $route['rendez-vous'] = 'rendezVous/index';
+$route['rendez-vous/api/delete-rdv'] = 'rendezVous/delete';
 
 
 $route['deconnexion'] = 'profile/deconnexion';

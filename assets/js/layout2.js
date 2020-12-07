@@ -320,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Récupère l'ensemble des rendez-vous d'un utilisateur
         async function getAllEvents() {
+
             let response = await fetch(`${window.origin}/rendez-vous/api/liste`);
             json = await response.json();
             json.forEach(event => {
@@ -350,10 +351,10 @@ document.addEventListener('DOMContentLoaded', function () {
             firstDay: 1,
             showNonCurrentDates: false,
             fixedWeekCount: false,
+            // Lors d'un clique sur une date, je peux ajouter un rendez-vous avec un client
             dateClick: function (info) {
 
                 resetModal();
-
 
                 let instanceModal = M.Modal.getInstance(modal);
                 instanceModal.open();
@@ -443,6 +444,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                 let msg = await response.json();
                                 if (msg.status == 'add_rdv') {
                                     instanceModal.close();
+                                    let result = calendar.getEvents();
+                                    result.forEach(event => {
+                                        event.remove();
+                                    })
+                                    getAllEvents();
                                 }
 
                             })
@@ -453,7 +459,65 @@ document.addEventListener('DOMContentLoaded', function () {
 
             },
             eventClick: function (info) {
-                alert('Event: ' + info.event.id + info.event.start);
+
+                resetModal();
+
+                let instanceModal = M.Modal.getInstance(modal);
+                instanceModal.open();
+
+                let modalContent = document.querySelector('.modal-content');
+
+                let divRDV = document.createElement('div');
+                divRDV.classList.add('rendez-vous');
+
+                let title = document.createElement('h6');
+                title.innerHTML = `Rendez-vous avec ${info.event.title}`;
+
+                let form = document.createElement('form');
+
+
+                let inputDate = document.createElement('input');
+                inputDate.setAttribute('type', 'datetime-local');
+
+                modalContent.appendChild(divRDV);
+                divRDV.appendChild(title);
+                divRDV.appendChild(form);
+                form.appendChild(inputDate);
+
+                let buttonModifier = document.createElement('a');
+                buttonModifier.innerHTML = 'Modifier';
+                buttonModifier.classList.add('btn', 'teal', 'modifier')
+                form.appendChild(buttonModifier);
+
+                let buttonSupprimer = document.createElement('a');
+                buttonSupprimer.innerHTML = 'Supprimer';
+                buttonSupprimer.classList.add('btn', 'red', 'supprimer')
+                form.appendChild(buttonSupprimer);
+
+                buttonSupprimer.addEventListener('click', async function () {
+                    let response = await fetch(
+
+                        `${window.origin}/rendez-vous/api/delete-rdv`,
+                        {
+                            method: 'DELETE',
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ id: info.event.id }),
+                        }
+                    );
+                    let msg = await response.json();
+                    if (msg.status == 'delete_rdv') {
+                        instanceModal.close();
+                        let result = calendar.getEvents();
+                        result.forEach(event => {
+                            event.remove();
+                        })
+                        getAllEvents();
+                    }
+                })
+                // alert('Event: ' + info.event.id + info.event.start);
             }
 
         });

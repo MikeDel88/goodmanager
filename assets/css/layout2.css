@@ -95,6 +95,14 @@ main header .settings-menu a{
         text-align: center;
         margin: 10px 0;
     }
+    .fc .fc-toolbar.fc-header-toolbar, .fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+        flex-wrap: wrap;
+    }
+    .fc-toolbar-chunk{
+        width:100%;
+        text-align: center;
+        margin: 10px 0;
+    }
 }
 fieldset{
     border:2px solid var(--main-bg-color);

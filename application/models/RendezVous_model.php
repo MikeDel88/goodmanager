@@ -38,4 +38,9 @@ class RendezVous_model extends MY_Model {
         $this->db->where('user_id', $this->session->session_id);
         return $this->db->get()->result();
     }
+
+    public function deleteRDV(int $id){
+        $this->db->where('rdv_id', $id);
+        $this->db->delete($this->getTable());
+    }
 }
