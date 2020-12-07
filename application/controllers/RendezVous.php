@@ -31,7 +31,7 @@ class RendezVous extends MY_Controller {
     
     /**
      * add
-     * Ajouter un rendez-vous depuis la liste des clients en AJAX
+     * Ajouter un rendez-vous depuis la liste des clients en JSON
      * @return void
      */
     public function add(){
@@ -60,7 +60,12 @@ class RendezVous extends MY_Controller {
         $result = $this->RendezVous_model->selectAllRdv();
         echo json_encode($result);
     }
-
+    
+    /**
+     * delete
+     * Supprimer un rendez-vous, renvoi une réponse en JSON
+     * @return void
+     */
     public function delete(){
         $input_data = $this->getInput();
         $response = [];
@@ -70,6 +75,22 @@ class RendezVous extends MY_Controller {
         $response['status'] = 'delete_rdv';
         
         echo json_encode($response);
+    }
+    
+    /**
+     * modification
+     * Permet de modifier un rendez-vous, renvoi une réponse en JSON
+     * @return void
+     */
+    public function modification(){
+        $input_data = $this->getInput();
+        $response = [];
+        
+        $data['date'] = $input_data['dateRDV'];
+        $id = intval($input_data['id']);
 
+        $this->RendezVous_model->updateRDV($data, $id);
+        $response['status'] = 'modification_ok';
+        echo json_encode($response);
     }
 }

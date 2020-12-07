@@ -487,6 +487,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 let buttonModifier = document.createElement('a');
                 buttonModifier.innerHTML = 'Modifier';
                 buttonModifier.classList.add('btn', 'teal', 'modifier')
+                buttonModifier.style.marginRight = '35px'
                 form.appendChild(buttonModifier);
 
                 let buttonSupprimer = document.createElement('a');
@@ -517,7 +518,31 @@ document.addEventListener('DOMContentLoaded', function () {
                         getAllEvents();
                     }
                 })
-                // alert('Event: ' + info.event.id + info.event.start);
+
+                buttonModifier.addEventListener('click', async function () {
+                    let response = await fetch(
+
+                        `${window.origin}/rendez-vous/api/modification-rdv`,
+                        {
+                            method: 'POST',
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ id: info.event.id, dateRDV: inputDate.value }),
+                        }
+                    );
+                    let msg = await response.json();
+                    if (msg.status == 'modification_ok') {
+                        instanceModal.close();
+                        let result = calendar.getEvents();
+                        result.forEach(event => {
+                            event.remove();
+                        })
+                        getAllEvents();
+                    }
+                })
+
             }
 
         });

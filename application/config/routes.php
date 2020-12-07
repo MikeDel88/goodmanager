@@ -80,6 +80,7 @@ $route['rendez-vous/api/add-rdv'] = 'rendezVous/add';
 $route['rendez-vous/api/liste'] = 'rendezVous/getAll';
 $route['rendez-vous'] = 'rendezVous/index';
 $route['rendez-vous/api/delete-rdv'] = 'rendezVous/delete';
+$route['rendez-vous/api/modification-rdv'] = 'rendezVous/modification';
 
 
 $route['deconnexion'] = 'profile/deconnexion';

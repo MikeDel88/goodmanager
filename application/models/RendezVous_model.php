@@ -43,4 +43,11 @@ class RendezVous_model extends MY_Model {
         $this->db->where('rdv_id', $id);
         $this->db->delete($this->getTable());
     }
+
+    public function updateRDV(array $data, int $id){
+        $this->db->set($data);
+        $this->db->set('updated_at', date('Y-m-d H:i:s'));
+        $this->db->where('rdv_id', $id);
+        $this->db->update($this->getTable());
+    }
 }
