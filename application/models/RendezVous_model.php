@@ -29,4 +29,13 @@ class RendezVous_model extends MY_Model {
     public function getTable() :string{
         return $this->table;
     }
+
+    public function selectAllRdv(){
+        $this->db->select('*');
+        $this->db->from($this->getTable());
+        $this->db->join('client', "client.id = {$this->getTable()}.client_id");
+        $this->db->where('client.entreprise_id', $this->session->entreprise_id);
+        $this->db->where('user_id', $this->session->session_id);
+        return $this->db->get()->result();
+    }
 }

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href='<?= base_url() . "assets/css/layout2.css" ?>'>
   <link rel="stylesheet" href="<?= $css ?>">
   <title><?= $title ?></title>
 </head>
@@ -20,7 +21,7 @@
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">person</i><span class="nav-text">Gestion des comptes</span></a></li>
                 <li class="list-item"><a href="/gestion-clients"><i class="material-icons nav-icon">people</i><span class="nav-text">Gestion clients</span></a></li>
                 <li class="list-item"><a href="/liste-clients"><i class="material-icons nav-icon">list</i><span class="nav-text">Liste clients</span></a></li>
-                <li class="list-item"><a href="#"><i class="material-icons nav-icon">event_available</i><span class="nav-text">Rendez-vous</span></a></li>
+                <li class="list-item"><a href="/rendez-vous"><i class="material-icons nav-icon">event_available</i><span class="nav-text">Rendez-vous</span></a></li>
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">map</i><span class="nav-text">Géolocalisation</span></a></li>
             </ul>
         </div>
@@ -48,4 +49,5 @@
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="<?= $js ?>"></script>
+  <script src='<?= base_url() . "assets/js/layout2.js" ?>'></script>
 </html>
