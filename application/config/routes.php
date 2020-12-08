@@ -83,6 +83,9 @@ $route['rendez-vous/api/delete-rdv'] = 'rendezVous/delete';
 $route['rendez-vous/api/modification-rdv'] = 'rendezVous/modification';
 
 
+$route['geolocalisation'] = 'geolocalisation/index';
+
+
 $route['deconnexion'] = 'profile/deconnexion';
 
 $route['default_controller'] = 'accueil/index';

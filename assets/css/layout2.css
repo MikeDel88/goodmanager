@@ -132,3 +132,7 @@ fieldset legend{
     background-color: var(--main-bg-color);
     color: var(--main-color);
 }
+
+#detailsMap{
+    height:500px;
+}

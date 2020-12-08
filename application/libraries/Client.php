@@ -15,6 +15,8 @@ class Client extends Utilities{
     private string $address;
     private string $zipcode;
     private string $city;
+    private string $lat;
+    private string $lng;
     private string $email;
     private string $phone;
     private string $created_at;
@@ -269,6 +271,46 @@ class Client extends Utilities{
     public function setUpdated_at($updated_at)
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lat
+     */ 
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set the value of lat
+     *
+     * @return  self
+     */ 
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lng
+     */ 
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * Set the value of lng
+     *
+     * @return  self
+     */ 
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
 
         return $this;
     }

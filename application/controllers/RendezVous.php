@@ -22,8 +22,13 @@ class RendezVous extends MY_Controller {
         $this->layout->set_js(base_url() . "assets/fullcalendar/lib/main.js");
         $this->layout->set_theme("back-office");
     }
-
-    public function index(){
+    
+    /**
+     * index
+     * Affichage de la page rendez-vous
+     * @return void
+     */
+    public function index() :void{
         $this->layout->set_title("GoodManager | Rendez-vous");
         $this->layout->set_page("Calendrier des rendez-vous");
         $this->layout->view('rendez-vous');
@@ -34,7 +39,7 @@ class RendezVous extends MY_Controller {
      * Ajouter un rendez-vous depuis la liste des clients en JSON
      * @return void
      */
-    public function add(){
+    public function add() :void{
 
         $input_data = $this->getInput();
         $response = [];
@@ -56,7 +61,7 @@ class RendezVous extends MY_Controller {
      *  Renvoie la liste des rendez-vous de l'utilisateur de session sous format JSON
      * @return void
      */
-    public function getAll(){
+    public function getAll() :void{
         $result = $this->RendezVous_model->selectAllRdv();
         echo json_encode($result);
     }
@@ -66,7 +71,7 @@ class RendezVous extends MY_Controller {
      * Supprimer un rendez-vous, renvoi une réponse en JSON
      * @return void
      */
-    public function delete(){
+    public function delete() :void{
         $input_data = $this->getInput();
         $response = [];
 
@@ -82,7 +87,7 @@ class RendezVous extends MY_Controller {
      * Permet de modifier un rendez-vous, renvoi une réponse en JSON
      * @return void
      */
-    public function modification(){
+    public function modification() :void{
         $input_data = $this->getInput();
         $response = [];
         

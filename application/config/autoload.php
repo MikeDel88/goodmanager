@@ -68,7 +68,8 @@ $autoload['libraries'] = array(
     "Contact",
     'layout', 
     'form_validation', 
-    'session'
+    'session',
+    'user_agent'
 );
 
 /*

@@ -60,6 +60,7 @@ class Profile extends MY_Controller {
         if($this->form_validation->run())
         {
             $data = $this->post();
+
             $this->Users_model->update($data, $this->session->session_id);
             
         }

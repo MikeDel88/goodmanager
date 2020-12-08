@@ -60,4 +60,37 @@ class MY_Controller extends CI_Controller {
         }
         return $data;
     }
+    
+    /**
+     * coordonnees
+     *  Transforme une adresse en coordonnees lat et lon
+     * @param  mixed $address
+     * @param  mixed $zipcode
+     * @param  mixed $city
+     * @return void
+     */
+    public function coordonnees($address, $zipcode, $city) :array{
+            $adresse = array(
+                  'street'     => $address,
+                  'postalcode' => $zipcode,
+                  'city'       => $city,
+                  'country'    => 'france',
+                  'format'     => 'json',
+                );
+
+                $url = 'https://nominatim.openstreetmap.org/?' . http_build_query($adresse);
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_USERAGENT, $this->agent->agent_string());
+                $geopos = curl_exec($ch);
+                curl_close($ch);
+                $json_data = json_decode($geopos, true);
+
+                // Mettre une alerte si l'adresse n'est pas reconnu
+                
+                $data['lat'] = $json_data[0]['lat'];
+                $data['lng'] = $json_data[0]['lon'];
+
+                return $data;
+    }
 }

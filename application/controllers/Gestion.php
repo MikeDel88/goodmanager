@@ -47,6 +47,12 @@ class Gestion extends MY_Controller {
         if ($this->form_validation->run()){
 
             $data = $this->post();
+   
+
+            if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
+                $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+            }
+
             $this->Client_model->insert($data);
             redirect('gestion-clients');
 

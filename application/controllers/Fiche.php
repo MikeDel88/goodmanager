@@ -50,6 +50,11 @@ class Fiche extends MY_Controller {
 
             $data = $this->post();
             $id = intval($data['id']);
+
+            if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
+                $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+            }
+
             $this->Client_model->update($data, $id);
             redirect("fiche-client/$id/{$data['last_name']}");
 
