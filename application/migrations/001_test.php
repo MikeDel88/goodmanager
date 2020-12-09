@@ -9,7 +9,7 @@ class Migration_Test extends CI_Migration {
             $sql = "ALTER TABLE `client` ADD `lat` DECIMAL(10,8) NOT NULL AFTER `city`";
             $this->db->query($sql);
 
-            $sql = "ALTER TABLE `client` ADD `lng` DECIMAL(11,8) NOT NULL AFTER `latitude`";
+            $sql = "ALTER TABLE `client` ADD `lng` DECIMAL(11,8) NOT NULL AFTER `lat`";
             $this->db->query($sql);
         }
 
