@@ -35,7 +35,7 @@ class Client_model extends MY_Model {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('entreprise_id', $this->session->entreprise_id);
-        $this->db->where($field, $data);
+        $this->db->like($field, $data, 'after');
         return $this->db->get()->custom_result_object('Client');
         
     }
