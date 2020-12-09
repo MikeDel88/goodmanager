@@ -89,6 +89,7 @@ $route['geolocalisation/api/clients/(:any)/(:any)/(:any)'] = 'geolocalisation/ge
 
 $route['deconnexion'] = 'profile/deconnexion';
 
+
 $route['default_controller'] = 'accueil/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

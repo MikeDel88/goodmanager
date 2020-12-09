@@ -122,20 +122,25 @@ async function getSearch() {
     let searchClients = await fetch(`${window.origin}/geolocalisation/api/clients/${lat}/${lng}/${distance}`);
     let clients = await searchClients.json()
 
-    document.querySelector('.count-clients').innerHTML = (clients.length !== 0) ? `${clients.length} clients dans la zone` : `aucun client dans la zone`
+    document.querySelector('.count-clients').innerHTML = (clients.length > 0) ? `${clients.length} clients dans la zone` : `aucun client dans la zone`
 
-    clients.forEach(client => {
-        pos = [client.lat, client.lng]
-        marqueur = L.marker(pos)
-        marqueur.bindPopup(`${client.last_name} ${client.first_name}`)
-        marqueurs.addLayer(marqueur)
-        tableauMarqueurs.push(marqueur)
-    })
+    if (clients.length > 0) {
 
-    let groupMarqueur = new L.featureGroup(tableauMarqueurs);
-    mymap.fitBounds(groupMarqueur.getBounds().pad(0.5));
+        clients.forEach(client => {
+            pos = [client.lat, client.lng]
+            marqueur = L.marker(pos)
+            marqueur.bindPopup(`${client.last_name} ${client.first_name}`)
+            marqueurs.addLayer(marqueur)
+            tableauMarqueurs.push(marqueur)
+        })
 
-    mymap.addLayer(marqueurs)
+        let groupMarqueur = new L.featureGroup(tableauMarqueurs);
+        mymap.fitBounds(groupMarqueur.getBounds().pad(0.5));
+        mymap.addLayer(marqueurs)
+
+    }
+
+
 
 
 
