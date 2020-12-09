@@ -28,7 +28,10 @@ class Geolocalisation extends MY_Controller {
         $this->layout->view('geolocalisation');
     }
 
-    public function geolocalisationClient(){
+    public function geolocalisationClient($lat, $lng, $distance){
+
+        $result = $this->Client_model->getGeolocalisationClients($lat, $lng,$distance);
+        echo json_encode($result);
         
     }
 }

@@ -50,7 +50,9 @@ class Gestion extends MY_Controller {
    
 
             if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
-                $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+                $coordonnees = $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+                $data['lat'] = $coordonnees['lat'];
+                $data['lng'] = $coordonnees['lng'];
             }
 
             $this->Client_model->insert($data);
@@ -68,10 +70,17 @@ class Gestion extends MY_Controller {
      * @return void
      */
     public function api(string $search) :void{
-        $data = [
-            'entreprise_id' => $this->session->entreprise_id,
-            'last_name' => urldecode(html_escape($search))
-        ];
+        if($search == 'all'){
+            $data = [
+                'entreprise_id' => $this->session->entreprise_id,
+            ];
+        }else{
+            $data = [
+                'entreprise_id' => $this->session->entreprise_id,
+                'last_name' => urldecode($search)
+            ];
+        }
+
         $result = $this->Client_model->selectAll($data);
         header('Content-type: application/json');
         echo json_encode($result);

@@ -4,6 +4,8 @@ let lat
 let lng
 let cercle
 let json
+let mapMarkers = [];
+
 
 window.onload = () => {
 
@@ -31,6 +33,7 @@ async function mapClickListen(e) {
     // Je charge une ville en fonction des coordonnées
     let ville = await getAdresse(lat, lng)
     document.querySelector("#search").value = ville.display_name
+    document.querySelector('#filtre').value = 'address'
 
     // Affiche le marqueur
     addMarker(pos);
@@ -70,6 +73,7 @@ async function getAdresse(lat, lng) {
     return json
 }
 
+// Permet de récupérer les informations pour la recherche et les afficher sur la map
 async function getSearch() {
 
     if (cercle != undefined) {
@@ -78,11 +82,15 @@ async function getSearch() {
     }
     if (marqueur != undefined) {
         mymap.removeLayer(marqueur);
+        mapMarkers.forEach(marqueur => {
+            mymap.removeLayer(marqueur)
+        })
     }
 
-    let recherche = document.querySelector('#search').value
+    let recherche = encodeURI(document.querySelector('#search').value);
     let filtre = document.querySelector('#filtre').value
     let distance = document.querySelector('#distance').value
+    let rayon = distance * 1000
 
     // J'effectue ma recherche en fonction du filtre envoyé
     if (filtre !== 'address') {
@@ -102,73 +110,31 @@ async function getSearch() {
         color: 'blue',
         fillColor: 'blue',
         fillOpacity: 0.2,
-        radius: (distance) * 1000
+        radius: rayon
     }).addTo(mymap)
 
-    // Si je cherche une adresse précise, alors j'inscris un marqueur
-    if (filtre === 'address') {
-        addMarker(pos)
-    }
     mymap.setView(pos, 11)
 
+    let searchClients = await fetch(`${window.origin}/geolocalisation/api/clients/${lat}/${lng}/${distance}`);
+    let clients = await searchClients.json()
+
+    document.querySelector('.count-clients').innerHTML = (clients.length !== 0) ? `${clients.length} clients dans la zone` : `aucun client dans la zone`
+
+    clients.forEach(client => {
+        pos = [client.lat, client.lng]
+        marqueur = L.marker(pos)
+        mapMarkers.push(marqueur)
+        marqueur.addTo(mymap)
+        marqueur.bindPopup(`${client.last_name} ${client.first_name}`)
+    })
 
 
 
-
-
-
-
-
-
-
-
-
-
-    // document.querySelector("#ville").addEventListener("blur", getCity)
-
-    // dessiner un cercle de 5km de diamètre
-    // rayon 2500m
-    // let cercle = L.circle([48.852969, 2.349903], {
-    //     color: 'blue',
-    //     fillColor: 'blue',
-    //     fillOpacity: 0.2,
-    //     radius: 2500
-    // }).addTo(mymap)
-    // cercle.bindPopup('Ville de Paris')
-
-    // let triangle = L.polygon([
-    //     [48.85779, 2.3392724],
-    //     [48.852630, 2.3523187],
-    //     [48.86, 2.35223293]
-    // ]).addTo(mymap)
-    // triangle.bindPopup("Triangle")
-
-
-
-
-    // On initialise une requête Ajax
-    // let response = await fetch(`https://nominatim.openstreetmap.org/search?q=${cp}&format=json&addressdetails=0&limit=1&polygon_svg=1`)
-    // let response = await fetch(`https://nominatim.openstreetmap.org/search.php?country=France&city=${recherche}&polygon_geojson=1&bounded=1&polygon_threshold=0&format=jsonv2`)
-    // let json = await response.json();
-
-    // let parDepartement = L.geoJSON(json[0].geojson, {
-    //     style: {
-    //         "color": 'blue',
-    //         "opcaity": 1,
-    //         "filleColor": 'blue',
-    //         "fillOpacity": 0.2,
-    //     }
-    // }).addTo(mymap)
-
-    // let lat = json[0].lat
-    // let lon = json[0].lon
-
-    // document.querySelector('#lat').value = lat
-    // document.querySelector('#lon').value = lon
-
-    // let pos = [lat, lon]
-    // addMarker(pos)
-
-    // mymap.setView(pos, 11)
 }
+
+
+
+
+
+
 

@@ -52,9 +52,10 @@ class Fiche extends MY_Controller {
             $id = intval($data['id']);
 
             if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
-                $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+                $coordonnees = $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+                $data['lat'] = $coordonnees['lat'];
+                $data['lng'] = $coordonnees['lng'];
             }
-
             $this->Client_model->update($data, $id);
             redirect("fiche-client/$id/{$data['last_name']}");
 

@@ -46,8 +46,9 @@ class Liste extends MY_Controller {
             $contacts =[];
             $field = $this->input->post('select-search');
             $value = $this->input->post('search');
-            $clients = $this->Client_model->getClientBy(html_escape($field), html_escape($value));
 
+            $clients = $this->Client_model->getClientBy(html_escape($field), html_escape($value));
+            
             $contacts = $this->Contact_model->getContact();
             $this->index($clients, $contacts);
 

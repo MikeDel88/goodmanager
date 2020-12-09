@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let copyright = document.querySelector('aside footer p');
     let settings = document.querySelector('main header .settings');
     let json;
+    let response;
 
 
     // Permet de faire du responsive pour le menu de navigation
@@ -108,41 +109,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (gestionSearch.value !== '') {
 
                     // Requête de la liste des clients recherchés
-                    let response = await fetch(`${window.origin}/gestion-clients/api/${gestionSearch.value}`);
-                    json = await response.json();
+                    response = await fetch(`${window.origin}/gestion-clients/api/${encodeURI(gestionSearch.value)}`);
+                } else {
+                    response = await fetch(`${window.origin}/gestion-clients/api/all`);
+                }
+                json = await response.json();
 
-                    // Création de la liste
-                    let list = document.createElement('ul');
-                    list.classList.add('collection', 'with-header');
-                    searchResult.appendChild(list);
+                // Création de la liste
+                let list = document.createElement('ul');
+                list.classList.add('collection', 'with-header');
+                searchResult.appendChild(list);
 
-                    // Création du titre pour le résultat de la recherche
-                    let titleResult = document.createElement('li');
-                    titleResult.classList.add('collection-header');
+                // Création du titre pour le résultat de la recherche
+                let titleResult = document.createElement('li');
+                titleResult.classList.add('collection-header');
 
-                    // S'il y a un client ou plus alors je créé le contenu de la liste avec un lien pour accéder à la fiche
-                    if (json.length > 0) {
+                // S'il y a un client ou plus alors je créé le contenu de la liste avec un lien pour accéder à la fiche
+                if (json.length > 0) {
 
-                        let client = (json.length > 1) ? 'clients' : 'client';
-                        titleResult.innerHTML = `Il y a ${json.length} ${client}`;
-                        list.appendChild(titleResult);
+                    let client = (json.length > 1) ? 'clients' : 'client';
+                    titleResult.innerHTML = `Il y a ${json.length} ${client}`;
+                    list.appendChild(titleResult);
 
-                        json.forEach(client => {
+                    json.forEach(client => {
 
-                            let listResult = document.createElement('a');
-                            listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
-                            listResult.classList.add('collection-item');
-                            let birthday = new Date(client.birthday);
-                            listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
-                            list.appendChild(listResult);
-                        })
+                        let listResult = document.createElement('a');
+                        listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
+                        listResult.classList.add('collection-item');
+                        let birthday = new Date(client.birthday);
+                        listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
+                        list.appendChild(listResult);
+                    })
 
-                        // Sinon j'indique qu'il y a aucun client présent dans la recherche
-                    } else {
-                        titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
-                        list.appendChild(titleResult);
-                    }
-
+                    // Sinon j'indique qu'il y a aucun client présent dans la recherche
+                } else {
+                    titleResult.innerHTML = "Il n'y a aucun client avec ce nom";
+                    list.appendChild(titleResult);
                 }
             }
         });

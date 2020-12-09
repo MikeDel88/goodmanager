@@ -39,4 +39,11 @@ class Client_model extends MY_Model {
         return $this->db->get()->custom_result_object('Client');
         
     }
+
+    public function getGeolocalisationClients($lat, $lng,$distance){
+
+        $sql = "SELECT id, last_name, first_name, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
+        $query = $this->db->query($sql);
+        return $query->result();
+    }
 }

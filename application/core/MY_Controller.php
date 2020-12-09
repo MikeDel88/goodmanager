@@ -50,11 +50,11 @@ class MY_Controller extends CI_Controller {
      */
     protected function post() :array{
         $posts = $this->input->post();
-        foreach($posts as $post => $value){
-            if($post == 'birthday'){
+        foreach($posts as $key => $value){
+            if($key == 'birthday'){
                 $data['birthday'] = date("Y-m-d", strtotime($value));
             }else{
-                $data[$post] = html_escape(strtolower($value));
+                $data[$key] = strtolower($value);
             }
             
         }
@@ -67,7 +67,7 @@ class MY_Controller extends CI_Controller {
      * @param  mixed $address
      * @param  mixed $zipcode
      * @param  mixed $city
-     * @return void
+     * @return array
      */
     public function coordonnees($address, $zipcode, $city) :array{
             $adresse = array(
@@ -79,6 +79,7 @@ class MY_Controller extends CI_Controller {
                 );
 
                 $url = 'https://nominatim.openstreetmap.org/?' . http_build_query($adresse);
+
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_USERAGENT, $this->agent->agent_string());
@@ -90,7 +91,7 @@ class MY_Controller extends CI_Controller {
                 
                 $data['lat'] = $json_data[0]['lat'];
                 $data['lng'] = $json_data[0]['lon'];
-
+                
                 return $data;
     }
 }

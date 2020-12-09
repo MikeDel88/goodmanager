@@ -23,5 +23,6 @@
         </div>
         <div class="btn teal">Valider</div>
     </form>
+    <p class="count-clients center-align"></p>
     <div id="detailsMap" class="container"></div>
 </section>

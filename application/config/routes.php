@@ -84,6 +84,7 @@ $route['rendez-vous/api/modification-rdv'] = 'rendezVous/modification';
 
 
 $route['geolocalisation'] = 'geolocalisation/index';
+$route['geolocalisation/api/clients/(:any)/(:any)/(:any)'] = 'geolocalisation/geolocalisationClient/$1/$2/$3';
 
 
 $route['deconnexion'] = 'profile/deconnexion';
