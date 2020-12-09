@@ -5,17 +5,17 @@
             <input type="text" id="search" name="search">
         </div>
         <div>
+            <label for="filtre">Filtre </label>
             <select id="filtre" name="filtre">
-                <option value="#" disabled selected>Choisir un filtre</option>
-                <option value="address">Adresse</option>
+                <option value="address" selected>Adresse</option>
                 <option value="zipcode">Code Postal</option>
                 <option value="city">Ville</option>
             </select>
         </div>
         <div>
+            <label for="distance">Rayon de recherche</label>
             <select id="distance" name="distance">
-                <option value="#" disabled selected>Choisir une distance</option>
-                <option value="5">5km</option>
+                <option value="5" selected>5km</option>
                 <option value="10">10km</option>
                 <option value="20">20km</option>
                 <option value="25">25km</option>

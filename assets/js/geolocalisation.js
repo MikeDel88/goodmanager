@@ -4,7 +4,8 @@ let lat
 let lng
 let cercle
 let json
-let mapMarkers = [];
+let tableauMarqueurs = [];
+let marqueurs
 
 
 window.onload = () => {
@@ -17,6 +18,7 @@ window.onload = () => {
         maxZoom: 20
     }).addTo(mymap)
     mymap.on('click', mapClickListen)
+    marqueurs = L.markerClusterGroup();
 
     document.querySelector('.btn').addEventListener('click', getSearch)
 
@@ -59,7 +61,6 @@ async function addMarker(pos) {
         lat = pos.lat
         lng = pos.lng
         let ville = await getAdresse(lat, lng)
-        document.querySelector("#search").value = ville.display_name
         marqueur.bindPopup(`${ville.address.postcode}, ${ville.address.village}`)
     })
     marqueur.addTo(mymap)
@@ -82,15 +83,18 @@ async function getSearch() {
     }
     if (marqueur != undefined) {
         mymap.removeLayer(marqueur);
-        mapMarkers.forEach(marqueur => {
+        tableauMarqueurs.forEach(marqueur => {
             mymap.removeLayer(marqueur)
         })
+        marqueurs.clearLayers()
     }
+
 
     let recherche = encodeURI(document.querySelector('#search').value);
     let filtre = document.querySelector('#filtre').value
     let distance = document.querySelector('#distance').value
     let rayon = distance * 1000
+
 
     // J'effectue ma recherche en fonction du filtre envoyé
     if (filtre !== 'address') {
@@ -123,10 +127,18 @@ async function getSearch() {
     clients.forEach(client => {
         pos = [client.lat, client.lng]
         marqueur = L.marker(pos)
-        mapMarkers.push(marqueur)
-        marqueur.addTo(mymap)
         marqueur.bindPopup(`${client.last_name} ${client.first_name}`)
+        marqueurs.addLayer(marqueur)
+        tableauMarqueurs.push(marqueur)
     })
+
+    let groupMarqueur = new L.featureGroup(tableauMarqueurs);
+    mymap.fitBounds(groupMarqueur.getBounds().pad(0.5));
+
+    mymap.addLayer(marqueurs)
+
+
+
 
 
 
