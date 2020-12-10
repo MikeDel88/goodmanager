@@ -45,7 +45,7 @@ class Inscription extends CI_Controller {
     private function registerEntreprise(): int{
 
        
-        $data['name'] = html_escape($this->input->post("entreprise"));
+        $data['name'] = $this->input->post("entreprise");
         return $this->Entreprise_model->register($data);
 
     }
@@ -61,8 +61,8 @@ class Inscription extends CI_Controller {
             $string_token = strval(microtime(TRUE)*100000);
             $token = md5($string_token);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
-            $password_hash = password_hash(html_escape($this->input->post('password_repeat')), PASSWORD_DEFAULT);
-            $email = html_escape($this->input->post('email'));
+            $password_hash = password_hash($this->input->post('password_repeat'), PASSWORD_DEFAULT);
+            $email = $this->input->post('email');
 
             $data = array(
             'email' => $email,
@@ -71,6 +71,7 @@ class Inscription extends CI_Controller {
             'token_validation' => $token_validation,
             'password' => $password_hash,
             'activate' => '0',
+            'admin' => true,
             );
 
             // Enregistrement de l'utilisateur

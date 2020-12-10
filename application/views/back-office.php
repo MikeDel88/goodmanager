@@ -21,7 +21,9 @@
         <div class="nav-back-office">
             <ul class="list-nav">
                 <li class="list-item"><a href="#"><i class="material-icons nav-icon">home</i><span class="nav-text">Dashboard</span></a></li>
-                <li class="list-item"><a href="#"><i class="material-icons nav-icon">person</i><span class="nav-text">Gestion des comptes</span></a></li>
+                <? if($this->session->admin == true){?>
+                    <li class="list-item"><a href="/gestion-comptes"><i class="material-icons nav-icon">person</i><span class="nav-text">Gestion des comptes</span></a></li>
+                <?}?>
                 <li class="list-item"><a href="/gestion-clients"><i class="material-icons nav-icon">people</i><span class="nav-text">Gestion clients</span></a></li>
                 <li class="list-item"><a href="/liste-clients"><i class="material-icons nav-icon">list</i><span class="nav-text">Liste clients</span></a></li>
                 <li class="list-item"><a href="/rendez-vous"><i class="material-icons nav-icon">event_available</i><span class="nav-text">Rendez-vous</span></a></li>

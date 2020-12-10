@@ -338,10 +338,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Génère un calendrier fullcalendar
         let calendarEl = document.getElementById('calendar');
         let calendar = new FullCalendar.Calendar(calendarEl, {
-            headerToolbar: { center: 'dayGridMonth,dayGridWeek' },
+            headerToolbar: { center: 'dayGridMonth,dayGridWeek,dayGridDay' },
             initialView: 'dayGridWeek',
             height: 650,
-            weekends: false,
+            weekends: true,
             weekNumbers: true,
             weekText: 'S',
             buttonText: {
@@ -551,6 +551,24 @@ document.addEventListener('DOMContentLoaded', function () {
         calendar.setOption('locale', 'fr');
         calendar.render();
         getAllEvents();
+    }
+
+    if (document.querySelector('#page-comptes')) {
+
+        // Si je clique sur le bouton close pour supprimer un collaborateur, je soumet le formulaire post
+        let closes = document.querySelectorAll('.close')
+        closes.forEach(close => close.addEventListener('click', function () {
+            console.log("CLICK LIEN OK")
+            let form = this.previousElementSibling
+            document.querySelector('#page-comptes .modal-close').addEventListener('click', function () {
+                if (!isNaN(form.firstChild.nextElementSibling.value)) {
+                    console.log("VALUE JS OK")
+                    form.submit();
+                } else {
+                    console.log("PAS OK")
+                }
+            })
+        }))
     }
 
 

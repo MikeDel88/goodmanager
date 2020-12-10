@@ -16,7 +16,12 @@ class MY_Controller extends CI_Controller {
             redirect('inscription');
         }
     }
-
+    
+    /**
+     * getInput
+     * Récupère les données envoyés en JSON
+     * @return void
+     */
     public function getInput(){
         $input_data = json_decode(trim(file_get_contents('php://input')), true);
         return $input_data;
@@ -25,7 +30,7 @@ class MY_Controller extends CI_Controller {
     /**
      * getUser
      *  
-     * @return object Récupère un utilisateur
+     * @return object Récupère un utilisateur en cours de session
      */
     protected function getUser() :object{
         return $this->Users_model->select('id', $this->session->session_id, 'User');

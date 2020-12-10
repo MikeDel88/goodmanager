@@ -1,4 +1,4 @@
-<section class="container">
+<section id="page-fiche" class="container">
     <fieldset class='row'>
         <legend><?= "$client->last_name $client->first_name"?></legend>
         <div class="container">
@@ -45,7 +45,7 @@
         <div id="delete-client" class="modal">
             <?= form_open("fiche-client/delete") ?>
             <div class="modal-content">
-                <input type="hidden" name="id" value="<?= $client->id ?>">
+                <input class="delete-fiche-client" type="hidden" name="id" value="<?= $client->id ?>">
                 <h4>Suppression du client</h4>
                 <p>La suppression du client sera définitive</p>
             </div>

@@ -196,5 +196,23 @@ $config = array(
                         'field' => 'select-search',
                         'label' => 'select-search'
                 )
+        ),
+        'comptes/add' => array(
+                array(
+                        'field' => 'email',
+                        'label' => 'email',
+                        'rules' => 'trim|valid_email' 
+                ),
+                array(
+                        'field' => 'last_name',
+                        'label' => 'last_name',
+                        'rules' => 'trim|required' 
+                ),
+                array(
+                        'field' => 'first_name',
+                        'label' => 'first_name',
+                        'rules' => 'trim|required' 
+                ),
         )
+
 );

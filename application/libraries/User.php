@@ -15,6 +15,7 @@ class User extends Utilities {
 	private string $last_name ='';
 	private string $first_name = '';
 	private int $activate;
+	private int $admin;
 	private string $token;
 	private string $token_validation;
 	private string $created_at;
@@ -237,6 +238,26 @@ class User extends Utilities {
 	public function setToken_validation($token_validation)
 	{
 		$this->token_validation = $token_validation;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of admin
+	 */ 
+	public function getAdmin()
+	{
+		return $this->admin;
+	}
+
+	/**
+	 * Set the value of admin
+	 *
+	 * @return  self
+	 */ 
+	public function setAdmin($admin)
+	{
+		$this->admin = $admin;
 
 		return $this;
 	}

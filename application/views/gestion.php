@@ -58,6 +58,5 @@
         <div class="search-result">
 
         </div>
-
     </div>
 </section>

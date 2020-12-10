@@ -71,5 +71,19 @@ class Users_model extends MY_Model {
         return $this->table;
     }
 
+        /**
+     * getUsers
+     *  Récupère tous les collaborateurs d'une entreprise
+     * @param  mixed $entrepriseId
+     * @return void
+     */
+    public function getUsers($entrepriseId){
+        $this->db->select('*');
+        $this->db->from($this->getTable());
+        $this->db->where('entreprise_id', $entrepriseId);
+        $this->db->where('admin', 0);
+        return $this->db->get()->custom_result_object('User');
+    }
+
 
 }

@@ -47,7 +47,7 @@ class Liste extends MY_Controller {
             $field = $this->input->post('select-search');
             $value = $this->input->post('search');
 
-            $clients = $this->Client_model->getClientBy(html_escape($field), html_escape($value));
+            $clients = $this->Client_model->getClientBy($field, $value);
             
             $contacts = $this->Contact_model->getContact();
             $this->index($clients, $contacts);
@@ -90,9 +90,15 @@ class Liste extends MY_Controller {
         echo json_encode($response);
 
     }
-
-    public function historyContact($client_id){
-        $history = $this->Contact_model->getHistoryContact(html_escape($client_id));
+    
+    /**
+     * historyContact
+     *  Renvoi en JSON l'ensemble de l'historique des contacts d'un client
+     * @param  mixed $client_id
+     * @return void
+     */
+    public function historyContact(int $client_id){
+        $history = $this->Contact_model->getHistoryContact($client_id);
         header('Content-type: application/json');
         echo json_encode($history);
     }

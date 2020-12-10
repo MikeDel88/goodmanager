@@ -63,6 +63,10 @@ $route['profil/entreprise'] = 'profile/miseAJourEntreprise';
 $route['profil/user'] = 'profile/miseAJourUser';
 $route['profil/delete'] = 'profile/deleteUser';
 
+$route['gestion-comptes'] = 'comptes/index';
+$route['gestion-comptes/suppression-collaborateur'] = 'comptes/delete';
+$route['gestion-comptes/ajouter-un-collaborateur'] = 'comptes/add';
+
 $route['gestion-clients'] = 'gestion/index';
 $route['gestion/nouveau-client'] = 'gestion/add';
 $route['gestion-clients/api/(:any)'] = 'gestion/api/$1';

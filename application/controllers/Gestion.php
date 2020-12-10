@@ -70,15 +70,11 @@ class Gestion extends MY_Controller {
      * @return void
      */
     public function api(string $search) :void{
-        if($search == 'all'){
-            $data = [
-                'entreprise_id' => $this->session->entreprise_id,
-            ];
-        }else{
-            $data = [
-                'entreprise_id' => $this->session->entreprise_id,
-                'last_name' => urldecode($search)
-            ];
+        $data = [];
+        $data['entreprise_id'] = $this->session->entreprise_id;
+        
+        if($search !== 'all'){
+            $data['last_name'] = urldecode($search);
         }
 
         $result = $this->Client_model->selectAll($data);

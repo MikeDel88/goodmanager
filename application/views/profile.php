@@ -1,4 +1,5 @@
 <section class="container">
+<? if($this->session->admin == true){?>
     <fieldset class='row'>
         <legend>L'entreprise</legend>
         <div class="container">
@@ -25,6 +26,7 @@
             <?= form_close() ?>
         </div>
     </fieldset>
+<?}?>
     <fieldset class='row'>
         <legend>Mon Profil</legend>
         <div class="container">

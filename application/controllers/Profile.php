@@ -74,7 +74,10 @@ class Profile extends MY_Controller {
      */
     public function deleteUser() :void{
         $this->Users_model->delete($this->session->session_id);
-        $this->Entreprise_model->delete($this->session->entreprise_id);
+        if($this->session->admin == true){
+            $this->Users_model->deleteAllUsers($this->session->entreprise_id);
+            $this->Entreprise_model->delete($this->session->entreprise_id);
+        }
         redirect('/');
     }
     

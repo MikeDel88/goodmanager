@@ -27,8 +27,8 @@ class Connexion extends CI_Controller {
         $data = [];
         if ($this->form_validation->run())
         {
-            $email = html_escape($this->input->post('email'));
-            $password = html_escape($this->input->post('password'));
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
             $result = $this->Users_model->select('email', $email, 'User');
 
             if(!empty($result)){
@@ -40,6 +40,8 @@ class Connexion extends CI_Controller {
                     $this->session->session_id = $result->id;
                     $this->session->entreprise_id = $result->entreprise_id;
                     $this->session->session_logged = true;
+                    $this->session->admin = $result->admin;
+
                     redirect('espace-personnel');
 
                 }else{
@@ -67,7 +69,7 @@ class Connexion extends CI_Controller {
     public function reset() :void{
         if ($this->form_validation->run())
         {
-            $email = html_escape($this->input->post('email'));
+            $email = $this->input->post('email');
             $result = $this->Users_model->select('email', $email, 'User');
   
             if(!empty($result) && $result->activate == 1){

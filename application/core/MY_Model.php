@@ -46,6 +46,7 @@ class MY_Model extends CI_Model {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->like($data, 'before');
+        $this->db->order_by('last_name', 'ASC');
         return $this->db->get()->result();
     }
         
