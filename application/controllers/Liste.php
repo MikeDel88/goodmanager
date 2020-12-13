@@ -86,7 +86,7 @@ class Liste extends MY_Controller {
         }else{
             $response['status'] = 'error';
         }
-
+        header('Content-type: application/json');
         echo json_encode($response);
 
     }

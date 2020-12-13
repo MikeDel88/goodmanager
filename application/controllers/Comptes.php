@@ -72,7 +72,7 @@ class Comptes extends MY_Controller {
                 <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
             ");
             $this->email->send();
-                   
+   
         }
         redirect('gestion-comptes');
     }

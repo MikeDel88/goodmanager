@@ -50,4 +50,10 @@ class RendezVous_model extends MY_Model {
         $this->db->where('rdv_id', $id);
         $this->db->update($this->getTable());
     }
+
+    public function nombreRdvPrisParUtilisateur(){
+        $year = date("Y");
+        $query = $this->db->query("SELECT users.last_name, users.first_name, COUNT(rdv.user_id) as nombre FROM rdv, users WHERE rdv.user_id = users.id AND YEAR(date) = $year AND users.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.user_id");
+        return $query->result();
+    }
 }

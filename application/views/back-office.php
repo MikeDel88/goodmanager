@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <link rel="stylesheet" href='<?= base_url() . "assets/css/layout2.css" ?>'>
   <link rel="stylesheet" href="<?= $css ?>">
   <title><?= $title ?></title>
@@ -20,7 +21,7 @@
         </figure>
         <div class="nav-back-office">
             <ul class="list-nav">
-                <li class="list-item"><a href="#"><i class="material-icons nav-icon">home</i><span class="nav-text">Dashboard</span></a></li>
+                <li class="list-item"><a href="/tableau-de-bord"><i class="material-icons nav-icon">home</i><span class="nav-text">Dashboard</span></a></li>
                 <? if($this->session->admin == true){?>
                     <li class="list-item"><a href="/gestion-comptes"><i class="material-icons nav-icon">person</i><span class="nav-text">Gestion des comptes</span></a></li>
                 <?}?>

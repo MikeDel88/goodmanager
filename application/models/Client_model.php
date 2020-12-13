@@ -73,5 +73,61 @@ class Client_model extends MY_Model {
         $this->db->delete($this->getTable());
     }
     
+    /**
+     * selectNewClientByYear
+     *  Récupère l'ensemble des nouveaux clients d'une année
+     * @return void
+     */
+    public function selectNewClientByYear(){
+        $query = $this->db->query("SELECT YEAR(created_at) as annee, COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY YEAR(created_at)");
+        return $query->result();
+    }
+    
+    /**
+     * selectNumberClientByYear
+     * Récupère le nombre de client par an
+     * @param  mixed $year
+     * @return void
+     */
+    public function selectNumberClientByYear($year){
+        $query = $this->db->query("SELECT COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} AND YEAR(created_at) <= $year");
+        $row = $query->row();
+        return $row->nbrClients;
+    }
+    
+    /**
+     * selectNombreClientByDept
+     *  Récupère le nombre de client par département
+     * @return void
+     */
+    public function selectNombreClientByDept(){
+        $query = $this->db->query("SELECT SUBSTRING(zipcode,1, 2) as code , COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY code");
+        return $query->result();
+    }
+    
+    /**
+     * selectSansInfo
+     *  Récupère l'ensemble des clients sans informations (mail, tél)
+     * @param  mixed $info
+     * @return void
+     */
+    public function selectSansInfo(string $info){
+        $query = $this->db->query("SELECT count(id) as $info FROM {$this->getTable()} WHERE $info = ' ' AND entreprise_id = {$this->session->entreprise_id}");
+        $row = $query->row();
+        return $row->$info;
+    }
+    
+    /**
+     * selectSansTelNiMail
+     *  Récupère l'ensemble des clients sans téléphone ni adresse email
+     * @param  mixed $tel
+     * @param  mixed $mail
+     * @return void
+     */
+    public function selectSansTelNiMail(string $tel, string $mail){
+        $query = $this->db->query("SELECT count(id) as sansTelNiMail FROM {$this->getTable()} WHERE $tel = '' AND $mail = '' AND entreprise_id = {$this->session->entreprise_id}");
+        $row = $query->row();
+        return $row->sansTelNiMail;
+    }
 
 }

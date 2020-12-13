@@ -63,6 +63,14 @@ $route['profil/entreprise'] = 'profile/miseAJourEntreprise';
 $route['profil/user'] = 'profile/miseAJourUser';
 $route['profil/delete'] = 'profile/deleteUser';
 
+$route['tableau-de-bord'] = 'dashboard/index';
+$route['tableau-de-bord/api/nouveaux-clients'] = 'dashboard/newClients';
+$route['tableau-de-bord/api/nombre-clients-par-an/(:any)'] = 'dashboard/NumberClientsByYear/$1';
+$route['tableau-de-bord/api/nombre-clients-par-dept'] = 'dashboard/NumberClientByDept';
+$route['tableau-de-bord/api/sans-tel-sans-email'] = 'dashboard/SansTelNiMail';
+$route['tableau-de-bord/api/contact-par-utilisateur'] = 'dashboard/contactParUtilisateur';
+$route['tableau-de-bord/api/rdv-par-utilisateur'] = 'dashboard/rendezVousParUtilisateur';
+
 $route['gestion-comptes'] = 'comptes/index';
 $route['gestion-comptes/suppression-collaborateur'] = 'comptes/delete';
 $route['gestion-comptes/ajouter-un-collaborateur'] = 'comptes/add';
