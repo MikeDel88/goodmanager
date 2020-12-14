@@ -79,7 +79,9 @@ class Comptes extends MY_Controller {
 
     public function delete() :void{
         $userId = intval($this->input->post('id'));
-        $this->Users_model->delete($userId);
+        $this->Contact_model->delete('user_id', $userId);
+        $this->RendezVous_model->delete('user_id', $userId);
+        $this->Users_model->delete('id', $userId);
         redirect('/gestion-comptes');
     }
 }

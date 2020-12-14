@@ -71,8 +71,8 @@ class MY_Model extends CI_Model {
      * @param  int $id
      * @return void
      */
-    public function delete(int $id) :void{
-        $this->db->where('id', $id);
+    public function delete(string $field, int $id) :void{
+        $this->db->where($field, $id);
         $this->db->delete($this->getTable());
     }
 }

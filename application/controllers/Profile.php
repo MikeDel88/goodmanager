@@ -76,15 +76,21 @@ class Profile extends MY_Controller {
     
     /**
      * deleteUser
-     * Suppression d'un utilisateur et de son entreprise
+     * Suppression d'un utilisateur et si admin, de son entreprise
      * @return void
      */
     public function deleteUser() :void{
-        $this->Users_model->delete($this->session->session_id);
+
+        $this->Contact_model->delete('user_id', $this->session->session_id);
+        $this->RendezVous_model->delete('user_id', $this->session->session_id);
+
         if($this->session->admin == true){
-            $this->Users_model->deleteAllUsers($this->session->entreprise_id);
-            $this->Entreprise_model->delete($this->session->entreprise_id);
+            $this->Users_model->delete('entreprise_id', $this->session->entreprise_id);
+            $this->Client_model->delete('entreprise_id', $this->session->entreprise_id);
+            $this->Entreprise_model->delete('id', $this->session->entreprise_id);
         }
+
+        $this->Users_model->delete('id', $this->session->session_id);
         redirect('/');
     }
     

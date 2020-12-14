@@ -73,7 +73,9 @@ class Fiche extends MY_Controller {
     public function delete() :void{
         if ($this->form_validation->run()){
             $id = intval($this->input->post('id'));
-            $this->Client_model->delete($id);
+            $this->Contact_model->delete('client_id', $id);
+            $this->RendezVous_model->delete('client_id', $id);
+            $this->Client_model->delete('id', $id);
             redirect('gestion-clients');
         }
     }

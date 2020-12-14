@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?= form_open('connexion/index') ?>
     <div class="input-field col s12">
         <label for="email">Adresse mail</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email" value="<?= $this->input->post('email') ?>" required>
     </div>
     <div class="input-field col s12">
         <label for="password">Mot de passe</label>
