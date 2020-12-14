@@ -105,12 +105,16 @@ main header .settings-menu a{
     }
 }
 fieldset{
-    border:2px solid var(--main-bg-color);
+    border:1px solid var(--main-bg-color);
     margin: 20px 0;
+    transition: box-shadow 1s, border 0.5s;
 }
 fieldset:hover{
     border: 0;
     box-shadow: 0 0 5px 0px var(--main-bg-color);
+}
+.btn{
+    background-color: #356dc1;
 }
 fieldset legend{
     font-size: 15px;

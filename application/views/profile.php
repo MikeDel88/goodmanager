@@ -23,6 +23,7 @@
                 <div class="form-submit">
                     <button class="btn" type="submit">Mettre à jour</button>
                 </div>
+                <?= (isset($msg) && $msg == 'error') ? "<span class='red-text'>Erreur sur le nom de l'entreprise</span>" : null ?>
             <?= form_close() ?>
         </div>
     </fieldset>

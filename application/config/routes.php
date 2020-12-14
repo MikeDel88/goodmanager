@@ -76,6 +76,7 @@ $route['gestion-comptes/suppression-collaborateur'] = 'comptes/delete';
 $route['gestion-comptes/ajouter-un-collaborateur'] = 'comptes/add';
 
 $route['gestion-clients'] = 'gestion/index';
+$route['gestion-clients/(:any)'] = 'gestion/index/$1';
 $route['gestion/nouveau-client'] = 'gestion/add';
 $route['gestion-clients/api/(:any)'] = 'gestion/api/$1';
 
@@ -103,5 +104,5 @@ $route['deconnexion'] = 'profile/deconnexion';
 
 
 $route['default_controller'] = 'accueil/index';
-$route['404_override'] = '';
+$route['404_override'] = 'errors/error404';
 $route['translate_uri_dashes'] = FALSE;

@@ -27,8 +27,8 @@ class Gestion extends MY_Controller {
      *  Affiche la page de gestion client, permet la recherche et l'ajout d'un client
      * @return void
      */
-    public function index() :void{
-
+    public function index(?string $msg = null) :void{
+        $data['msg'] = $msg;
         $data['user'] = $this->getUser();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
 
@@ -55,8 +55,13 @@ class Gestion extends MY_Controller {
                 $data['lng'] = $coordonnees['lng'];
             }
 
-            $this->Client_model->insert($data);
-            redirect('gestion-clients');
+            $result = $this->Client_model->insert($data);
+            if($result == true){
+                $msg = "success";
+            }else{
+                $msg = "error";
+            }
+            redirect("gestion-clients/$msg");
 
         }else{
             redirect('gestion-clients');

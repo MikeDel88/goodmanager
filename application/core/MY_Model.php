@@ -17,10 +17,10 @@ class MY_Model extends CI_Model {
      * insert
      *
      * @param  array $fields
-     * @return void
+     * @return bool
      */
-    public function insert(array $fields = []) :void{
-        $this->db->set($fields)->insert($this->getTable());
+    public function insert(array $fields = []) :bool{
+        return $this->db->set($fields)->insert($this->getTable());
     }
     
     
@@ -55,13 +55,14 @@ class MY_Model extends CI_Model {
      *
      * @param  array $data
      * @param  int $id
-     * @return void
+     * @return bool
      */
-    public function update(array $data, int $id) :void{
-        $this->db->set($data);
-        $this->db->set('updated_at', date('Y-m-d H:i:s'));
-        $this->db->where('id', $id);
-        $this->db->update($this->getTable());
+    public function update(array $data, int $id) :bool{
+        $query = $this->db->set($data)
+        ->set('updated_at', date('Y-m-d H:i:s'))
+        ->where('id', $id)
+        ->update($this->getTable());
+        return $query;
     }
     
     /**

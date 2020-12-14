@@ -53,8 +53,11 @@
                 <div class="form-submit">
                     <button class="btn" type="submit">Créer</button>
                 </div>
+
             <?= form_close() ?>
         </div>
+            <?= (isset($msg) && $msg == 'success') ? '<span class="chip teal white-text">Le client a bien été ajouté<i class="close material-icons">close</i></span>' : null ?>
+            <?= (isset($msg) && $msg == 'error') ? '<span class="chip red white-text">Une erreur est survenue<i class="close material-icons">close</i></span>' : null ?>
         <div class="search-result">
 
         </div>

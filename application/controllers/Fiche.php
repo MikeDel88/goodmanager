@@ -46,10 +46,11 @@ class Fiche extends MY_Controller {
      * @return void
      */
     public function update() :void{
-        if ($this->form_validation->run()){
+        
+        $data = $this->post();
+        $id = intval($data['id']);
 
-            $data = $this->post();
-            $id = intval($data['id']);
+        if ($this->form_validation->run()){
 
             if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
                 $coordonnees = $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
@@ -60,7 +61,7 @@ class Fiche extends MY_Controller {
             redirect("fiche-client/$id/{$data['last_name']}");
 
         }else{
-            redirect('gestion-clients');
+            redirect("fiche-client/$id/{$data['last_name']}");
         }
     }
     

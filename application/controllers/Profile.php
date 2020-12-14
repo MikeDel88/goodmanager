@@ -26,8 +26,8 @@ class Profile extends MY_Controller {
      *
      * @return void Affiche la page de profil de l'utilisateur
      */
-    public function index() :void{
-
+    public function index(?string $msg = null) :void{
+        $data['msg'] = $msg;
         $data['user'] = $this->getUser();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
         $this->layout->set_title("GoodManager | Espace Personnel");
@@ -45,9 +45,16 @@ class Profile extends MY_Controller {
         if($this->form_validation->run())
         {
             $data = $this->post();
-            $this->Entreprise_model->update($data, $this->session->entreprise_id);
+            $result = $this->Entreprise_model->update($data, $this->session->entreprise_id);
 
-        }            
+            // Duplication du nom de l'entreprise, renvoi une erreur
+            if($result == false){
+                $msg = "error";
+                redirect("/espace-personnel/$msg");
+            }
+        
+
+        }          
         redirect("/espace-personnel");
     }
     
