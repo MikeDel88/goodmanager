@@ -35,9 +35,9 @@ class Client_model extends MY_Model {
      * Récupère une liste de client en fonction d'une recherche effectuée aproximative
      * @param  string $field
      * @param  string $data
-     * @return void
+     * @return array
      */
-    public function getClientBy(string $field, string $data){
+    public function getClientBy(string $field, string $data) :array{
 
         $this->db->select('*');
         $this->db->from($this->getTable());
@@ -53,9 +53,9 @@ class Client_model extends MY_Model {
      * @param  mixed $lat
      * @param  mixed $lng
      * @param  mixed $distance
-     * @return void
+     * @return array
      */
-    public function getGeolocalisationClients($lat, $lng,$distance){
+    public function getGeolocalisationClients($lat, $lng,$distance) :array{
 
         $sql = "SELECT id, last_name, first_name, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
         $query = $this->db->query($sql);
@@ -68,7 +68,7 @@ class Client_model extends MY_Model {
      * @param  int $entrepriseId
      * @return void
      */
-    public function deleteAllUsers(int $entrepriseId){
+    public function deleteAllUsers(int $entrepriseId) :void{
         $this->db->where('entreprise_id', $entrepriseId);
         $this->db->delete($this->getTable());
     }
@@ -78,7 +78,7 @@ class Client_model extends MY_Model {
      *  Récupère l'ensemble des nouveaux clients d'une année
      * @return void
      */
-    public function selectNewClientByYear(){
+    public function selectNewClientByYear() :array{
         $query = $this->db->query("SELECT YEAR(created_at) as annee, COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY YEAR(created_at)");
         return $query->result();
     }
@@ -87,9 +87,9 @@ class Client_model extends MY_Model {
      * selectNumberClientByYear
      * Récupère le nombre de client par an
      * @param  mixed $year
-     * @return void
+     * @return array
      */
-    public function selectNumberClientByYear($year){
+    public function selectNumberClientByYear($year) :string{
         $query = $this->db->query("SELECT COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} AND YEAR(created_at) <= $year");
         $row = $query->row();
         return $row->nbrClients;
@@ -98,9 +98,9 @@ class Client_model extends MY_Model {
     /**
      * selectNombreClientByDept
      *  Récupère le nombre de client par département
-     * @return void
+     * @return array
      */
-    public function selectNombreClientByDept(){
+    public function selectNombreClientByDept() :array{
         $query = $this->db->query("SELECT SUBSTRING(zipcode,1, 2) as code , COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY code");
         return $query->result();
     }
@@ -109,9 +109,9 @@ class Client_model extends MY_Model {
      * selectSansInfo
      *  Récupère l'ensemble des clients sans informations (mail, tél)
      * @param  mixed $info
-     * @return void
+     * @return string
      */
-    public function selectSansInfo(string $info){
+    public function selectSansInfo(string $info) :string{
         $query = $this->db->query("SELECT count(id) as $info FROM {$this->getTable()} WHERE $info = ' ' AND entreprise_id = {$this->session->entreprise_id}");
         $row = $query->row();
         return $row->$info;
@@ -122,9 +122,9 @@ class Client_model extends MY_Model {
      *  Récupère l'ensemble des clients sans téléphone ni adresse email
      * @param  mixed $tel
      * @param  mixed $mail
-     * @return void
+     * @return array
      */
-    public function selectSansTelNiMail(string $tel, string $mail){
+    public function selectSansTelNiMail(string $tel, string $mail) :string{
         $query = $this->db->query("SELECT count(id) as sansTelNiMail FROM {$this->getTable()} WHERE $tel = '' AND $mail = '' AND entreprise_id = {$this->session->entreprise_id}");
         $row = $query->row();
         return $row->sansTelNiMail;

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <main id="page_connexion" class="row valign-wrapper">
 <div class="col m6">
-    <h3 class="center-align">Acceder à votre compte</h3>
+    <h3 class="center-align">Accédez à votre compte</h3>
 
     <?= form_open('connexion/index') ?>
     <div class="input-field col s12">

@@ -33,7 +33,6 @@ class Fiche extends MY_Controller {
     public function index(?int $id, ?string $nom) :void{
 
         $data['client'] = $this->Client_model->select('id', $id, 'Client');
-
         $this->layout->set_title("GoodManager | Fiche Client");
         $this->layout->set_page("Fiche Client | " . ucFirst($data['client']->last_name));
         $this->layout->view('fiche', $data);

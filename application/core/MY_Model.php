@@ -15,7 +15,7 @@ class MY_Model extends CI_Model {
     
     /**
      * insert
-     *
+     *  Insert dans la base de données
      * @param  array $fields
      * @return bool
      */
@@ -26,23 +26,23 @@ class MY_Model extends CI_Model {
     
     /**
      * select
-     *
+     *  Selectionne en fonction du champs, des données et renvoi un objet
      * @param  string $fields
      * @param  string $data
      * @param  string $class
      * @return object
      */
-    public function select(string $fields, $data, string $class){
+    public function select(string $fields, $data, string $class) :object{
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
     
     /**
      * selectAll
-     *
+     *  Selectionne tous les clients qui commencent par un nom donnée.
      * @param  array $data
-     * @return void
+     * @return array
      */
-    public function selectAll(array $data){
+    public function selectAll(array $data) :array{
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->like($data, 'before');
@@ -52,7 +52,7 @@ class MY_Model extends CI_Model {
         
     /**
      * update
-     *
+     *  Mets à jour les données d'une table et renvoi un booléan pour vérifier si tout s'est bien passé
      * @param  array $data
      * @param  int $id
      * @return bool
@@ -67,7 +67,7 @@ class MY_Model extends CI_Model {
     
     /**
      * delete
-     *
+     *  Supprimer un champs dans une table
      * @param  int $id
      * @return void
      */

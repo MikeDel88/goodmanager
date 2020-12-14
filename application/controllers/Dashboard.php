@@ -21,20 +21,36 @@ class Dashboard extends MY_Controller {
         $this->layout->set_js(base_url() . "assets/js/dashboard.js");
         $this->layout->set_theme("back-office");
     }
-
-    public function index(){
+    
+    /**
+     * index
+     *  Affiche la page du tableau de bord
+     * @return void
+     */
+    public function index() :void{
         $this->layout->set_title("GoodManager | Tableau de bord");
         $this->layout->set_page("Les Analyses");
         $this->layout->view('dashboard');
     }
-
-    public function newClients(){
+    
+    /**
+     * newClients
+     *  Tableau qui renvoi en JSON le nombre de nouveaux clients sur différentes années
+     * @return void
+     */
+    public function newClients() :void{
         $result = $this->Client_model->selectNewClientByYear();
 
         header('Content-type: application/json');
         echo json_encode($result);
     }
-
+    
+    /**
+     * NumberClientsByYear
+     *  Renvoi en JSON le nombre de clients par an
+     * @param  mixed $datas
+     * @return void
+     */
     public function NumberClientsByYear(string $datas){
         $results = [];
         $annees = explode("-", $datas);
@@ -47,15 +63,25 @@ class Dashboard extends MY_Controller {
         header('Content-type: application/json');
         echo json_encode($results);
     }
-
-    public function NumberClientByDept(){
+    
+    /**
+     * NumberClientByDept
+     *  Génère le nombre de clients par département
+     * @return void
+     */
+    public function NumberClientByDept() :void{
         $result = $this->Client_model->selectNombreClientByDept();
 
         header('Content-type: application/json');
         echo json_encode($result);
     }
-
-    public function SansTelNiMail(){
+    
+    /**
+     * SansTelNiMail
+     * Renvoi en JSON le nombre de clients sans téléphone, sans mail, et les deux
+     * @return void
+     */
+    public function SansTelNiMail() :void{
 
         $result = [];
 
@@ -71,16 +97,26 @@ class Dashboard extends MY_Controller {
         echo json_encode($result);
 
     }
-
-    public function contactParUtilisateur(){
+    
+    /**
+     * contactParUtilisateur
+     *  renvoi en JSON le nombre de contact client par utilisateur
+     * @return void
+     */
+    public function contactParUtilisateur() :void{
 
         $result = $this->Contact_model->selectContactParUtilisateur();
 
         header('Content-type: application/json');
         echo json_encode($result);
     }
-
-    public function rendezVousParUtilisateur(){
+    
+    /**
+     * rendezVousParUtilisateur
+     *  Renvoi en JSON le nombre de rendez-vous par utilisateur
+     * @return void
+     */
+    public function rendezVousParUtilisateur() :void{
         $result = $this->RendezVous_model->nombreRdvPrisParUtilisateur();
 
         header('Content-type: application/json');

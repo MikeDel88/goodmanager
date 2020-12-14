@@ -20,7 +20,7 @@ class MY_Controller extends CI_Controller {
     /**
      * getInput
      * Récupère les données envoyés en JSON
-     * @return void
+     * @return mixed
      */
     public function getInput(){
         $input_data = json_decode(trim(file_get_contents('php://input')), true);
@@ -43,8 +43,8 @@ class MY_Controller extends CI_Controller {
      * @param  int $id
      * @return object Récupère une entreprise
      */
-    protected function getEntreprise($id) :object{
-        return $this->Entreprise_model->select('id', $id, 'Entreprise');
+    protected function getEntreprise(int $id) :object{
+        return $this->Entreprise_model->select('id', intval($id), 'Entreprise');
     }
 
         
@@ -74,7 +74,7 @@ class MY_Controller extends CI_Controller {
      * @param  mixed $city
      * @return array
      */
-    public function coordonnees($address, $zipcode, $city) :array{
+    public function coordonnees(string $address, string $zipcode, string $city) :array{
             $adresse = array(
                   'street'     => $address,
                   'postalcode' => $zipcode,

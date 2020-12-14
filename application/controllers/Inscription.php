@@ -93,7 +93,7 @@ class Inscription extends CI_Controller {
      * @param  mixed $token
      * @return void Récupère le lien avec le token et vérifie pour activer le compte 
      */
-    public function validation($token):void{
+    public function validation(string $token):void{
 
         $verification = $this->Users_model->selectToken($token);
         $date_time = date("Y-m-d H:i:s");

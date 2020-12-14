@@ -38,12 +38,24 @@ class Comptes extends MY_Controller {
         $this->layout->set_page("Gestion Comptes collaborateurs");
         $this->layout->view('comptes', $data);
     }
-
-    private function passgen2($nbChar){
+    
+    /**
+     * passgen2
+     *
+     * @param  mixed $nbChar
+     * Retourne un mot de passe provisoire au collaborateur enregistré par l'admin
+     * @return string
+     */
+    private function passgen2($nbChar) :string{
         return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789'),1, $nbChar); 
     }
-
-    public function add(){
+    
+    /**
+     * add
+     *  Ajout d'un nouveau collaborateur, envoi d'email avec mot de passe provisoire et token de validation
+     * @return void
+     */
+    public function add() :void{
 
         if($this->form_validation->run()){
 
@@ -76,7 +88,12 @@ class Comptes extends MY_Controller {
         }
         redirect('gestion-comptes');
     }
-
+    
+    /**
+     * delete
+     *  Supprime un collaborateur par l'admin
+     * @return void
+     */
     public function delete() :void{
         $userId = intval($this->input->post('id'));
         $this->Contact_model->delete('user_id', $userId);

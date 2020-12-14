@@ -32,7 +32,7 @@
             </ul>
         </div>
         <footer>
-            <p>&copy; copyright - michael delamarre <?= date("Y") ?></p>
+            <p>&copy; copyright - michael Delamarre <?= date("Y") ?></p>
         </footer>
     </aside>
     <main>
@@ -50,7 +50,7 @@
         </header>
         
             <?=$output?>
-
+            <div><?= ($message !== '') ? $message : null ?></div>
     </main>
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

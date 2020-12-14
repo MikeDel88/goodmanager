@@ -19,6 +19,8 @@ class Layout {
         $this->var['css'] = '';
         $this->var['js'] = ''; 
         $this->var['page'] = '';
+        $this->var['message'] = '';
+
     }
 
     public function view($name, $data = array()) {
@@ -81,6 +83,14 @@ class Layout {
     public function set_page($page) {
         if(is_string($page) AND !empty($page)) {
             $this->var['page'] = $page;
+        return true;
+        }
+        return false;
+    }
+
+    public function set_message($message) {
+        if(is_string($message) AND !empty($message)) {
+            $this->var['message'] = $message;
         return true;
         }
         return false;

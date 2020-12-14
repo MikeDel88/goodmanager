@@ -41,7 +41,7 @@ class Liste extends MY_Controller {
      *  récupère la liste des clients en fonction des recherches
      * @return void
      */
-    public function search(){
+    public function search() :void{
         if($this->form_validation->run()){
             $contacts =[];
             $field = $this->input->post('select-search');
@@ -97,7 +97,7 @@ class Liste extends MY_Controller {
      * @param  mixed $client_id
      * @return void
      */
-    public function historyContact(int $client_id){
+    public function historyContact(int $client_id) :void{
         $history = $this->Contact_model->getHistoryContact($client_id);
         header('Content-type: application/json');
         echo json_encode($history);

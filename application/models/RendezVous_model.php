@@ -29,8 +29,13 @@ class RendezVous_model extends MY_Model {
     public function getTable() :string{
         return $this->table;
     }
-
-    public function selectAllRdv(){
+    
+    /**
+     * selectAllRdv
+     *  Retourne l'ensemble des rendez-vous d'un utilisateur
+     * @return array
+     */
+    public function selectAllRdv() :array{
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->join('client', "client.id = {$this->getTable()}.client_id");
@@ -38,20 +43,38 @@ class RendezVous_model extends MY_Model {
         $this->db->where('user_id', $this->session->session_id);
         return $this->db->get()->result();
     }
-
+    
+    /**
+     * deleteRDV
+     *  Supprime un rendez-vous
+     * @param  mixed $id
+     * @return void
+     */
     public function deleteRDV(int $id){
         $this->db->where('rdv_id', $id);
         $this->db->delete($this->getTable());
     }
-
+    
+    /**
+     * updateRDV
+     *  Mets à jour un rendez-vous
+     * @param  mixed $data
+     * @param  mixed $id
+     * @return void
+     */
     public function updateRDV(array $data, int $id){
         $this->db->set($data);
         $this->db->set('updated_at', date('Y-m-d H:i:s'));
         $this->db->where('rdv_id', $id);
         $this->db->update($this->getTable());
     }
-
-    public function nombreRdvPrisParUtilisateur(){
+    
+    /**
+     * nombreRdvPrisParUtilisateur
+     *  Retourne le nombre de Rendez vous pris par un utilisateur pour le dashboard
+     * @return array
+     */
+    public function nombreRdvPrisParUtilisateur() :array{
         $year = date("Y");
         $query = $this->db->query("SELECT users.last_name, users.first_name, COUNT(rdv.user_id) as nombre FROM rdv, users WHERE rdv.user_id = users.id AND YEAR(date) = $year AND users.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.user_id");
         return $query->result();

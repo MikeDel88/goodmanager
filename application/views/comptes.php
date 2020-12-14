@@ -44,7 +44,7 @@
 <div id="delete-compte" class="modal">
     <div class="modal-content">
       <h4>Suppression du compte collaborateur</h4>
-      <p>attention ! Cette action est irréversible</p>
+      <p>Attention ! Cette action est irréversible</p>
     </div>
     <div class="modal-footer">
         <span class="modal-close waves-effect waves-green btn-flat">Confirmer</span>

@@ -44,7 +44,7 @@ ListeNouveauClients().then(function (clients) {
     let data = [trace1];
 
     let layout = {
-        title: 'Nouveau clients par an',
+        title: 'Nouveaux clients par an',
         xaxis: {
             tickangle: -45
         },

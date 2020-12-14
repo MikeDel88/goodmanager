@@ -21,14 +21,27 @@ class Geolocalisation extends MY_Controller {
         $this->layout->set_js(base_url() . "assets/js/geolocalisation.js");
         $this->layout->set_theme("back-office");
     }
-
+    
+    /**
+     * index
+     *  Affiche la page de géolocalisation
+     * @return void
+     */
     public function index(){
         $this->layout->set_title("GoodManager | Geolocalisation");
         $this->layout->set_page("Géolocalisation des clients");
         $this->layout->view('geolocalisation');
     }
-
-    public function geolocalisationClient($lat, $lng, $distance){
+    
+    /**
+     * geolocalisationClient
+     *  Renvoi en JSON la liste des clients dans un périmètre 
+     * @param  mixed $lat
+     * @param  mixed $lng
+     * @param  mixed $distance
+     * @return void
+     */
+    public function geolocalisationClient($lat, $lng, $distance) :void{
 
         $result = $this->Client_model->getGeolocalisationClients($lat, $lng,$distance);
         
