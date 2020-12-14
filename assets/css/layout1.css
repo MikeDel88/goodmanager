@@ -10,17 +10,14 @@ main {
     margin-right: 20px;
     padding: 10px 0;
 }
-
-#page-accueil{
-    background-position: center;
+h3, h4{
+    font-size:24px;
 }
+
 #page_connexion, #page_inscription{
     display:flex;
 }
-.img-connexion{
-    width:100%;
-    height:auto;
-}
+
 .password_reset{
     margin-top: 10px;
 }
@@ -35,18 +32,10 @@ main {
     height:auto;
     margin-top:3px;
 }
-
-#page_inscription .img-inscription{
-    width:80%;
-    height:auto;
-}
 .messages{
     margin-top: 10px;
 }
-#page_inscription .form-submit{
-    text-align:right;
-    width:100%;
-}
+
 
 @media screen and (max-width:600px){
     .form-submit, .password_reset, #page_inscription .form-submit{

@@ -12,12 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?= form_open('inscription') ?>
     <div class="input-field col s12">
         <label for="email">E-mail</label>
-        <input type="email" name="email" class="validate" required>
+        <input type="email" name="email" class="validate" value="<?= $this->input->post('email') ?? null ?>" required>
         <span class="helper-text" data-error="mail incorrect" data-success="mail correct">Une adresse mail valide</span>
     </div>
     <div class="input-field col s12">
         <label for="entreprise">Entreprise</label>
-        <input id="entreprise" type="text" name="entreprise" required>
+        <input id="entreprise" type="text" name="entreprise" value="<?= $this->input->post('entreprise') ?? null ?>" required>
         <span class="helper-text">Le nom de votre entreprise</span>
     </div>
     <div class="input-field col s12">

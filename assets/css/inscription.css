@@ -1,0 +1,9 @@
+#page_inscription .img-inscription{
+    width:80%;
+    height:auto;
+    box-shadow: 2px 4px 11px 0px #716f6f;
+}
+#page_inscription .form-submit{
+    text-align:right;
+    width:100%;
+}
