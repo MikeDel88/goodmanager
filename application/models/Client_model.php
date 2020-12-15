@@ -57,7 +57,7 @@ class Client_model extends MY_Model {
      */
     public function getGeolocalisationClients($lat, $lng,$distance) :array{
 
-        $sql = "SELECT id, last_name, first_name, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
+        $sql = "SELECT id, nom, prenom, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
         $query = $this->db->query($sql);
         return $query->result();
     }
@@ -101,7 +101,7 @@ class Client_model extends MY_Model {
      * @return array
      */
     public function selectNombreClientByDept() :array{
-        $query = $this->db->query("SELECT SUBSTRING(zipcode,1, 2) as code , COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY code");
+        $query = $this->db->query("SELECT SUBSTRING(code_postal,1, 2) as code , COUNT(id) as nbrClients FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} GROUP BY code");
         return $query->result();
     }
     

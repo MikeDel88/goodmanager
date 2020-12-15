@@ -7,9 +7,9 @@
         <div>
             <label for="filtre">Filtre </label>
             <select id="filtre" name="filtre">
-                <option value="address" selected>Adresse</option>
-                <option value="zipcode">Code Postal</option>
-                <option value="city">Ville</option>
+                <option value="adresse" selected>Adresse</option>
+                <option value="code_postal">Code Postal</option>
+                <option value="ville">Ville</option>
             </select>
         </div>
         <div>

@@ -85,9 +85,9 @@ class Dashboard extends MY_Controller {
 
         $result = [];
 
-        $sansTel = $this->Client_model->selectSansInfo('phone');
+        $sansTel = $this->Client_model->selectSansInfo('telephone');
         $sansEmail = $this->Client_model->selectSansInfo('email');
-        $sansTelNiMail = $this->Client_model->selectSansTelNiMail('phone', 'email');
+        $sansTelNiMail = $this->Client_model->selectSansTelNiMail('telephone', 'email');
 
         $result[] = $sansTel;
         $result[] = $sansEmail;

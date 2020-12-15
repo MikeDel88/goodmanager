@@ -56,22 +56,22 @@ $config = array(
         ),
         'profile/miseAJourEntreprise' => array(
                 array(
-                        'field' => 'name',
+                        'field' => 'nom',
                         'label' => 'nom',
                         'rules' => 'trim|required'
                 ),
                 array(
-                        'field' => 'address',
+                        'field' => 'adresse',
                         'label' => 'adresse',
                         'rules' => 'trim'
                 ),
                 array(
-                        'field' => 'zipcode',
+                        'field' => 'code_postal',
                         'label' => 'code postal',
                         'rules' => 'trim|exact_length[5]'
                 ),
                 array(
-                        'field' => 'city',
+                        'field' => 'ville',
                         'label' => 'ville',
                         'rules' => 'trim'
                 ),
@@ -84,44 +84,44 @@ $config = array(
                         'rules' => 'trim|required|valid_email' 
                 ),
                 array(
-                        'field' => 'last_name',
+                        'field' => 'nom',
                         'label' => 'nom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'first_name',
+                        'field' => 'prenom',
                         'label' => 'prénom',
                         'rules' => 'trim|required' 
                 ),
         ),
         'gestion/add' => array(
                 array(
-                        'field' => 'last_name',
+                        'field' => 'nom',
                         'label' => 'nom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'first_name',
+                        'field' => 'prenom',
                         'label' => 'prénom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'birthday',
+                        'field' => 'date_naissance',
                         'label' => 'date anniversaire',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'address',
+                        'field' => 'adresse',
                         'label' => 'adresse',
                         'rules' => 'trim' 
                 ),
                 array(
-                        'field' => 'zipcode',
+                        'field' => 'code_postal',
                         'label' => 'code postal',
                         'rules' => 'trim|exact_length[5]'
                 ),
                 array(
-                        'field' => 'city',
+                        'field' => 'ville',
                         'label' => 'ville',
                         'rules' => 'trim'
                 ),
@@ -131,7 +131,7 @@ $config = array(
                         'rules' => 'trim|valid_email' 
                 ),
                 array(
-                        'field' => 'phone',
+                        'field' => 'telephone',
                         'label' => 'téléphone',
                         'rules' => 'trim|exact_length[10]' 
                 ),
@@ -139,32 +139,32 @@ $config = array(
         ),
         'fiche/update' => array(
                 array(
-                        'field' => 'last_name',
+                        'field' => 'nom',
                         'label' => 'nom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'first_name',
+                        'field' => 'prenom',
                         'label' => 'prénom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'birthday',
+                        'field' => 'date_naissance',
                         'label' => 'date anniversaire',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'address',
+                        'field' => 'adresse',
                         'label' => 'adresse',
                         'rules' => 'trim' 
                 ),
                 array(
-                        'field' => 'zipcode',
+                        'field' => 'code_postal',
                         'label' => 'code postal',
                         'rules' => 'trim|exact_length[5]'
                 ),
                 array(
-                        'field' => 'city',
+                        'field' => 'ville',
                         'label' => 'ville',
                         'rules' => 'trim'
                 ),
@@ -174,7 +174,7 @@ $config = array(
                         'rules' => 'trim|valid_email' 
                 ),
                 array(
-                        'field' => 'phone',
+                        'field' => 'telephone',
                         'label' => 'téléphone',
                         'rules' => 'trim|exact_length[10]' 
                 ),
@@ -204,12 +204,12 @@ $config = array(
                         'rules' => 'trim|valid_email' 
                 ),
                 array(
-                        'field' => 'last_name',
+                        'field' => 'nom',
                         'label' => 'nom',
                         'rules' => 'trim|required' 
                 ),
                 array(
-                        'field' => 'first_name',
+                        'field' => 'prenom',
                         'label' => 'prénom',
                         'rules' => 'trim|required' 
                 ),

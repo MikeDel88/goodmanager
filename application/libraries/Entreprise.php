@@ -8,10 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Entreprise extends Utilities{
 
     private int $id;
-    private string $name;
-    private string $address;
-    private string $zipcode;
-    private string $city;
+    private string $nom;
+    private string $adresse;
+    private string $code_postal;
+    private string $ville;
     private string $created_at;
     private string $updated_at;
 
@@ -39,9 +39,9 @@ class Entreprise extends Utilities{
     /**
      * Get the value of name
      */ 
-    public function getName()
+    public function getNom()
     {
-        return $this->name;
+        return $this->nom;
     }
 
     /**
@@ -49,69 +49,69 @@ class Entreprise extends Utilities{
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setNom($nom)
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get the value of address
+     * Get the value of adresse
      */ 
-    public function getAddress()
+    public function getAdresse()
     {
-        return $this->address;
+        return $this->adresse;
     }
 
     /**
-     * Set the value of address
+     * Set the value of adresse
      *
      * @return  self
      */ 
-    public function setAddress($address)
+    public function setAdresse($adresse)
     {
-        $this->address = $address;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
     /**
-     * Get the value of zipcode
+     * Get the value of code_postal
      */ 
-    public function getZipcode()
+    public function getCode_postal()
     {
-        return $this->zipcode;
+        return $this->code_postal;
     }
 
     /**
-     * Set the value of zipcode
+     * Set the value of code_postal
      *
      * @return  self
      */ 
-    public function setZipcode($zipcode)
+    public function setCode_postal($code_postal)
     {
-        $this->zipcode = $zipcode;
+        $this->code_postal = $code_postal;
 
         return $this;
     }
 
     /**
-     * Get the value of city
+     * Get the value of ville
      */ 
-    public function getCity()
+    public function getVille()
     {
-        return $this->city;
+        return $this->ville;
     }
 
     /**
-     * Set the value of city
+     * Set the value of ville
      *
      * @return  self
      */ 
-    public function setCity($city)
+    public function setVille($ville)
     {
-        $this->city = $city;
+        $this->ville = $ville;
 
         return $this;
     }

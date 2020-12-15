@@ -34,7 +34,7 @@ class Connexion extends CI_Controller {
 
                 $verif = password_verify($password, $result->password);
 
-                if($verif && $result->activate == 1){
+                if($verif && $result->active == 1){
                     
                     $this->session->session_id = $result->id;
                     $this->session->entreprise_id = $result->entreprise_id;
@@ -71,7 +71,7 @@ class Connexion extends CI_Controller {
             $email = $this->input->post('email');
             $result = $this->Users_model->select('email', $email, 'User');
   
-            if(!empty($result) && $result->activate == 1){
+            if(!empty($result) && $result->active == 1){
 
                 $string_token = strval(microtime(TRUE)*100000);
                 $token = md5($string_token);
@@ -89,7 +89,10 @@ class Connexion extends CI_Controller {
                 $this->email->from(SMTP_USER, 'No-Reply');
 		        $this->email->to($email);
 		        $this->email->subject('Modification du mot de passe GoodManager');
-		        $this->email->message("<a href='$lien' target='_blank'>Modification du mot de passe valable jusqu'au $token_validation</a>");
+                $this->email->message("
+                <p>Vous avez souhaité réinitiliser votre mot de passe.<br>Pour faire cela, il vous faut cliquer sur le lien ci-dessous.</p>
+                <a href='$lien' target='_blank'>Modification du mot de passe valable jusqu'au $token_validation</a>
+                ");
                 $this->email->send();
             
                 redirect('connexion');

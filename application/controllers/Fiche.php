@@ -34,7 +34,7 @@ class Fiche extends MY_Controller {
 
         $data['client'] = $this->Client_model->select('id', $id, 'Client');
         $this->layout->set_title("GoodManager | Fiche Client");
-        $this->layout->set_page("Fiche Client | " . ucFirst($data['client']->last_name));
+        $this->layout->set_page("Fiche Client | " . ucFirst($data['client']->nom));
         $this->layout->view('fiche', $data);
 
     }
@@ -51,16 +51,16 @@ class Fiche extends MY_Controller {
 
         if ($this->form_validation->run()){
 
-            if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
-                $coordonnees = $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+            if(isset($data['adresse']) && isset($data['code_postal']) && isset($data['ville'])){
+                $coordonnees = $this->coordonnees($data['adresse'], $data['code_postal'], $data['ville']);
                 $data['lat'] = $coordonnees['lat'];
                 $data['lng'] = $coordonnees['lng'];
             }
             $this->Client_model->update($data, $id);
-            redirect("fiche-client/$id/{$data['last_name']}");
+            redirect("fiche-client/$id/{$data['nom']}");
 
         }else{
-            redirect("fiche-client/$id/{$data['last_name']}");
+            redirect("fiche-client/$id/{$data['nom']}");
         }
     }
     

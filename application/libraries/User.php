@@ -12,9 +12,9 @@ class User extends Utilities {
 	private int $entreprise_id = 0;
 	private string $email;
 	private string $password;
-	private string $last_name ='';
-	private string $first_name = '';
-	private int $activate;
+	private string $nom ='';
+	private string $prenom = '';
+	private int $active;
 	private int $admin;
 	private string $token;
 	private string $token_validation;
@@ -103,61 +103,61 @@ class User extends Utilities {
 	}
 
 	/**
-	 * Get the value of last_name
+	 * Get the value of nom
 	 */ 
-	public function getLast_name()
+	public function getNom()
 	{
-		return $this->last_name;
+		return $this->nom;
 	}
 
 	/**
-	 * Set the value of last_name
+	 * Set the value of nom
 	 *
 	 * @return  self
 	 */ 
-	public function setLast_name($last_name)
+	public function setNom($nom)
 	{
-		$this->last_name = $last_name;
+		$this->nom = $nom;
 
 		return $this;
 	}
 
 	/**
-	 * Get the value of first_name
+	 * Get the value of prenom
 	 */ 
-	public function getFirst_name()
+	public function getPrenom()
 	{
-		return $this->first_name;
+		return $this->prenom;
 	}
 
 	/**
-	 * Set the value of first_name
+	 * Set the value of prenom
 	 *
 	 * @return  self
 	 */ 
-	public function setFirst_name($first_name)
+	public function setPrenom($prenom)
 	{
-		$this->first_name = $first_name;
+		$this->prenom = $prenom;
 
 		return $this;
 	}
 
 	/**
-	 * Get the value of activate
+	 * Get the value of active
 	 */ 
-	public function getActivate()
+	public function getActive()
 	{
-		return $this->activate;
+		return $this->active;
 	}
 
 	/**
-	 * Set the value of activate
+	 * Set the value of active
 	 *
 	 * @return  self
 	 */ 
-	public function setActivate($activate)
+	public function setActive($active)
 	{
-		$this->activate = $activate;
+		$this->active = $active;
 
 		return $this;
 	}

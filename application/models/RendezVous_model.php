@@ -76,7 +76,7 @@ class RendezVous_model extends MY_Model {
      */
     public function nombreRdvPrisParUtilisateur() :array{
         $year = date("Y");
-        $query = $this->db->query("SELECT users.last_name, users.first_name, COUNT(rdv.user_id) as nombre FROM rdv, users WHERE rdv.user_id = users.id AND YEAR(date) = $year AND users.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.user_id");
+        $query = $this->db->query("SELECT users.nom, users.prenom, COUNT(rdv.user_id) as nombre FROM rdv, users WHERE rdv.user_id = users.id AND YEAR(date) = $year AND users.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.user_id");
         return $query->result();
     }
 }

@@ -358,7 +358,7 @@ $config['encryption_key'] = '';
 |
 | 'sess_match_ip'
 |
-|	Whether to match the user's IP address when reading the session data.
+|	Whether to match the user's IP adresse when reading the session data.
 |
 |	WARNING: If you're using the database driver, don't forget to update
 |	         your session table's PRIMARY KEY when changing this setting.
@@ -510,11 +510,11 @@ $config['rewrite_short_tags'] = FALSE;
 |--------------------------------------------------------------------------
 |
 | If your server is behind a reverse proxy, you must whitelist the proxy
-| IP addresses from which CodeIgniter should trust headers such as
+| IP adressees from which CodeIgniter should trust headers such as
 | HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
-| the visitor's IP address.
+| the visitor's IP adresse.
 |
-| You can use both an array or a comma-separated list of proxy addresses,
+| You can use both an array or a comma-separated list of proxy adressees,
 | as well as specifying whole subnets. Here are a few examples:
 |
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'

@@ -2,7 +2,7 @@
 
 NEW_CLIENTS = document.getElementById('nouveau-clients');
 NBR_CLIENTS_YEAR = document.getElementById('nombre-clients-an');
-CLIENTS_TEL_MAIL = document.getElementById('clients-phone-mail');
+CLIENTS_TEL_MAIL = document.getElementById('clients-telephone-mail');
 CONTACT_UTILISATEUR = document.getElementById('nombre-contact-utilisateur');
 RDV_UTILISATEUR = document.getElementById('nombre-rdv-utilisateur');
 
@@ -176,7 +176,7 @@ async function nombreContactParUtilisateur() {
     let nombreTotal = 0;
 
     info.forEach(utilisateur => {
-        nomUtilisateur.push(`${utilisateur.last_name} ${utilisateur.first_name}`)
+        nomUtilisateur.push(`${utilisateur.nom} ${utilisateur.prenom}`)
         nombreContact.push(utilisateur.nombre)
         nombreTotal += parseInt(utilisateur.nombre)
     })
@@ -207,7 +207,7 @@ async function nombreRdvParUtilisateur() {
     let nombreTotal = 0;
 
     info.forEach(utilisateur => {
-        nomUtilisateur.push(`${utilisateur.last_name} ${utilisateur.first_name}`)
+        nomUtilisateur.push(`${utilisateur.nom} ${utilisateur.prenom}`)
         nombreContact.push(utilisateur.nombre)
         nombreTotal += parseInt(utilisateur.nombre)
     })

@@ -9,16 +9,16 @@ class Client extends Utilities{
 
     private int $id;
     private int $entreprise_id;
-    private string $last_name;
-    private string $first_name;
-    private string $birthday;
-    private string $address;
-    private string $zipcode;
-    private string $city;
+    private string $nom;
+    private string $prenom;
+    private string $date_naissance;
+    private string $adresse;
+    private string $code_postal;
+    private string $ville;
     private string $lat;
     private string $lng;
     private string $email;
-    private string $phone;
+    private string $telephone;
     private string $created_at;
     private string $updated_at;
     
@@ -28,8 +28,8 @@ class Client extends Utilities{
      * @return int
      */
     public function age() :int { 
-        $age = date('Y') - intval($this->birthday); 
-        if (date('md') < date('md', strtotime(intval($this->birthday)))) { 
+        $age = date('Y') - intval($this->date_naissance); 
+        if (date('md') < date('md', strtotime(intval($this->date_naissance)))) { 
             return $age - 1; 
         } 
         return $age; 
@@ -76,121 +76,121 @@ class Client extends Utilities{
     }
 
     /**
-     * Get the value of last_name
+     * Get the value of nom
      */ 
-    public function getLast_name()
+    public function getNom()
     {
-        return $this->last_name;
+        return $this->nom;
     }
 
     /**
-     * Set the value of last_name
+     * Set the value of nom
      *
      * @return  self
      */ 
-    public function setLast_name($last_name)
+    public function setNom($nom)
     {
-        $this->last_name = $last_name;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get the value of first_name
+     * Get the value of prenom
      */ 
-    public function getFirst_name()
+    public function getPrenom()
     {
-        return $this->first_name;
+        return $this->prenom;
     }
 
     /**
-     * Set the value of first_name
+     * Set the value of prenom
      *
      * @return  self
      */ 
-    public function setFirst_name($first_name)
+    public function setPrenom($prenom)
     {
-        $this->first_name = $first_name;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     /**
-     * Get the value of birthday
+     * Get the value of date_naissance
      */ 
-    public function getBirthday()
+    public function getDate_naissance()
     {
-        return $this->birthday;
+        return $this->date_naissance;
     }
 
     /**
-     * Set the value of birthday
+     * Set the value of date_naissance
      *
      * @return  self
      */ 
-    public function setBirthday($birthday)
+    public function setDate_naissance($date_naissance)
     {
-        $this->birthday = $birthday;
+        $this->date_naissance = $date_naissance;
 
         return $this;
     }
 
     /**
-     * Get the value of address
+     * Get the value of adresse
      */ 
-    public function getAddress()
+    public function getAdresse()
     {
-        return $this->address;
+        return $this->adresse;
     }
 
     /**
-     * Set the value of address
+     * Set the value of adresse
      *
      * @return  self
      */ 
-    public function setAddress($address)
+    public function setAdresse($adresse)
     {
-        $this->address = $address;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
     /**
-     * Get the value of zipcode
+     * Get the value of code_postal
      */ 
-    public function getZipcode()
+    public function getCode_postal()
     {
-        return $this->zipcode;
+        return $this->code_postal;
     }
 
     /**
-     * Set the value of zipcode
+     * Set the value of code_postal
      *
      * @return  self
      */ 
-    public function setZipcode($zipcode)
+    public function setCode_postal($code_postal)
     {
-        $this->zipcode = $zipcode;
+        $this->code_postal = $code_postal;
 
         return $this;
     }
 
     /**
-     * Get the value of city
+     * Get the value of ville
      */ 
-    public function getCity()
+    public function getVille()
     {
-        return $this->city;
+        return $this->ville;
     }
 
     /**
-     * Set the value of city
+     * Set the value of ville
      *
      * @return  self
      */ 
-    public function setCity($city)
+    public function setVille($ville)
     {
-        $this->city = $city;
+        $this->ville = $ville;
 
         return $this;
     }
@@ -216,21 +216,21 @@ class Client extends Utilities{
     }
 
     /**
-     * Get the value of phone
+     * Get the value of telephone
      */ 
-    public function getPhone()
+    public function getTelephone()
     {
-        return $this->phone;
+        return $this->telephone;
     }
 
     /**
-     * Set the value of phone
+     * Set the value of telephone
      *
      * @return  self
      */ 
-    public function setPhone($phone)
+    public function setTelephone($telephone)
     {
-        $this->phone = $phone;
+        $this->telephone = $telephone;
 
         return $this;
     }

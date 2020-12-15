@@ -44,7 +44,7 @@ class Inscription extends CI_Controller {
     private function registerEntreprise(): int{
 
        
-        $data['name'] = $this->input->post("entreprise");
+        $data['nom'] = $this->input->post("entreprise");
         return $this->Entreprise_model->register($data);
 
     }
@@ -69,7 +69,7 @@ class Inscription extends CI_Controller {
             'entreprise_id' => $entreprise_id,
             'token_validation' => $token_validation,
             'password' => $password_hash,
-            'activate' => '0',
+            'active' => '0',
             'admin' => true,
             );
 
@@ -80,7 +80,10 @@ class Inscription extends CI_Controller {
             $this->email->from(SMTP_USER, 'No-Reply');
 		    $this->email->to($email);
 		    $this->email->subject('Validation GoodManager');
-		    $this->email->message("<a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>");
+            $this->email->message("
+            <p>Bienvenue sur le site de GoodManager ! <br>Afin de valider votre inscription, il vous faut cliquer sur le lien ci-dessous</p>
+            <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
+            ");
             $this->email->send();
             
 		    return ($this->email->send(FALSE)) ? false : true;

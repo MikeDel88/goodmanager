@@ -56,8 +56,8 @@ class MY_Controller extends CI_Controller {
     protected function post() :array{
         $posts = $this->input->post();
         foreach($posts as $key => $value){
-            if($key == 'birthday'){
-                $data['birthday'] = date("Y-m-d", strtotime($value));
+            if($key == 'date_naissance'){
+                $data['date_naissance'] = date("Y-m-d", strtotime($value));
             }else{
                 $data[$key] = strtolower($value);
             }
@@ -69,16 +69,16 @@ class MY_Controller extends CI_Controller {
     /**
      * coordonnees
      *  Transforme une adresse en coordonnees lat et lon
-     * @param  mixed $address
-     * @param  mixed $zipcode
-     * @param  mixed $city
+     * @param  mixed $adresse
+     * @param  mixed $code_postal
+     * @param  mixed $ville
      * @return array
      */
-    public function coordonnees(string $address, string $zipcode, string $city) :array{
+    public function coordonnees(string $adresse, string $code_postal, string $ville) :array{
             $adresse = array(
-                  'street'     => $address,
-                  'postalcode' => $zipcode,
-                  'city'       => $city,
+                  'street'     => $adresse,
+                  'postalcode' => $code_postal,
+                  'ville'       => $ville,
                   'country'    => 'france',
                   'format'     => 'json',
                 );

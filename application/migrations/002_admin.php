@@ -6,7 +6,7 @@ class Migration_Admin extends CI_Migration {
 
         public function up()
         {     
-            $sql = "ALTER TABLE `users` ADD `admin` BOOLEAN NOT NULL DEFAULT FALSE AFTER `activate`";
+            $sql = "ALTER TABLE `users` ADD `admin` BOOLEAN NOT NULL DEFAULT FALSE AFTER `active`";
             $this->db->query($sql);
 
             $sql = "UPDATE `users` SET admin = 1";

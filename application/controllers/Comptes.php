@@ -67,7 +67,7 @@ class Comptes extends MY_Controller {
             $email = $data['email'];
 
             $data['entreprise_id'] = $this->session->entreprise_id;
-            $data['activate'] = 0;
+            $data['active'] = 0;
             $data['admin'] = 0;
             $data['token'] = $token;
             $data['token_validation'] = $token_validation;
@@ -80,6 +80,7 @@ class Comptes extends MY_Controller {
 		    $this->email->to($email);
 		    $this->email->subject('Validation GoodManager');
             $this->email->message("
+                <p>L'administrateur de l'entreprise vous a rajouté comme collaborateur.<br>Merci de cliquer sur le lien ci-dessous pour activer le compte.</p>
                 <p>Mot de passe provisoire : $password</p>
                 <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
             ");

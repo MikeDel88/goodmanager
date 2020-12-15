@@ -134,10 +134,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     json.forEach(client => {
 
                         let listResult = document.createElement('a');
-                        listResult.href = `/fiche-client/${client.id}/${client.last_name}`;
+                        listResult.href = `/fiche-client/${client.id}/${client.nom}`;
                         listResult.classList.add('collection-item');
-                        let birthday = new Date(client.birthday);
-                        listResult.innerHTML = `${client.last_name} ${client.first_name} née le ${birthday.toLocaleDateString('fr-FR')}`;
+                        let date_naissance = new Date(client.date_naissance);
+                        listResult.innerHTML = `${client.nom} ${client.prenom} née le ${date_naissance.toLocaleDateString('fr-FR')}`;
                         list.appendChild(listResult);
                     })
 
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 contactDateFR = contactDate.toLocaleDateString('fr-FR');
 
                 let item = document.createElement('li');
-                item.innerHTML = `Le ${contactDateFR} par ${contact.last_name} ${contact.first_name}`;
+                item.innerHTML = `Le ${contactDateFR} par ${contact.nom} ${contact.prenom}`;
 
                 liste.appendChild(item);
 
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
             json.forEach(event => {
                 let calendarEvent = {
                     id: event.rdv_id,
-                    title: `${event.last_name}  ${event.first_name}`,
+                    title: `${event.nom}  ${event.prenom}`,
                     start: event.date
                 }
                 calendar.addEvent(calendarEvent);
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 console.log(client)
                                 let option = document.createElement('option');
                                 option.value = client.id;
-                                option.innerHTML = `${client.last_name} ${client.first_name} née le ${new Date(client.birthday).toLocaleDateString('fr-FR')}`
+                                option.innerHTML = `${client.nom} ${client.prenom} née le ${new Date(client.date_naissance).toLocaleDateString('fr-FR')}`
                                 inputSelect.appendChild(option);
                             })
 

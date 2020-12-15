@@ -6,7 +6,7 @@
         <div id="nombre-clients-an" style="width:100%;height:500px;"></div>
     </div>
     <div class="divider"></div>
-    <div id="clients-phone-mail"></div>
+    <div id="clients-telephone-mail"></div>
     <div class="divider"></div>
     <div id="nombre-contact-utilisateur"></div>
     <div class="divider"></div>

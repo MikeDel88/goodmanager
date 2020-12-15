@@ -35,11 +35,11 @@ async function mapClickListen(e) {
     // Je charge une ville en fonction des coordonnées
     let ville = await getAdresse(lat, lng)
     document.querySelector("#search").value = ville.display_name
-    document.querySelector('#filtre').value = 'address'
+    document.querySelector('#filtre').value = 'adresse'
 
     // Affiche le marqueur
     addMarker(pos);
-    marqueur.bindPopup(`${ville.address.postcode}, ${ville.address.village}`)
+    marqueur.bindPopup(`${ville.adresse.postcode}, ${ville.adresse.village}`)
 
 }
 
@@ -61,7 +61,7 @@ async function addMarker(pos) {
         lat = pos.lat
         lng = pos.lng
         let ville = await getAdresse(lat, lng)
-        marqueur.bindPopup(`${ville.address.postcode}, ${ville.address.village}`)
+        marqueur.bindPopup(`${ville.adresse.postcode}, ${ville.adresse.village}`)
     })
     marqueur.addTo(mymap)
 }
@@ -97,7 +97,7 @@ async function getSearch() {
 
 
     // J'effectue ma recherche en fonction du filtre envoyé
-    if (filtre !== 'address') {
+    if (filtre !== 'adresse') {
         let response = await fetch(`https://nominatim.openstreetmap.org/search.php?country=France&city=${recherche}&bounded=1&polygon_threshold=0&format=jsonv2`)
         json = await response.json();
     } else {
@@ -129,7 +129,7 @@ async function getSearch() {
         clients.forEach(client => {
             pos = [client.lat, client.lng]
             marqueur = L.marker(pos)
-            marqueur.bindPopup(`${client.last_name} ${client.first_name}`)
+            marqueur.bindPopup(`${client.nom} ${client.prenom}`)
             marqueurs.addLayer(marqueur)
             tableauMarqueurs.push(marqueur)
         })

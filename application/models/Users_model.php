@@ -42,7 +42,7 @@ class Users_model extends MY_Model {
      * @return void
      */
     public function activation(int $id) :void{
-        $this->db->set('activate', 1);
+        $this->db->set('active', 1);
         $this->db->where('id', $id);
         $this->db->update($this->getTable());
     }

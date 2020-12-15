@@ -1,36 +1,36 @@
 <section id="page-fiche" class="container">
     <fieldset class='row'>
-        <legend><?= "$client->last_name $client->first_name"?></legend>
+        <legend><?= "$client->nom $client->prenom"?></legend>
         <div class="container">
             <?= form_open("fiche-client/modification") ?>
                 <input type="hidden" name="id" value="<?= $client->id ?>">
                 <div class="input-field">
-                    <label for="last_name-client">Nom</label>
-                    <input id="last_name-client" type="text" name="last_name"  value="<?= ucFirst($client->last_name) ?>" required>
+                    <label for="nom-client">Nom</label>
+                    <input id="nom-client" type="text" name="nom"  value="<?= ucFirst($client->nom) ?>" required>
                 </div>
                 <div class="input-field">
-                    <label for="first_name-client">Prénom</label>
-                    <input id="first_name-client" type="text" name="first_name"  value="<?= ucFirst($client->first_name) ?>" required>
+                    <label for="prenom-client">Prénom</label>
+                    <input id="prenom-client" type="text" name="prenom"  value="<?= ucFirst($client->prenom) ?>" required>
                 </div>
                 <div class="input-field">
-                    <label for="birthday-client">Date de naissance</label>
-                    <input id="birthday-client" type="text" name="birthday" class="datepicker"  value="<?= date("d-m-Y" , strtotime($client->birthday)) ?>" required>
+                    <label for="date_naissance-client">Date de naissance</label>
+                    <input id="date_naissance-client" type="text" name="date_naissance" class="datepicker"  value="<?= date("d-m-Y" , strtotime($client->date_naissance)) ?>" required>
                 </div>
                 <div class="input-field">
                     <label for="adresse-client">Adresse</label>
-                    <input id="adresse-client" type="text" name="address" value="<?= $client->address ?>" >
+                    <input id="adresse-client" type="text" name="adresse" value="<?= $client->adresse ?>" >
                 </div>
                 <div class="input-field">
                     <label for="code_postal-client">Code postal</label>
-                    <input id="code_postal-client" type="text" name="zipcode" value="<?= $client->zipcode ?>" >
+                    <input id="code_postal-client" type="text" name="code_postal" value="<?= $client->code_postal ?>" >
                 </div>
                 <div class="input-field">
                     <label for="ville-client">Ville</label>
-                    <input id="ville-client" type="text" name="city" value="<?= ucFirst($client->city) ?>" >
+                    <input id="ville-client" type="text" name="ville" value="<?= ucFirst($client->ville) ?>" >
                 </div>
                 <div class="input-field">
                     <label for="tel-client">Téléphone</label>
-                    <input id="tel-client" type="text" name="phone" value="<?= $client->phone ?>" >
+                    <input id="tel-client" type="text" name="telephone" value="<?= $client->telephone ?>" >
                 </div>
                 <div class="input-field">
                     <label for="mail-client">Email</label>

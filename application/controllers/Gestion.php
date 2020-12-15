@@ -49,8 +49,8 @@ class Gestion extends MY_Controller {
             $data = $this->post();
    
 
-            if(isset($data['address']) && isset($data['zipcode']) && isset($data['city'])){
-                $coordonnees = $this->coordonnees($data['address'], $data['zipcode'], $data['city']);
+            if(isset($data['adresse']) && isset($data['code_postal']) && isset($data['ville'])){
+                $coordonnees = $this->coordonnees($data['adresse'], $data['code_postal'], $data['ville']);
                 $data['lat'] = $coordonnees['lat'];
                 $data['lng'] = $coordonnees['lng'];
             }
@@ -79,7 +79,7 @@ class Gestion extends MY_Controller {
         $data['entreprise_id'] = $this->session->entreprise_id;
         
         if($search !== 'all'){
-            $data['last_name'] = urldecode($search);
+            $data['nom'] = urldecode($search);
         }
 
         $result = $this->Client_model->selectAll($data);

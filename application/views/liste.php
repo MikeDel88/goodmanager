@@ -12,9 +12,9 @@
         <div class="input-field col s12 m6">
             <select id="select-search" name="select-search">
                 <option disabled selected>Choisir votre filtre</option>
-                <option value="last_name">Nom</option>
-                <option value="zipcode">Code Postal</option>
-                <option value="city">Ville</option>
+                <option value="nom">Nom</option>
+                <option value="code_postal">Code Postal</option>
+                <option value="ville">Ville</option>
             </select>
             <label>Filtre</label>
         </div>
@@ -39,15 +39,15 @@
         <? if(isset($clients)) { ?>
             <tbody class="search-body">
             <? foreach($clients as $client){?>
-                <tr data-id="<?= $client->id ?>" data-name="<?= ucFirst($client->last_name) . " " . $client->first_name?>">
-                    <td class="ligne-client"><?= ucFirst($client->last_name) ?></td>
-                    <td class="ligne-client"><?= ucFirst($client->first_name) ?></td>
+                <tr data-id="<?= $client->id ?>" data-name="<?= ucFirst($client->nom) . " " . $client->prenom?>">
+                    <td class="ligne-client"><?= ucFirst($client->nom) ?></td>
+                    <td class="ligne-client"><?= ucFirst($client->prenom) ?></td>
                     <td class="ligne-client"><?= $client->age() ?></td>
-                    <td class="ligne-client"><?= $client->address ?></td>
-                    <td class="ligne-client"><?= $client->zipcode  ?></td>
-                    <td class="ligne-client"><?= ucFirst($client->city)  ?></td>
+                    <td class="ligne-client"><?= $client->adresse ?></td>
+                    <td class="ligne-client"><?= $client->code_postal  ?></td>
+                    <td class="ligne-client"><?= ucFirst($client->ville)  ?></td>
                     <td>
-                        <a href="tel:<?= $client->phone ?>" title="<?= $client->phone ?>"><?= ($client->phone !== '') ? '<i class="material-icons">phone_forwarded</i>' : '<i class="material-icons red-text">phonelink_erase</i>' ?></a>
+                        <a href="tel:<?= $client->telephone ?>" title="<?= $client->telephone ?>"><?= ($client->telephone !== '') ? '<i class="material-icons">telephone_forwarded</i>' : '<i class="material-icons red-text">telephonelink_erase</i>' ?></a>
                     </td>
                     <td>
                         <a href="mailto:<?= $client->email ?>" title="<?= $client->email ?>"><?= ($client->email !== '') ? '<i class="material-icons">email</i>' : '<i class="material-icons red-text">email</i>'?></a>

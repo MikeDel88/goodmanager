@@ -6,12 +6,12 @@
                 <label for="email">Email</label>
             </div>
             <div class="input-field col s12">
-                <input id="last_name" type="text" name="last_name">
-                <label for="last_name">Nom de famille</label>
+                <input id="nom" type="text" name="nom">
+                <label for="nom">Nom de famille</label>
             </div>
             <div class="input-field col s12">
-                <input id="first_name" type="text" name="first_name">
-                <label for="first_name">Prénom</label>
+                <input id="prenom" type="text" name="prenom">
+                <label for="prenom">Prénom</label>
             </div>
             <div>
                 <button class="btn teal" type="submit">Ajouter</button>
@@ -26,8 +26,8 @@
             <? foreach($users as $user){?>
             <li class="collection-item">
                 <p>
-                    <?= ucFirst($user->last_name) . " " . $user->first_name  . " " ?> | 
-                    <?= ($user->activate) ? '<span class="teal-text">compte validé</span>' : '<span class="red-text">compte non-validé</span>' ?>
+                    <?= ucFirst($user->nom) . " " . $user->prenom  . " " ?> | 
+                    <?= ($user->active) ? '<span class="teal-text">compte validé</span>' : '<span class="red-text">compte non-validé</span>' ?>
                 <p>
                 <div class="valign-wrapper">
                     <form action="/gestion-comptes/suppression-collaborateur" method="POST">

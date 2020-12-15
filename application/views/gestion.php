@@ -19,32 +19,32 @@
             <?= form_open("gestion/nouveau-client") ?>
                 <input type="hidden" name="entreprise_id" value="<?= $entreprise->id ?>">
                 <div class="input-field">
-                    <label for="last_name-client">Nom</label>
-                    <input id="last_name-client" type="text" name="last_name" required>
+                    <label for="nom-client">Nom</label>
+                    <input id="nom-client" type="text" name="nom" required>
                 </div>
                 <div class="input-field">
-                    <label for="first_name-client">Prénom</label>
-                    <input id="first_name-client" type="text" name="first_name" required>
+                    <label for="prenom-client">Prénom</label>
+                    <input id="prenom-client" type="text" name="prenom" required>
                 </div>
                 <div class="input-field">
-                    <label for="birthday-client">Date de naissance</label>
-                    <input id="birthday-client" type="text" name="birthday" class="datepicker" required>
+                    <label for="date_naissance-client">Date de naissance</label>
+                    <input id="date_naissance-client" type="text" name="date_naissance" class="datepicker" required>
                 </div>
                 <div class="input-field">
                     <label for="adresse-client">Adresse</label>
-                    <input id="adresse-client" type="text" name="address">
+                    <input id="adresse-client" type="text" name="adresse">
                 </div>
                 <div class="input-field">
                     <label for="code_postal-client">Code postal</label>
-                    <input id="code_postal-client" type="text" name="zipcode">
+                    <input id="code_postal-client" type="text" name="code_postal">
                 </div>
                 <div class="input-field">
                     <label for="ville-client">Ville</label>
-                    <input id="ville-client" type="text" name="city">
+                    <input id="ville-client" type="text" name="ville">
                 </div>
                 <div class="input-field">
                     <label for="tel-client">Téléphone</label>
-                    <input id="tel-client" type="text" name="phone">
+                    <input id="tel-client" type="text" name="telephone">
                 </div>
                 <div class="input-field">
                     <label for="mail-client">Email</label>

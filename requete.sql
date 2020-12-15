@@ -1,5 +1,5 @@
 -- nombre de client sans téléphone
-SELECT count(id) as telephone FROM client WHERE phone = '' AND entreprise_id = 42
+SELECT count(id) as teletelephone FROM client WHERE telephone = '' AND entreprise_id = 42
 
 -- nombre de client sans email
 SELECT count(id) as email FROM client WHERE email = '' AND entreprise_id = 42
@@ -33,7 +33,7 @@ SELECT COUNT(contact.client_id) FROM contact, client WHERE contact.client_id = c
 
 
 -- nombre de contact réalisés par un utilisateur de l'entreprise
-SELECT users.last_name, users.first_name, COUNT(contact.user_id) FROM contact, users WHERE contact.user_id = users.id AND YEAR(date) = 2020 AND users.entreprise_id = 42 GROUP BY user_id
+SELECT users.nom, users.prenom, COUNT(contact.user_id) FROM contact, users WHERE contact.user_id = users.id AND YEAR(date) = 2020 AND users.entreprise_id = 42 GROUP BY user_id
 
 
 
@@ -41,7 +41,7 @@ SELECT users.last_name, users.first_name, COUNT(contact.user_id) FROM contact, u
 --------------------------------------------------------------------
 
 -- nombre de client par département
-SELECT SUBSTRING(zipcode,1, 2) as code , COUNT(id) FROM client WHERE entreprise_id = 42 GROUP BY code
+SELECT SUBSTRING(code_postal,1, 2) as code , COUNT(id) FROM client WHERE entreprise_id = 42 GROUP BY code
 
 --------------------------------------------------------------------
 
