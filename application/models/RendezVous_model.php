@@ -40,7 +40,7 @@ class RendezVous_model extends MY_Model {
         $this->db->from($this->getTable());
         $this->db->join('client', "client.id = {$this->getTable()}.client_id");
         $this->db->where('client.entreprise_id', $this->session->entreprise_id);
-        $this->db->where('user_id', $this->session->session_id);
+        $this->db->where('utilisateur_id', $this->session->session_id);
         return $this->db->get()->result();
     }
     
@@ -76,7 +76,7 @@ class RendezVous_model extends MY_Model {
      */
     public function nombreRdvPrisParUtilisateur() :array{
         $year = date("Y");
-        $query = $this->db->query("SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(rdv.user_id) as nombre FROM rdv, utilisateurs WHERE rdv.user_id = utilisateurs.id AND YEAR(date) = $year AND utilisateurs.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.user_id");
+        $query = $this->db->query("SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(rdv.utilisateur_id) as nombre FROM rdv, utilisateurs WHERE rdv.utilisateur_id = utilisateurs.id AND YEAR(date) = $year AND utilisateurs.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.utilisateur_id");
         return $query->result();
     }
 }

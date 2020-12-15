@@ -46,7 +46,7 @@ class RendezVous extends MY_Controller {
         
 
         $data['client_id']= $input_data['id'];
-        $data['user_id'] = $this->session->session_id;
+        $data['utilisateur_id'] = $this->session->session_id;
         $data['date'] = $input_data['dateRDV'];
 
         $this->RendezVous_model->insert($data);

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Contact extends Utilities{
 
     private int $id;
-    private int $user_id;
+    private int $utilisateur_id;
     private int $client_id;
     private string $date;
     private string $created_at;
@@ -35,21 +35,21 @@ class Contact extends Utilities{
     }
 
     /**
-     * Get the value of user_id
+     * Get the value of utilisateur_id
      */ 
     public function getUtilisateur_id()
     {
-        return $this->user_id;
+        return $this->utilisateur_id;
     }
 
     /**
-     * Set the value of user_id
+     * Set the value of utilisateur_id
      *
      * @return  self
      */ 
-    public function setUtilisateur_id($user_id)
+    public function setUtilisateur_id($utilisateur_id)
     {
-        $this->user_id = $user_id;
+        $this->utilisateur_id = $utilisateur_id;
 
         return $this;
     }

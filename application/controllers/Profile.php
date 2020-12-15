@@ -81,8 +81,8 @@ class Profile extends MY_Controller {
      */
     public function deleteUtilisateur() :void{
 
-        $this->Contact_model->delete('user_id', $this->session->session_id);
-        $this->RendezVous_model->delete('user_id', $this->session->session_id);
+        $this->Contact_model->delete('utilisateur_id', $this->session->session_id);
+        $this->RendezVous_model->delete('utilisateur_id', $this->session->session_id);
 
         if($this->session->admin == true){
             $this->Utilisateurs_model->delete('entreprise_id', $this->session->entreprise_id);

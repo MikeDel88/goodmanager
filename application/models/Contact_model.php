@@ -50,7 +50,7 @@ class Contact_model extends MY_Model {
 
         $this->db->select('*');
         $this->db->from($this->getTable());
-        $this->db->where('user_id', $this->session->session_id);
+        $this->db->where('utilisateur_id', $this->session->session_id);
         $this->db->where('date', date('Y-m-d'));
         $query = $this->db->get();
         return $query->custom_result_object('Contact');
@@ -66,7 +66,7 @@ class Contact_model extends MY_Model {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('client_id', $id);
-        $this->db->join('utilisateurs', "utilisateurs.id = {$this->getTable()}.user_id");
+        $this->db->join('utilisateurs', "utilisateurs.id = {$this->getTable()}.utilisateur_id");
         $this->db->order_by('date', 'DESC');
         return $this->db->get()->result();
     }
@@ -78,7 +78,7 @@ class Contact_model extends MY_Model {
      */
     public function selectContactParUtilisateur() :array{
         $year = date("Y");
-        $query = $this->db->query("SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(contact.user_id) as nombre FROM {$this->getTable()}, utilisateurs WHERE contact.user_id = utilisateurs.id AND YEAR(date) = $year AND utilisateurs.entreprise_id = {$this->session->entreprise_id} GROUP BY user_id");
+        $query = $this->db->query("SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(contact.utilisateur_id) as nombre FROM {$this->getTable()}, utilisateurs WHERE contact.utilisateur_id = utilisateurs.id AND YEAR(date) = $year AND utilisateurs.entreprise_id = {$this->session->entreprise_id} GROUP BY utilisateur_id");
         return $query->result();
     }
 }

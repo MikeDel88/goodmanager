@@ -21,6 +21,8 @@ class Migration_Lang extends CI_Migration {
             ALTER TABLE `users` CHANGE `first_name` `prenom` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
             ALTER TABLE `users` CHANGE `activate` `active` TINYINT(1) NOT NULL DEFAULT '0';
             ALTER TABLE `users` CHANGE `password` `mdp` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL;
+            ALTER TABLE `rdv` CHANGE `user_id` `utilisateur_id` INT(11) NOT NULL;
+            ALTER TABLE `contact` CHANGE `user_id` `utilisateur_id` INT(11) NOT NULL;
             RENAME TABLE `goodmanager`.`users` TO `goodmanager`.`utilisateurs`;
             ";
             $this->db->query($sql);

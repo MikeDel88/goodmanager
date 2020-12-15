@@ -70,7 +70,7 @@ class Liste extends MY_Controller {
 
 
         $data['client_id']= $input_data['id'];
-        $data['user_id'] = $this->session->session_id;
+        $data['utilisateur_id'] = $this->session->session_id;
         $data['date'] = date('Y-m-d');
 
         if($this->input->method() == 'post'){

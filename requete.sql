@@ -24,7 +24,7 @@ SELECT contact.client_id, COUNT(contact.client_id) FROM contact, client WHERE co
 SELECT COUNT(contact.id) FROM contact, client WHERE contact.client_id = client.id AND YEAR(date) = 2020 AND client.entreprise_id = 42 GROUP BY contact.client_id
 
 -- nombre de fois où l'utilisateur à contacté le client de l'entreprise sur l'année
-SELECT COUNT(contact.id) FROM contact, client, utilisateurs WHERE contact.client_id = client.id AND contact.user_id = utilisateurs.id AND YEAR(date) = 2020 AND client.entreprise_id = 42 GROUP BY contact.client_id
+SELECT COUNT(contact.id) FROM contact, client, utilisateurs WHERE contact.client_id = client.id AND contact.utilisateur_id = utilisateurs.id AND YEAR(date) = 2020 AND client.entreprise_id = 42 GROUP BY contact.client_id
 
 -- nombre de contact client réalisés par l'entreprise sur l'année sans distinction client
 SELECT COUNT(contact.client_id) FROM contact, client WHERE contact.client_id = client.id AND YEAR(date) = 2020 AND client.entreprise_id = 42
@@ -33,7 +33,7 @@ SELECT COUNT(contact.client_id) FROM contact, client WHERE contact.client_id = c
 
 
 -- nombre de contact réalisés par un utilisateur de l'entreprise
-SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(contact.user_id) FROM contact, utilisateurs WHERE contact.user_id = utilisateurs.id AND YEAR(date) = 2020 AND utilisateurs.entreprise_id = 42 GROUP BY user_id
+SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(contact.utilisateur_id) FROM contact, utilisateurs WHERE contact.utilisateur_id = utilisateurs.id AND YEAR(date) = 2020 AND utilisateurs.entreprise_id = 42 GROUP BY utilisateur_id
 
 
 
@@ -55,4 +55,4 @@ SELECT client_id, COUNT(rdv.client_id) FROM rdv, client WHERE rdv.client_id = cl
 
 
 -- nombre de rdv pris par un utilisateur sur l'année
-SELECT rdv.user_id, COUNT(rdv.user_id) FROM rdv, utilisateurs WHERE rdv.user_id = utilisateurs.id AND YEAR(date) = 2020 AND utilisateurs.entreprise_id = 42 GROUP BY rdv.user_id
+SELECT rdv.utilisateur_id, COUNT(rdv.utilisateur_id) FROM rdv, utilisateurs WHERE rdv.utilisateur_id = utilisateurs.id AND YEAR(date) = 2020 AND utilisateurs.entreprise_id = 42 GROUP BY rdv.utilisateur_id
