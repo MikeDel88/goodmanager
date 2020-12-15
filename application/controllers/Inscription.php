@@ -74,7 +74,7 @@ class Inscription extends CI_Controller {
             );
 
             // Enregistrement de l'utilisateur
-            $register_user = $this->Utilisateurs_model->insert($data);
+            $register_user = $this->Utilisateur_model->insert($data);
 
             $lien = BASE_URL . "validation/" . $token;
             $this->email->from(SMTP_USER, 'No-Reply');
@@ -98,11 +98,11 @@ class Inscription extends CI_Controller {
      */
     public function validation(string $token):void{
 
-        $verification = $this->Utilisateurs_model->selectToken($token);
+        $verification = $this->Utilisateur_model->selectToken($token);
         $date_time = date("Y-m-d H:i:s");
 
         if($token === $verification->token && $date_time <= $verification->token_validation){
-            $this->Utilisateurs_model->activation($verification->id);
+            $this->Utilisateur_model->activation($verification->id);
             redirect('connexion');
         }else{
             redirect("/");

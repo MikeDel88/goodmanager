@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 /**
- * Utilisateurs_model
- * Permet d'interroger la base de données sur la table Utilisateurs
+ * Utilisateur_model
+ * Permet d'interroger la base de données sur la table Utilisateur
  */
-class Utilisateurs_model extends MY_Model {
+class Utilisateur_model extends MY_Model {
 
-    private string $table = 'utilisateurs';
+    private string $table = 'utilisateur';
     
     /**
      * __construct
@@ -72,12 +72,12 @@ class Utilisateurs_model extends MY_Model {
     }
 
         /**
-     * getUtilisateurs
+     * getUtilisateur
      *  Récupère tous les collaborateurs d'une entreprise
      * @param  mixed $entrepriseId
      * @return array
      */
-    public function getUtilisateurs($entrepriseId) :array{
+    public function getUtilisateur($entrepriseId) :array{
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('entreprise_id', $entrepriseId);

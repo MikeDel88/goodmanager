@@ -28,7 +28,7 @@ class Connexion extends CI_Controller {
         {
             $email = $this->input->post('email');
             $mdp = $this->input->post('mdp');
-            $result = $this->Utilisateurs_model->select('email', $email, 'Utilisateur');
+            $result = $this->Utilisateur_model->select('email', $email, 'Utilisateur');
 
             if(!empty($result)){
 
@@ -69,7 +69,7 @@ class Connexion extends CI_Controller {
         if ($this->form_validation->run())
         {
             $email = $this->input->post('email');
-            $result = $this->Utilisateurs_model->select('email', $email, 'Utilisateur');
+            $result = $this->Utilisateur_model->select('email', $email, 'Utilisateur');
   
             if(!empty($result) && $result->active == 1){
 
@@ -83,7 +83,7 @@ class Connexion extends CI_Controller {
                     'updated_at' => date('Y-m-d H:i:s')
                 );
 
-                $this->Utilisateurs_model->reset($email, $data); 
+                $this->Utilisateur_model->reset($email, $data); 
                 
                 $lien = BASE_URL . "reset/" . $token;
                 $this->email->from(SMTP_USER, 'No-Reply');
@@ -111,7 +111,7 @@ class Connexion extends CI_Controller {
      */
     public function modification(string $token) :void{
 
-        $result = $this->Utilisateurs_model->selectToken(html_escape($token));
+        $result = $this->Utilisateur_model->selectToken(html_escape($token));
         $date_time = date("Y-m-d H:i:s");
 
         if(!empty($result) && $result->token_validation > $date_time){
@@ -120,7 +120,7 @@ class Connexion extends CI_Controller {
             
             if ($this->form_validation->run()){
                 $data['mdp'] = password_hash(html_escape($this->input->post('mdp_repeat')), PASSWORD_DEFAULT);
-                $this->Utilisateurs_model->reset($result->email, $data);
+                $this->Utilisateur_model->reset($result->email, $data);
                 redirect('connexion');
             }
 

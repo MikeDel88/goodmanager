@@ -32,7 +32,7 @@ class Comptes extends MY_Controller {
      */
     public function index() :void{
 
-        $data['utilisateurs'] = $this->Utilisateurs_model->getUtilisateurs($this->session->entreprise_id);
+        $data['utilisateur'] = $this->Utilisateur_model->getUtilisateur($this->session->entreprise_id);
 
         $this->layout->set_title("GoodManager | Gestion Comptes");
         $this->layout->set_page("Gestion Comptes collaborateurs");
@@ -73,7 +73,7 @@ class Comptes extends MY_Controller {
             $data['token_validation'] = $token_validation;
             $data['mdp'] = password_hash($mdp, PASSWORD_DEFAULT);
 
-            $this->Utilisateurs_model->insert($data);
+            $this->Utilisateur_model->insert($data);
 
             $lien = BASE_URL . "validation/" . $token;
             $this->email->from(SMTP_USER, 'No-Reply');
@@ -99,7 +99,7 @@ class Comptes extends MY_Controller {
         $userId = intval($this->input->post('id'));
         $this->Contact_model->delete('utilisateur_id', $userId);
         $this->RendezVous_model->delete('utilisateur_id', $userId);
-        $this->Utilisateurs_model->delete('id', $userId);
+        $this->Utilisateur_model->delete('id', $userId);
         redirect('/gestion-comptes');
     }
 }

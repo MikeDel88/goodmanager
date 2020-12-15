@@ -63,12 +63,12 @@ class Client_model extends MY_Model {
     }
     
     /**
-     * deleteAllUtilisateurs
+     * deleteAllUtilisateur
      *  Si l'admin décide de supprimer son compte, il supprime également l'ensemble des sous_comptes non admin relié à l'entreprise
      * @param  int $entrepriseId
      * @return void
      */
-    public function deleteAllUtilisateurs(int $entrepriseId) :void{
+    public function deleteAllUtilisateur(int $entrepriseId) :void{
         $this->db->where('entreprise_id', $entrepriseId);
         $this->db->delete($this->getTable());
     }

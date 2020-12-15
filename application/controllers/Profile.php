@@ -68,7 +68,7 @@ class Profile extends MY_Controller {
         {
             $data = $this->post();
 
-            $this->Utilisateurs_model->update($data, $this->session->session_id);
+            $this->Utilisateur_model->update($data, $this->session->session_id);
             
         }
         redirect("/espace-personnel");
@@ -85,12 +85,12 @@ class Profile extends MY_Controller {
         $this->RendezVous_model->delete('utilisateur_id', $this->session->session_id);
 
         if($this->session->admin == true){
-            $this->Utilisateurs_model->delete('entreprise_id', $this->session->entreprise_id);
+            $this->Utilisateur_model->delete('entreprise_id', $this->session->entreprise_id);
             $this->Client_model->delete('entreprise_id', $this->session->entreprise_id);
             $this->Entreprise_model->delete('id', $this->session->entreprise_id);
         }
 
-        $this->Utilisateurs_model->delete('id', $this->session->session_id);
+        $this->Utilisateur_model->delete('id', $this->session->session_id);
         redirect('/');
     }
     
