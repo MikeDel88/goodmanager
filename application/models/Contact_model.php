@@ -66,7 +66,7 @@ class Contact_model extends MY_Model {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->where('client_id', $id);
-        $this->db->join('users', "users.id = {$this->getTable()}.user_id");
+        $this->db->join('utilisateurs', "utilisateurs.id = {$this->getTable()}.user_id");
         $this->db->order_by('date', 'DESC');
         return $this->db->get()->result();
     }
@@ -78,7 +78,7 @@ class Contact_model extends MY_Model {
      */
     public function selectContactParUtilisateur() :array{
         $year = date("Y");
-        $query = $this->db->query("SELECT users.nom, users.prenom, COUNT(contact.user_id) as nombre FROM {$this->getTable()}, users WHERE contact.user_id = users.id AND YEAR(date) = $year AND users.entreprise_id = {$this->session->entreprise_id} GROUP BY user_id");
+        $query = $this->db->query("SELECT utilisateurs.nom, utilisateurs.prenom, COUNT(contact.user_id) as nombre FROM {$this->getTable()}, utilisateurs WHERE contact.user_id = utilisateurs.id AND YEAR(date) = $year AND utilisateurs.entreprise_id = {$this->session->entreprise_id} GROUP BY user_id");
         return $query->result();
     }
 }

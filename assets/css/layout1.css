@@ -18,7 +18,7 @@ h3, h4{
     display:flex;
 }
 
-.password_reset{
+.mdp_reset{
     margin-top: 10px;
 }
 .modal .modal-footer{
@@ -38,7 +38,7 @@ h3, h4{
 
 
 @media screen and (max-width:600px){
-    .form-submit, .password_reset, #page_inscription .form-submit{
+    .form-submit, .mdp_reset, #page_inscription .form-submit{
         text-align: center;
         margin: 10px 0;
     }

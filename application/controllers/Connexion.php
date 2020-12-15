@@ -27,12 +27,12 @@ class Connexion extends CI_Controller {
         if ($this->form_validation->run())
         {
             $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $result = $this->Users_model->select('email', $email, 'User');
+            $mdp = $this->input->post('mdp');
+            $result = $this->Utilisateurs_model->select('email', $email, 'Utilisateur');
 
             if(!empty($result)){
 
-                $verif = password_verify($password, $result->password);
+                $verif = password_verify($mdp, $result->mdp);
 
                 if($verif && $result->active == 1){
                     
@@ -69,7 +69,7 @@ class Connexion extends CI_Controller {
         if ($this->form_validation->run())
         {
             $email = $this->input->post('email');
-            $result = $this->Users_model->select('email', $email, 'User');
+            $result = $this->Utilisateurs_model->select('email', $email, 'Utilisateur');
   
             if(!empty($result) && $result->active == 1){
 
@@ -83,7 +83,7 @@ class Connexion extends CI_Controller {
                     'updated_at' => date('Y-m-d H:i:s')
                 );
 
-                $this->Users_model->reset($email, $data); 
+                $this->Utilisateurs_model->reset($email, $data); 
                 
                 $lien = BASE_URL . "reset/" . $token;
                 $this->email->from(SMTP_USER, 'No-Reply');
@@ -111,7 +111,7 @@ class Connexion extends CI_Controller {
      */
     public function modification(string $token) :void{
 
-        $result = $this->Users_model->selectToken(html_escape($token));
+        $result = $this->Utilisateurs_model->selectToken(html_escape($token));
         $date_time = date("Y-m-d H:i:s");
 
         if(!empty($result) && $result->token_validation > $date_time){
@@ -119,8 +119,8 @@ class Connexion extends CI_Controller {
             $data['token'] = $token;
             
             if ($this->form_validation->run()){
-                $data['password'] = password_hash(html_escape($this->input->post('password_repeat')), PASSWORD_DEFAULT);
-                $this->Users_model->reset($result->email, $data);
+                $data['mdp'] = password_hash(html_escape($this->input->post('mdp_repeat')), PASSWORD_DEFAULT);
+                $this->Utilisateurs_model->reset($result->email, $data);
                 redirect('connexion');
             }
 

@@ -12,16 +12,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <input type="email" name="email" value="<?= $this->input->post('email') ?>" required>
     </div>
     <div class="input-field col s12">
-        <label for="password">Mot de passe</label>
-        <input id="password" type="password" name="password" data-length="10" required>
+        <label for="mdp">Mot de passe</label>
+        <input id="mdp" type="password" name="mdp" data-length="10" required>
     </div>
     <div class="form-submit col s-12">
         <button type="submit" class="waves-effect waves-light btn #0d47a1 blue darken-2">connexion</button>
     </div>
     <?= form_close(); ?>
 
-    <div class="password_reset right-align">
-        <a href="#modal_password_reset" class="modal-trigger">Mot de passe oublié ?</a>
+    <div class="mdp_reset right-align">
+        <a href="#modal_mdp_reset" class="modal-trigger">Mot de passe oublié ?</a>
     </div>
     <? if(isset($msg)){?>
         <div class="chip teal lighten-1 white-text">
@@ -35,8 +35,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <img src="<?= base_url() ?>/assets/images/connexion.jpg" alt="logo connexion" class="img-connexion">
 </div>
 </main>
-<div id="modal_password_reset" class="modal">
-    <?= form_open('connexion/reset-password') ?>
+<div id="modal_mdp_reset" class="modal">
+    <?= form_open('connexion/reset-mdp') ?>
         <div class="modal-content container">
             <h4 class="center-align">Réinitialiser le mot de passe</h4>
             <div class="input-field col s12">

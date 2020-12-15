@@ -13,14 +13,14 @@ $config = array(
                         'rules' => 'trim|required'
                 ),
                 array(
-                        'field' => 'password',
+                        'field' => 'mdp',
                         'label' => 'mot de passe',
                         'rules' => 'trim|required|min_length[8]|max_length[16]'
                 ),
                 array(
-                        'field' => 'password_repeat',
+                        'field' => 'mdp_repeat',
                         'label' => 'confirmation mot de passe',
-                        'rules' => 'trim|required|matches[password]'
+                        'rules' => 'trim|required|matches[mdp]'
                 )
         ),
         'connexion/index' => array(
@@ -30,8 +30,8 @@ $config = array(
                         'rules' => 'trim|required|valid_email' 
                 ),
                 array(
-                        'field' => 'password',
-                        'label' => 'password',
+                        'field' => 'mdp',
+                        'label' => 'mdp',
                         'rules' => 'trim|required'
                 ),
         ),
@@ -44,14 +44,14 @@ $config = array(
         ),
         'connexion/modification' => array(
                 array(
-                        'field' => 'password',
+                        'field' => 'mdp',
                         'label' => 'mot de passe',
                         'rules' => 'trim|required|min_length[8]|max_length[16]'
                 ),
                 array(
-                        'field' => 'password_repeat',
+                        'field' => 'mdp_repeat',
                         'label' => 'confirmation mot de passe',
-                        'rules' => 'trim|required|matches[password]'
+                        'rules' => 'trim|required|matches[mdp]'
                 )
         ),
         'profile/miseAJourEntreprise' => array(
@@ -77,7 +77,7 @@ $config = array(
                 ),
                 
         ),
-        'profile/miseAJourUser' => array (
+        'profile/miseAJourUtilisateur' => array (
                 array(
                         'field' => 'email',
                         'label' => 'email',

@@ -8,18 +8,18 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Sidenav.init(sidenav);
 
 
-    // Récupère les id des formulaires password
-    let password_repeat = document.querySelector("#password_repeat");
-    let password = document.querySelector("#password");
+    // Récupère les id des formulaires mdp
+    let mdp_repeat = document.querySelector("#mdp_repeat");
+    let mdp = document.querySelector("#mdp");
     let helper;
 
 
-    if (password_repeat !== null) {
-        password_repeat.addEventListener('change', function () {
+    if (mdp_repeat !== null) {
+        mdp_repeat.addEventListener('change', function () {
 
-            helper = document.querySelector("#helper_password_repeat");
+            helper = document.querySelector("#helper_mdp_repeat");
 
-            if (password.value !== password_repeat.value) {
+            if (mdp.value !== mdp_repeat.value) {
                 helper.innerHTML = "Les mots de passe ne correspondent pas";
                 helper.style.color = 'red';
             } else {
@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         })
     }
-    if (password !== null) {
-        password.addEventListener('keypress', function () {
+    if (mdp !== null) {
+        mdp.addEventListener('keypress', function () {
 
-            helper = document.querySelector("#helper_password");
+            helper = document.querySelector("#helper_mdp");
 
-            if (password.value.length >= 8 && password.value.length <= 16) {
+            if (mdp.value.length >= 8 && mdp.value.length <= 16) {
                 helper.innerHTML = "Mot de passe correct";
                 helper.style.color = 'green';
             } else {

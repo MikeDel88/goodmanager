@@ -18,12 +18,12 @@
             </div>
         <?= form_close() ?>
     </div>
-<? if(!empty($users)){?>
+<? if(!empty($utilisateurs)){?>
     <div>
         <h4>Liste des collaborateurs</h4>
         <ul class="collection with-header">
-            <li class="collection-header teal white-text"><?= count($users) ?> <?=(count($users) == 1) ? 'collaborateur' : 'collaborateurs'; ?></li>
-            <? foreach($users as $user){?>
+            <li class="collection-header teal white-text"><?= count($utilisateurs) ?> <?=(count($utilisateurs) == 1) ? 'collaborateur' : 'collaborateurs'; ?></li>
+            <? foreach($utilisateurs as $user){?>
             <li class="collection-item">
                 <p>
                     <?= ucFirst($user->nom) . " " . $user->prenom  . " " ?> | 

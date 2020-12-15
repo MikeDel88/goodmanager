@@ -29,7 +29,7 @@ class Gestion extends MY_Controller {
      */
     public function index(?string $msg = null) :void{
         $data['msg'] = $msg;
-        $data['user'] = $this->getUser();
+        $data['user'] = $this->getUtilisateur();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
 
         $this->layout->set_title("GoodManager | Gestion Clients");

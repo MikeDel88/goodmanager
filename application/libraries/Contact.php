@@ -37,7 +37,7 @@ class Contact extends Utilities{
     /**
      * Get the value of user_id
      */ 
-    public function getUser_id()
+    public function getUtilisateur_id()
     {
         return $this->user_id;
     }
@@ -47,7 +47,7 @@ class Contact extends Utilities{
      *
      * @return  self
      */ 
-    public function setUser_id($user_id)
+    public function setUtilisateur_id($user_id)
     {
         $this->user_id = $user_id;
 

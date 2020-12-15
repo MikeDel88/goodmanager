@@ -32,7 +32,7 @@ class Comptes extends MY_Controller {
      */
     public function index() :void{
 
-        $data['users'] = $this->Users_model->getUsers($this->session->entreprise_id);
+        $data['utilisateurs'] = $this->Utilisateurs_model->getUtilisateurs($this->session->entreprise_id);
 
         $this->layout->set_title("GoodManager | Gestion Comptes");
         $this->layout->set_page("Gestion Comptes collaborateurs");
@@ -62,7 +62,7 @@ class Comptes extends MY_Controller {
             $data = $this->post();
             $string_token = strval(microtime(TRUE)*100000);
             $token = md5($string_token);
-            $password = $this->passgen2(10);
+            $mdp = $this->passgen2(10);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
             $email = $data['email'];
 
@@ -71,9 +71,9 @@ class Comptes extends MY_Controller {
             $data['admin'] = 0;
             $data['token'] = $token;
             $data['token_validation'] = $token_validation;
-            $data['password'] = password_hash($password, PASSWORD_DEFAULT);
+            $data['mdp'] = password_hash($mdp, PASSWORD_DEFAULT);
 
-            $this->Users_model->insert($data);
+            $this->Utilisateurs_model->insert($data);
 
             $lien = BASE_URL . "validation/" . $token;
             $this->email->from(SMTP_USER, 'No-Reply');
@@ -81,7 +81,7 @@ class Comptes extends MY_Controller {
 		    $this->email->subject('Validation GoodManager');
             $this->email->message("
                 <p>L'administrateur de l'entreprise vous a rajouté comme collaborateur.<br>Merci de cliquer sur le lien ci-dessous pour activer le compte.</p>
-                <p>Mot de passe provisoire : $password</p>
+                <p>Mot de passe provisoire : $mdp</p>
                 <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
             ");
             $this->email->send();
@@ -99,7 +99,7 @@ class Comptes extends MY_Controller {
         $userId = intval($this->input->post('id'));
         $this->Contact_model->delete('user_id', $userId);
         $this->RendezVous_model->delete('user_id', $userId);
-        $this->Users_model->delete('id', $userId);
+        $this->Utilisateurs_model->delete('id', $userId);
         redirect('/gestion-comptes');
     }
 }

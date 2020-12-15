@@ -28,7 +28,7 @@ class Profile extends MY_Controller {
      */
     public function index(?string $msg = null) :void{
         $data['msg'] = $msg;
-        $data['user'] = $this->getUser();
+        $data['user'] = $this->getUtilisateur();
         $data['entreprise'] = $this->getEntreprise($this->session->entreprise_id);
         $this->layout->set_title("GoodManager | Espace Personnel");
         $this->layout->set_page("Mon Profil");
@@ -59,38 +59,38 @@ class Profile extends MY_Controller {
     }
     
     /**
-     * miseAJourUser
+     * miseAJourUtilisateur
      *
      * @return void Met à jour l'utlisateur et redirige vers la page profil
      */
-    public function miseAJourUser() :void{
+    public function miseAJourUtilisateur() :void{
         if($this->form_validation->run())
         {
             $data = $this->post();
 
-            $this->Users_model->update($data, $this->session->session_id);
+            $this->Utilisateurs_model->update($data, $this->session->session_id);
             
         }
         redirect("/espace-personnel");
     }
     
     /**
-     * deleteUser
+     * deleteUtilisateur
      * Suppression d'un utilisateur et si admin, de son entreprise
      * @return void
      */
-    public function deleteUser() :void{
+    public function deleteUtilisateur() :void{
 
         $this->Contact_model->delete('user_id', $this->session->session_id);
         $this->RendezVous_model->delete('user_id', $this->session->session_id);
 
         if($this->session->admin == true){
-            $this->Users_model->delete('entreprise_id', $this->session->entreprise_id);
+            $this->Utilisateurs_model->delete('entreprise_id', $this->session->entreprise_id);
             $this->Client_model->delete('entreprise_id', $this->session->entreprise_id);
             $this->Entreprise_model->delete('id', $this->session->entreprise_id);
         }
 
-        $this->Users_model->delete('id', $this->session->session_id);
+        $this->Utilisateurs_model->delete('id', $this->session->session_id);
         redirect('/');
     }
     

@@ -54,14 +54,14 @@ $route['inscription'] = 'inscription/index';
 $route['validation/(:any)'] = 'inscription/validation/$1';
 
 $route['connexion'] = 'connexion/index';
-$route['connexion/reset-password'] = 'connexion/reset';
+$route['connexion/reset-mdp'] = 'connexion/reset';
 $route['reset/(:any)'] = 'connexion/modification/$1';
 
 $route['espace-personnel'] = 'profile/index';
 $route['espace-personnel/(:any)'] = 'profile/index/$1';
 $route['profil/entreprise'] = 'profile/miseAJourEntreprise';
-$route['profil/user'] = 'profile/miseAJourUser';
-$route['profil/delete'] = 'profile/deleteUser';
+$route['profil/user'] = 'profile/miseAJourUtilisateur';
+$route['profil/delete'] = 'profile/deleteUtilisateur';
 
 $route['tableau-de-bord'] = 'dashboard/index';
 $route['tableau-de-bord/api/nouveaux-clients'] = 'dashboard/newClients';

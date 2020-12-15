@@ -60,7 +60,7 @@ class Inscription extends CI_Controller {
             $string_token = strval(microtime(TRUE)*100000);
             $token = md5($string_token);
             $token_validation = date('Y-m-d H:i:s',strtotime('+1 day',strtotime(date("Y-m-d H:i:s"))));
-            $password_hash = password_hash($this->input->post('password_repeat'), PASSWORD_DEFAULT);
+            $mdp_hash = password_hash($this->input->post('mdp_repeat'), PASSWORD_DEFAULT);
             $email = $this->input->post('email');
 
             $data = array(
@@ -68,13 +68,13 @@ class Inscription extends CI_Controller {
             'token' => $token,
             'entreprise_id' => $entreprise_id,
             'token_validation' => $token_validation,
-            'password' => $password_hash,
+            'mdp' => $password_hash,
             'active' => '0',
             'admin' => true,
             );
 
             // Enregistrement de l'utilisateur
-            $register_user = $this->Users_model->insert($data);
+            $register_user = $this->Utilisateurs_model->insert($data);
 
             $lien = BASE_URL . "validation/" . $token;
             $this->email->from(SMTP_USER, 'No-Reply');
@@ -98,11 +98,11 @@ class Inscription extends CI_Controller {
      */
     public function validation(string $token):void{
 
-        $verification = $this->Users_model->selectToken($token);
+        $verification = $this->Utilisateurs_model->selectToken($token);
         $date_time = date("Y-m-d H:i:s");
 
         if($token === $verification->token && $date_time <= $verification->token_validation){
-            $this->Users_model->activation($verification->id);
+            $this->Utilisateurs_model->activation($verification->id);
             redirect('connexion');
         }else{
             redirect("/");

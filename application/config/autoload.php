@@ -62,7 +62,7 @@ $autoload['libraries'] = array(
     'database', 
     'email', 
     'Utilities', 
-    'User',
+    'Utilisateur',
     'Entreprise', 
     'Client',
     "Contact",
@@ -146,7 +146,7 @@ $autoload['language'] = array();
 */
 $autoload['model'] = array(
     'Entreprise_model',
-    'Users_model',
+    'Utilisateurs_model',
     'Client_model',
     'Contact_model',
     'RendezVous_model',

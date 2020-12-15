@@ -3,15 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 /**
- * User
+ * Utilisateur
  * Cette classe représente le model de construction pour un utilisateur
  */
-class User extends Utilities {
+class Utilisateur extends Utilities {
 
 	private int $id;
 	private int $entreprise_id = 0;
 	private string $email;
-	private string $password;
+	private string $mdp;
 	private string $nom ='';
 	private string $prenom = '';
 	private int $active;
@@ -83,21 +83,21 @@ class User extends Utilities {
 	}
 
 	/**
-	 * Get the value of password
+	 * Get the value of mdp
 	 */ 
-	public function getPassword()
+	public function getmdp()
 	{
-		return $this->password;
+		return $this->mdp;
 	}
 
 	/**
-	 * Set the value of password
+	 * Set the value of mdp
 	 *
 	 * @return  self
 	 */ 
-	public function setPassword($password)
+	public function setmdp($mdp)
 	{
-		$this->password = $password;
+		$this->mdp = $mdp;
 
 		return $this;
 	}

@@ -28,12 +28,12 @@ class MY_Controller extends CI_Controller {
     }
     
     /**
-     * getUser
+     * getUtilisateur
      *  
      * @return object Récupère un utilisateur en cours de session
      */
-    protected function getUser() :object{
-        return $this->Users_model->select('id', $this->session->session_id, 'User');
+    protected function getUtilisateur() :object{
+        return $this->Utilisateurs_model->select('id', $this->session->session_id, 'Utilisateur');
     }
     
     
