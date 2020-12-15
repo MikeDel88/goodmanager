@@ -26,7 +26,6 @@ class Migration_Lang extends CI_Migration {
             RENAME TABLE `goodmanager`.`users` TO `goodmanager`.`utilisateurs`;
             ";
             $this->db->query($sql);
-
         }
 
         public function down(){
