@@ -57,7 +57,7 @@ class Client_model extends MY_Model {
      */
     public function getGeolocalisationClients($lat, $lng,$distance) :array{
 
-        $sql = "SELECT id, nom, prenom, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
+        $sql = "SELECT id, nom, prenom, lat, lng, ( 6371 * acos( cos( radians(".$this->db->escape($lat).") ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(".$this->db->escape($lng).") ) + sin( radians(".$this->db->escape($lat).") ) * sin( radians( lat ) ) ) ) AS distance FROM {$this->getTable()} WHERE entreprise_id = {$this->session->entreprise_id} HAVING distance < ".$this->db->escape($distance)." ORDER BY distance";
         $query = $this->db->query($sql);
         return $query->result();
     }

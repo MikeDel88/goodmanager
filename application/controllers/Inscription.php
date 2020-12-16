@@ -68,7 +68,7 @@ class Inscription extends CI_Controller {
             'token' => $token,
             'entreprise_id' => $entreprise_id,
             'token_validation' => $token_validation,
-            'mdp' => $password_hash,
+            'mdp' => $mdp_hash,
             'active' => '0',
             'admin' => true,
             );

@@ -85,7 +85,7 @@ class Utilisateur extends Utilities {
 	/**
 	 * Get the value of mdp
 	 */ 
-	public function getmdp()
+	public function getMdp()
 	{
 		return $this->mdp;
 	}
@@ -95,7 +95,7 @@ class Utilisateur extends Utilities {
 	 *
 	 * @return  self
 	 */ 
-	public function setmdp($mdp)
+	public function setMdp($mdp)
 	{
 		$this->mdp = $mdp;
 
