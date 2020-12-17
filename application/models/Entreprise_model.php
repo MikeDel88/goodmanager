@@ -1,14 +1,14 @@
 <?php
 declare(strict_types = 1);
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 /**
  * Entreprise_model
  * Permet d'interroger la base de données sur la table entreprise
  */
-class Entreprise_model extends MY_Model {
-
+class Entreprise_model extends MY_Model
+{
     private string $table = 'entreprise';
     
     /**
@@ -16,7 +16,8 @@ class Entreprise_model extends MY_Model {
      *
      * @return void Permet de définir le nom de la table
      */
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
     
@@ -25,10 +26,11 @@ class Entreprise_model extends MY_Model {
      * register
      *
      * @param  mixed $data
-     * @return int 
+     * @return int
      * Permet d'enregistrer une entreprise lors de la création d'un utilisateur
      */
-    public function register(array $data) :int{
+    public function register(array $data) :int
+    {
         $this->insert($data);
         $last_id = $this->db->insert_id();
         return $last_id;
@@ -41,9 +43,8 @@ class Entreprise_model extends MY_Model {
      * @return string
      * Retourne le nom de la table
      */
-    public function getTable() :string{
+    public function getTable() :string
+    {
         return $this->table;
     }
-
-
 }

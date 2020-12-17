@@ -1,6 +1,6 @@
 <?php
 declare(strict_types = 1);
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 
@@ -8,15 +8,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Dashboard
  * Affiche la page de la Dashboard
  */
-class Dashboard extends MY_Controller {
+class Dashboard extends MY_Controller
+{
 
     
     /**
      * __construct
-     *  Défini le css, js et le layout 
+     *  Défini le css, js et le layout
      * @return void
      */
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->layout->set_js(base_url() . "assets/js/dashboard.js");
         $this->layout->set_theme("back-office");
@@ -27,7 +29,8 @@ class Dashboard extends MY_Controller {
      *  Affiche la page du tableau de bord
      * @return void
      */
-    public function index() :void{
+    public function index() :void
+    {
         $this->layout->set_title("GoodManager | Tableau de bord");
         $this->layout->set_page("Les Analyses");
         $this->layout->view('dashboard');
@@ -35,10 +38,13 @@ class Dashboard extends MY_Controller {
     
     /**
      * newClients
-     *  Tableau qui renvoi en JSON le nombre de nouveaux clients sur différentes années
+     * Tableau qui renvoi en JSON
+     * le nombre de nouveaux clients sur différentes années
+     *
      * @return void
      */
-    public function newClients() :void{
+    public function newClients() :void
+    {
         $result = $this->Client_model->selectNewClientByYear();
 
         header('Content-type: application/json');
@@ -47,14 +53,16 @@ class Dashboard extends MY_Controller {
     
     /**
      * NumberClientsByYear
-     *  Renvoi en JSON le nombre de clients par an
+     * Renvoi en JSON le nombre de clients par an
+     *
      * @param  mixed $datas
      * @return void
      */
-    public function NumberClientsByYear(string $datas){
+    public function numberClientsByYear(string $datas)
+    {
         $results = [];
         $annees = explode("-", $datas);
-        foreach($annees as $annee){
+        foreach ($annees as $annee) {
             $results[] = [
                 'annee' => $annee,
                 'nombre' => $this->Client_model->selectNumberClientByYear($annee),
@@ -69,7 +77,8 @@ class Dashboard extends MY_Controller {
      *  Génère le nombre de clients par département
      * @return void
      */
-    public function NumberClientByDept() :void{
+    public function numberClientByDept() :void
+    {
         $result = $this->Client_model->selectNombreClientByDept();
 
         header('Content-type: application/json');
@@ -81,8 +90,8 @@ class Dashboard extends MY_Controller {
      * Renvoi en JSON le nombre de clients sans téléphone, sans mail, et les deux
      * @return void
      */
-    public function SansTelNiMail() :void{
-
+    public function sansTelNiMail() :void
+    {
         $result = [];
 
         $sansTel = $this->Client_model->selectSansInfo('telephone');
@@ -95,7 +104,6 @@ class Dashboard extends MY_Controller {
 
         header('Content-type: application/json');
         echo json_encode($result);
-
     }
     
     /**
@@ -103,8 +111,8 @@ class Dashboard extends MY_Controller {
      *  renvoi en JSON le nombre de contact client par utilisateur
      * @return void
      */
-    public function contactParUtilisateur() :void{
-
+    public function contactParUtilisateur() :void
+    {
         $result = $this->Contact_model->selectContactParUtilisateur();
 
         header('Content-type: application/json');
@@ -116,7 +124,8 @@ class Dashboard extends MY_Controller {
      *  Renvoi en JSON le nombre de rendez-vous par utilisateur
      * @return void
      */
-    public function rendezVousParUtilisateur() :void{
+    public function rendezVousParUtilisateur() :void
+    {
         $result = $this->RendezVous_model->nombreRdvPrisParUtilisateur();
 
         header('Content-type: application/json');

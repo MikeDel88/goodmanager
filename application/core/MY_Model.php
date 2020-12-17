@@ -1,15 +1,16 @@
 <?php
 declare(strict_types = 1);
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 /**
  * MY_Model
  * Permet d'inclure des méthodes génériques en SQL
  */
-class MY_Model extends CI_Model {
-
-    public function __construct(){
+class MY_Model extends CI_Model
+{
+    public function __construct()
+    {
         parent::__construct();
     }
     
@@ -19,7 +20,8 @@ class MY_Model extends CI_Model {
      * @param  array $fields
      * @return bool
      */
-    public function insert(array $fields = []) :bool{
+    public function insert(array $fields = []) :bool
+    {
         return $this->db->set($fields)->insert($this->getTable());
     }
     
@@ -32,7 +34,8 @@ class MY_Model extends CI_Model {
      * @param  string $class
      * @return object
      */
-    public function select(string $fields, $data, string $class) :object{
+    public function select(string $fields, $data, string $class) :object
+    {
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
     
@@ -42,7 +45,8 @@ class MY_Model extends CI_Model {
      * @param  array $data
      * @return array
      */
-    public function selectAll(array $data) :array{
+    public function selectAll(array $data) :array
+    {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->like($data, 'before');
@@ -57,7 +61,8 @@ class MY_Model extends CI_Model {
      * @param  int $id
      * @return bool
      */
-    public function update(array $data, int $id) :bool{
+    public function update(array $data, int $id) :bool
+    {
         $query = $this->db->set($data)
         ->set('updated_at', date('Y-m-d H:i:s'))
         ->where('id', $id)
@@ -71,7 +76,8 @@ class MY_Model extends CI_Model {
      * @param  int $id
      * @return void
      */
-    public function delete(string $field, int $id) :void{
+    public function delete(string $field, int $id) :void
+    {
         $this->db->where($field, $id);
         $this->db->delete($this->getTable());
     }

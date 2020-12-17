@@ -1,14 +1,14 @@
 <?php
 declare(strict_types = 1);
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
 /**
  * RendezVous_model
  * Permet d'interroger la base de données sur la table rendez-vous
  */
-class RendezVous_model extends MY_Model {
-
+class RendezVous_model extends MY_Model
+{
     private string $table = 'rdv';
     
     /**
@@ -16,7 +16,8 @@ class RendezVous_model extends MY_Model {
      *
      * @return void Permet de définir le nom de la table
      */
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -26,7 +27,8 @@ class RendezVous_model extends MY_Model {
      * @return string
      * Retourne le nom de la table
      */
-    public function getTable() :string{
+    public function getTable() :string
+    {
         return $this->table;
     }
     
@@ -35,7 +37,8 @@ class RendezVous_model extends MY_Model {
      *  Retourne l'ensemble des rendez-vous d'un utilisateur
      * @return array
      */
-    public function selectAllRdv() :array{
+    public function selectAllRdv() :array
+    {
         $this->db->select('*');
         $this->db->from($this->getTable());
         $this->db->join('client', "client.id = {$this->getTable()}.client_id");
@@ -50,7 +53,8 @@ class RendezVous_model extends MY_Model {
      * @param  mixed $id
      * @return void
      */
-    public function deleteRDV(int $id){
+    public function deleteRDV(int $id)
+    {
         $this->db->where('rdv_id', $id);
         $this->db->delete($this->getTable());
     }
@@ -62,7 +66,8 @@ class RendezVous_model extends MY_Model {
      * @param  mixed $id
      * @return void
      */
-    public function updateRDV(array $data, int $id){
+    public function updateRDV(array $data, int $id)
+    {
         $this->db->set($data);
         $this->db->set('updated_at', date('Y-m-d H:i:s'));
         $this->db->where('rdv_id', $id);
@@ -74,7 +79,8 @@ class RendezVous_model extends MY_Model {
      *  Retourne le nombre de Rendez vous pris par un utilisateur pour le dashboard
      * @return array
      */
-    public function nombreRdvPrisParUtilisateur() :array{
+    public function nombreRdvPrisParUtilisateur() :array
+    {
         $year = date("Y");
         $query = $this->db->query("SELECT utilisateur.nom, utilisateur.prenom, COUNT(rdv.utilisateur_id) as nombre FROM rdv, utilisateur WHERE rdv.utilisateur_id = utilisateur.id AND YEAR(date) = $year AND utilisateur.entreprise_id = {$this->session->entreprise_id} GROUP BY rdv.utilisateur_id");
         return $query->result();

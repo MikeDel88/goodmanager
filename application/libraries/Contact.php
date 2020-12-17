@@ -1,12 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Contact
  * Cette classe représente le model de construction pour un contact
  */
-class Contact extends Utilities{
-
+class Contact extends Utilities
+{
     private int $id;
     private int $utilisateur_id;
     private int $client_id;
@@ -16,7 +16,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -26,7 +26,7 @@ class Contact extends Utilities{
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -36,7 +36,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of utilisateur_id
-     */ 
+     */
     public function getUtilisateur_id()
     {
         return $this->utilisateur_id;
@@ -46,7 +46,7 @@ class Contact extends Utilities{
      * Set the value of utilisateur_id
      *
      * @return  self
-     */ 
+     */
     public function setUtilisateur_id($utilisateur_id)
     {
         $this->utilisateur_id = $utilisateur_id;
@@ -56,7 +56,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of client_id
-     */ 
+     */
     public function getClient_id()
     {
         return $this->client_id;
@@ -66,7 +66,7 @@ class Contact extends Utilities{
      * Set the value of client_id
      *
      * @return  self
-     */ 
+     */
     public function setClient_id($client_id)
     {
         $this->client_id = $client_id;
@@ -76,7 +76,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function getCreated_at()
     {
         return $this->created_at;
@@ -86,7 +86,7 @@ class Contact extends Utilities{
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
@@ -96,7 +96,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of updated_at
-     */ 
+     */
     public function getUpdated_at()
     {
         return $this->updated_at;
@@ -106,7 +106,7 @@ class Contact extends Utilities{
      * Set the value of updated_at
      *
      * @return  self
-     */ 
+     */
     public function setUpdated_at($updated_at)
     {
         $this->updated_at = $updated_at;
@@ -116,7 +116,7 @@ class Contact extends Utilities{
 
     /**
      * Get the value of date
-     */ 
+     */
     public function getDate()
     {
         return $this->date;
@@ -126,7 +126,7 @@ class Contact extends Utilities{
      * Set the value of date
      *
      * @return  self
-     */ 
+     */
     public function setDate($date)
     {
         $this->date = $date;

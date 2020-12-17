@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Utilities
  * Permet de récupérer de façon automatique les getters et setters
  */
-class Utilities {
+class Utilities
+{
     
     /**
      * __get
@@ -13,10 +14,11 @@ class Utilities {
      * @param  mixed $attr
      * @return void methode magique getter
      */
-    public function __get($attr){    
-        $method = 'get'.ucFirst($attr);        
-        return $this->$method();   
-    }    
+    public function __get($attr)
+    {
+        $method = 'get'.ucFirst($attr);
+        return $this->$method();
+    }
     /**
      * __set
      *
@@ -24,9 +26,9 @@ class Utilities {
      * @param  mixed $value
      * @return void méthode magique setter
      */
-    public function __set($attr, $value){  
+    public function __set($attr, $value)
+    {
         $method = 'set'.ucFirst($attr);
         $this->$method($value);
     }
-    
 }

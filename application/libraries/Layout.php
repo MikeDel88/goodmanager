@@ -1,36 +1,38 @@
-<?
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /**
  * Layout
  * Le Layout de l'application
  */
-class Layout {
-    
+class Layout
+{
     private $CI;
     private $var = array();
     private $theme = "";
     
-    public function __construct() {
-
+    public function __construct()
+    {
         $this->CI =& get_instance();
         $this->var['output'] = '';
         $this->var['title'] = '';
         $this->var['css'] = '';
-        $this->var['js'] = ''; 
+        $this->var['js'] = '';
         $this->var['page'] = '';
         $this->var['message'] = '';
-
     }
 
-    public function view($name, $data = array()) {
-
+    public function view($name, $data = array())
+    {
         $this->var['output'] .= $this->CI->load->view($name, $data, true);
 
         $this->CI->load->view("../views/{$this->theme}.php", $this->var);
     }
 
-    public function views($name, $data = array()) {
+    public function views($name, $data = array())
+    {
         $this->var['output'] .= $this->CI->load->view($name, $data, true);
         return $this;
     }
@@ -47,51 +49,57 @@ class Layout {
         return true;
     }*/
 
-    public function set_theme($theme) {
-        if(is_string($theme) AND !empty($theme) AND file_exists("./application/views/$theme.php")) {
+    public function set_theme($theme)
+    {
+        if (is_string($theme) and !empty($theme) and file_exists("./application/views/$theme.php")) {
             $this->theme = $theme;
             return true;
         }
         return false;
     }
 
-    public function set_title($title) {
-        if(is_string($title) AND !empty($title)) {
+    public function set_title($title)
+    {
+        if (is_string($title) and !empty($title)) {
             $this->var['title'] = $title;
-        return true;
+            return true;
         }
         return false;
     }
 
-    public function set_css($css) {
-        if(is_string($css) AND !empty($css)) {
+    public function set_css($css)
+    {
+        if (is_string($css) and !empty($css)) {
             $this->var['css'] = $css;
-        return true;
+            return true;
         }
         return false;
     }
 
 
-    public function set_js($js) {
-        if(is_string($js) AND !empty($js)) {
+    public function set_js($js)
+    {
+        if (is_string($js) and !empty($js)) {
             $this->var['js'] = $js;
-        return true;
+            return true;
         }
         return false;
     }
 
-    public function set_page($page) {
-        if(is_string($page) AND !empty($page)) {
+    public function set_page($page)
+    {
+        if (is_string($page) and !empty($page)) {
             $this->var['page'] = $page;
-        return true;
+            return true;
         }
         return false;
     }
 
-    public function set_message($message) {
-        if(is_string($message) AND !empty($message)) {
+    public function set_message($message)
+    {
+        if (is_string($message) and !empty($message)) {
             $this->var['message'] = $message;
-        return true;
+            return true;
         }
         return false;
     }
@@ -116,14 +124,12 @@ class Layout {
     //     return false;
     // }
 
-    public function set_header($header) {
-        if(is_string($header)) {
+    public function set_header($header)
+    {
+        if (is_string($header)) {
             $this->var['header'] = $header;
             return true;
         }
         return false;
     }
-
-    
-    
 }

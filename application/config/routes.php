@@ -65,9 +65,9 @@ $route['profil/delete'] = 'profile/deleteUtilisateur';
 
 $route['tableau-de-bord'] = 'dashboard/index';
 $route['tableau-de-bord/api/nouveaux-clients'] = 'dashboard/newClients';
-$route['tableau-de-bord/api/nombre-clients-par-an/(:any)'] = 'dashboard/NumberClientsByYear/$1';
-$route['tableau-de-bord/api/nombre-clients-par-dept'] = 'dashboard/NumberClientByDept';
-$route['tableau-de-bord/api/sans-tel-sans-email'] = 'dashboard/SansTelNiMail';
+$route['tableau-de-bord/api/nombre-clients-par-an/(:any)'] = 'dashboard/numberClientsByYear/$1';
+$route['tableau-de-bord/api/nombre-clients-par-dept'] = 'dashboard/numberClientByDept';
+$route['tableau-de-bord/api/sans-tel-sans-email'] = 'dashboard/sansTelNiMail';
 $route['tableau-de-bord/api/contact-par-utilisateur'] = 'dashboard/contactParUtilisateur';
 $route['tableau-de-bord/api/rdv-par-utilisateur'] = 'dashboard/rendezVousParUtilisateur';
 

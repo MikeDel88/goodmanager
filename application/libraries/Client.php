@@ -1,12 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Client
  * Cette classe représente le model de construction pour un client rattaché à une entreprise
  */
-class Client extends Utilities{
-
+class Client extends Utilities
+{
     private int $id;
     private int $entreprise_id;
     private string $nom;
@@ -27,17 +27,18 @@ class Client extends Utilities{
      *  Retourne l'age du client en fonction de sa date de naissance
      * @return int
      */
-    public function age() :int { 
-        $age = date('Y') - intval($this->date_naissance); 
-        if (date('md') < date('md', strtotime(intval($this->date_naissance)))) { 
-            return $age - 1; 
-        } 
-        return $age; 
-    } 
+    public function age() :int
+    {
+        $age = date('Y') - intval($this->date_naissance);
+        if (date('md') < date('md', strtotime(intval($this->date_naissance)))) {
+            return $age - 1;
+        }
+        return $age;
+    }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -47,7 +48,7 @@ class Client extends Utilities{
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -57,7 +58,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of entreprise_id
-     */ 
+     */
     public function getEntreprise_id()
     {
         return $this->entreprise_id;
@@ -67,7 +68,7 @@ class Client extends Utilities{
      * Set the value of entreprise_id
      *
      * @return  self
-     */ 
+     */
     public function setEntreprise_id($entreprise_id)
     {
         $this->entreprise_id = $entreprise_id;
@@ -77,7 +78,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of nom
-     */ 
+     */
     public function getNom()
     {
         return $this->nom;
@@ -87,7 +88,7 @@ class Client extends Utilities{
      * Set the value of nom
      *
      * @return  self
-     */ 
+     */
     public function setNom($nom)
     {
         $this->nom = $nom;
@@ -97,7 +98,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of prenom
-     */ 
+     */
     public function getPrenom()
     {
         return $this->prenom;
@@ -107,7 +108,7 @@ class Client extends Utilities{
      * Set the value of prenom
      *
      * @return  self
-     */ 
+     */
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
@@ -117,7 +118,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of date_naissance
-     */ 
+     */
     public function getDate_naissance()
     {
         return $this->date_naissance;
@@ -127,7 +128,7 @@ class Client extends Utilities{
      * Set the value of date_naissance
      *
      * @return  self
-     */ 
+     */
     public function setDate_naissance($date_naissance)
     {
         $this->date_naissance = $date_naissance;
@@ -137,7 +138,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of adresse
-     */ 
+     */
     public function getAdresse()
     {
         return $this->adresse;
@@ -147,7 +148,7 @@ class Client extends Utilities{
      * Set the value of adresse
      *
      * @return  self
-     */ 
+     */
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
@@ -157,7 +158,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of code_postal
-     */ 
+     */
     public function getCode_postal()
     {
         return $this->code_postal;
@@ -167,7 +168,7 @@ class Client extends Utilities{
      * Set the value of code_postal
      *
      * @return  self
-     */ 
+     */
     public function setCode_postal($code_postal)
     {
         $this->code_postal = $code_postal;
@@ -177,7 +178,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of ville
-     */ 
+     */
     public function getVille()
     {
         return $this->ville;
@@ -187,7 +188,7 @@ class Client extends Utilities{
      * Set the value of ville
      *
      * @return  self
-     */ 
+     */
     public function setVille($ville)
     {
         $this->ville = $ville;
@@ -197,7 +198,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -207,7 +208,7 @@ class Client extends Utilities{
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -217,7 +218,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of telephone
-     */ 
+     */
     public function getTelephone()
     {
         return $this->telephone;
@@ -227,7 +228,7 @@ class Client extends Utilities{
      * Set the value of telephone
      *
      * @return  self
-     */ 
+     */
     public function setTelephone($telephone)
     {
         $this->telephone = $telephone;
@@ -237,7 +238,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function getCreated_at()
     {
         return $this->created_at;
@@ -247,7 +248,7 @@ class Client extends Utilities{
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
@@ -257,7 +258,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of updated_at
-     */ 
+     */
     public function getUpdated_at()
     {
         return $this->updated_at;
@@ -267,7 +268,7 @@ class Client extends Utilities{
      * Set the value of updated_at
      *
      * @return  self
-     */ 
+     */
     public function setUpdated_at($updated_at)
     {
         $this->updated_at = $updated_at;
@@ -277,7 +278,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of lat
-     */ 
+     */
     public function getLat()
     {
         return $this->lat;
@@ -287,7 +288,7 @@ class Client extends Utilities{
      * Set the value of lat
      *
      * @return  self
-     */ 
+     */
     public function setLat($lat)
     {
         $this->lat = $lat;
@@ -297,7 +298,7 @@ class Client extends Utilities{
 
     /**
      * Get the value of lng
-     */ 
+     */
     public function getLng()
     {
         return $this->lng;
@@ -307,7 +308,7 @@ class Client extends Utilities{
      * Set the value of lng
      *
      * @return  self
-     */ 
+     */
     public function setLng($lng)
     {
         $this->lng = $lng;
