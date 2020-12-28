@@ -6,12 +6,21 @@ let cercle
 let json
 let tableauMarqueurs = [];
 let marqueurs
+let posLat = 46.14939437647686;
+let posLng = 2.1972656250000004;
 
 
 window.onload = () => {
 
+
     // Chargement de la carte
-    mymap = L.map("detailsMap").setView([46.14939437647686, 2.1972656250000004], 6);
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            posLat = position.coords.latitude;
+            posLng = position.coords.longitude;
+        })
+    }
+    mymap = L.map("detailsMap").setView([posLat, posLng], 6);
     L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
         attribution: "&copy; les contributeurs & contributrices OpenStreetMap sous licence libre ODBl. Fond de carte par OpenStreetMap France sous licence libre CC BY-SA",
         minZoom: 1,

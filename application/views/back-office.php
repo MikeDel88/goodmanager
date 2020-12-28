@@ -58,4 +58,5 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
   <script src="<?= $js ?>"></script>
   <script src='<?= base_url() . "assets/js/layout2.js" ?>'></script>
+  <script src='<?= base_url() . "assets/fullcalendar/lib/main.js"?>'></script>
 </html>

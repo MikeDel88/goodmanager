@@ -20,8 +20,8 @@ class RendezVous extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->layout->set_css(base_url() . "assets/fullcalendar/lib/main.css");
-        $this->layout->set_js(base_url() . "assets/fullcalendar/lib/main.js");
+        $this->layout->set_css(base_url("assets/fullcalendar/lib/main.css"));
+        $this->layout->set_js(base_url('assets/js/rdv.js'));
         $this->layout->set_theme("back-office");
     }
     

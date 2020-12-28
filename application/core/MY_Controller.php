@@ -64,8 +64,10 @@ class MY_Controller extends CI_Controller
         foreach ($posts as $key => $value) {
             if ($key == 'date_naissance') {
                 $data['date_naissance'] = date("Y-m-d", strtotime($value));
+            }else{
+                $data[$key] = strtolower($value);
             }
-            $data[$key] = strtolower($value);
+            
         }
         return $data;
     }

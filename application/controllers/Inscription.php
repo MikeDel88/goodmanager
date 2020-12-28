@@ -12,8 +12,7 @@ class Inscription extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $base = base_url();
-        $this->layout->set_css("$base/assets/css/inscription.css");
+        $this->layout->set_css(base_url("assets/css/inscription.css"));
         $this->layout->set_theme('front-office');
     }
     
@@ -26,8 +25,22 @@ class Inscription extends CI_Controller
     {
         $data = [];
         if ($this->form_validation->run()) {
+
             $entreprise_id = $this->registerEntreprise();
-            $data['confirm'] = $this->register($entreprise_id);
+
+            if($entreprise_id !== 0){
+                $register = $this->register($entreprise_id);
+                
+                if($register == true){
+                    $data['confirm'] = 1;
+                }else{
+                    $data['not_confirm'] = 0;
+                }
+                
+            }else{
+                $data['not_confirm'] = 0;
+            }
+            
         }
 
         $this->layout->set_title("GoodManager | Inscription");
@@ -42,7 +55,7 @@ class Inscription extends CI_Controller
     private function registerEntreprise(): int
     {
         $data = [];
-        $data['nom'] = $this->input->post("entreprise");
+        $data['nom'] = strtolower($this->input->post("entreprise"));
         return $this->Entreprise_model->register($data);
     }
 
@@ -73,17 +86,25 @@ class Inscription extends CI_Controller
         // Enregistrement de l'utilisateur
         $register_user = $this->Utilisateur_model->insert($data);
 
-        $lien = BASE_URL . "validation/" . $token;
-        $this->email->from(SMTP_USER, 'No-Reply');
-        $this->email->to($email);
-        $this->email->subject('Validation GoodManager');
-        $this->email->message("
+        if($register_user == false){
+
+            return false;
+
+        }else{ 
+            $lien = BASE_URL . "validation/" . $token;
+            $this->email->from(SMTP_USER, 'No-Reply');
+            $this->email->to($email);
+            $this->email->subject('Validation GoodManager');
+            $this->email->message("
             <p>Bienvenue sur le site de GoodManager ! <br>Afin de valider votre inscription, il vous faut cliquer sur le lien ci-dessous</p>
             <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
             ");
-        $this->email->send();
+            $this->email->send();
             
-        return ($this->email->send(false)) ? false : true;
+            return ($this->email->send(false)) ? false : true;
+        }
+
+        
     }
    
     /**

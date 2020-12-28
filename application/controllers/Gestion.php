@@ -20,6 +20,7 @@ class Gestion extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->layout->set_js(base_url('assets/js/gestion.js'));
         $this->layout->set_theme("back-office");
     }
 

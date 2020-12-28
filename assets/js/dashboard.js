@@ -38,7 +38,8 @@ ListeNouveauClients().then(function (clients) {
         marker: {
             color: 'rgb(49,130,189)',
             opacity: 0.7,
-        }
+        },
+
     };
 
     let data = [trace1];
@@ -48,7 +49,12 @@ ListeNouveauClients().then(function (clients) {
         xaxis: {
             tickangle: -45
         },
-        barmode: 'group'
+        barmode: 'group',
+        xaxis: {
+            type: 'category'
+        },
+
+
     };
     let config = { responsive: true }
 
@@ -72,8 +78,8 @@ for (i = nombreAnneAnalyse - 1; i >= 0; i--) {
 }
 tableauAnneeUrl = tableauAnnees.join('-');
 
-nombreClientsParAn(tableauAnneeUrl).then(function (clients) {
 
+function graphiqueNombreClientsParAn(clients) {
     nombreClients = [];
     annees = []
 
@@ -92,13 +98,21 @@ nombreClientsParAn(tableauAnneeUrl).then(function (clients) {
 
     let layout = {
         title: 'Nombre de clients par an',
-        showlegend: false
+        showlegend: false,
+        xaxis: {
+            type: 'category',
+        },
+        yaxis: {
+            type: 'linear',
+        }
     };
 
     let config = { responsive: true }
 
     Plotly.newPlot(NBR_CLIENTS_YEAR, data, layout, config);
-
+}
+nombreClientsParAn(tableauAnneeUrl).then(function (clients) {
+    graphiqueNombreClientsParAn(clients);
 })
 document.querySelector('#nombre-annees').addEventListener('change', function () {
 
@@ -111,32 +125,7 @@ document.querySelector('#nombre-annees').addEventListener('change', function () 
     tableauAnneeUrl = tableauAnnees.join('-');
 
     nombreClientsParAn(tableauAnneeUrl).then(function (clients) {
-
-        nombreClients = [];
-        annees = []
-
-        clients.forEach(client => {
-            nombreClients.push(client.nombre);
-            annees.push(client.annee)
-        })
-        let trace1 = {
-            x: annees,
-            y: nombreClients,
-            mode: 'lines+markers',
-            connectgaps: true
-        };
-
-        let data = [trace1];
-
-        let layout = {
-            title: 'Nombre de clients par an',
-            showlegend: false
-        };
-
-        let config = { responsive: true }
-
-        Plotly.newPlot(NBR_CLIENTS_YEAR, data, layout, config);
-
+        graphiqueNombreClientsParAn(clients);
     })
 })
 
@@ -157,7 +146,8 @@ nombreClientSansTelSansMail().then(function (info) {
     let layout = {
         title: 'Nombre clients sans téléphone ou email',
         xaxis: {
-            tickangle: -45
+            tickangle: -45,
+            rangemode: "tozero"
         },
         barmode: 'group'
     };
@@ -190,6 +180,9 @@ async function nombreContactParUtilisateur() {
 
     let layout = {
         title: `Nombre de contacts clients par utilisateur sur ${new Date().getFullYear()} | Total ${nombreTotal}`,
+        xaxis: {
+            rangemode: "tozero"
+        },
     }
     let config = { responsive: true }
 
@@ -221,6 +214,9 @@ async function nombreRdvParUtilisateur() {
 
     let layout = {
         title: `Nombre de rendez-vous clients par utilisateur sur ${new Date().getFullYear()} | Total ${nombreTotal}`,
+        xaxis: {
+            rangemode: "tozero"
+        },
     }
     let config = { responsive: true }
 

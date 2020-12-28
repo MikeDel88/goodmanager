@@ -20,6 +20,7 @@ class Liste extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->layout->set_js(base_url('assets/js/listing.js'));
         $this->layout->set_theme("back-office");
     }
     
@@ -30,7 +31,6 @@ class Liste extends MY_Controller
      */
     public function index(array $clients = null, array $contacts = null) :void
     {
-        $data = [];
         $data['clients'] = $clients;
         $data['contacts'] = $contacts;
 
@@ -47,16 +47,20 @@ class Liste extends MY_Controller
     public function search() :void
     {
         if ($this->form_validation->run()) {
-            $contacts =[];
+
             $field = $this->input->post('select-search');
             $value = $this->input->post('search');
 
             $clients = $this->Client_model->getClientBy($field, $value);
             
             $contacts = $this->Contact_model->getContact();
+
             $this->index($clients, $contacts);
+
+        }else{
+            redirect("liste-clients");
         }
-        redirect("liste-clients");
+        
     }
     
     /**
