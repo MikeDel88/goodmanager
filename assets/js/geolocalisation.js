@@ -19,6 +19,7 @@ window.onload = () => {
             let coordLat = position.coords.latitude;
             let coordLng = position.coords.longitude;
             mymap = L.map("detailsMap").setView([coordLat, coordLng], 6);
+            return mymap;
         }, function () {
             mymap = L.map("detailsMap").setView([posLat, posLng], 6);
         })
