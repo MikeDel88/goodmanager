@@ -23,6 +23,7 @@ class Errors extends CI_Controller
      */
     public function error404() :void
     {
+        set_status_header(404); 
         $this->layout->set_title("GoodManager | Page introuvable");
         $this->layout->view("error");
     }

@@ -14,6 +14,7 @@ class Inscription extends CI_Controller
         parent::__construct();
         $this->layout->set_css(base_url("assets/css/inscription.css"));
         $this->layout->set_theme('front-office');
+
     }
     
     /**
@@ -56,7 +57,7 @@ class Inscription extends CI_Controller
     {
         $data = [];
         $data['nom'] = strtolower($this->input->post("entreprise"));
-        return $this->Entreprise_model->register($data);
+        return $this->Entreprise_model->register($this->security->xss_clean($data));
     }
 
     /**
@@ -84,7 +85,7 @@ class Inscription extends CI_Controller
             );
 
         // Enregistrement de l'utilisateur
-        $register_user = $this->Utilisateur_model->insert($data);
+        $register_user = $this->Utilisateur_model->insert($this->security->xss_clean($data));
 
         if($register_user == false){
 

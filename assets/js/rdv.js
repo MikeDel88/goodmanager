@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             divRDV.appendChild(form);
             form.appendChild(inputSearch);
 
-            inputSearch.addEventListener('change', async function () {
+            async function searchClient() {
 
                 if (inputSearch.value !== '') {
                     let response = await fetch(`${window.origin}/gestion-clients/api/${inputSearch.value}`);
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         form.appendChild(button);
 
                         button.addEventListener('click', async function () {
-
+                            console.log("OKKKKKKK");
                             let response = await fetch(
 
                                 `${window.origin}/rendez-vous/api/add-rdv`,
@@ -149,7 +149,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     }
                 }
-            })
+            }
+            inputSearch.addEventListener('change', searchClient);
 
         },
         eventClick: function (info) {
