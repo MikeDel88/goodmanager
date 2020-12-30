@@ -20,7 +20,7 @@ window.onload = () => {
 
     // Chargement de la carte
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(mymap = geoloc(position), function () {
+        navigator.geolocation.getCurrentPosition(mymap = geoloc, function () {
             mymap = L.map("detailsMap").setView([posLat, posLng], 6);
         })
     } else {
