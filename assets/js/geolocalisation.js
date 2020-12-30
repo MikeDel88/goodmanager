@@ -11,16 +11,16 @@ let posLng = 2.1972656250000004;
 
 
 window.onload = () => {
-
+    function geoloc(position) {
+        let coordLat = position.coords.latitude;
+        let coordLng = position.coords.longitude;
+        mymap = L.map("detailsMap").setView([coordLat, coordLng], 6);
+        return mymap;
+    }
 
     // Chargement de la carte
     if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            let coordLat = position.coords.latitude;
-            let coordLng = position.coords.longitude;
-            mymap = L.map("detailsMap").setView([coordLat, coordLng], 6);
-            return mymap;
-        }, function () {
+        navigator.geolocation.getCurrentPosition(mymap = geoloc(position), function () {
             mymap = L.map("detailsMap").setView([posLat, posLng], 6);
         })
     } else {
