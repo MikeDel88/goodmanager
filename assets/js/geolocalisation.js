@@ -16,9 +16,9 @@ window.onload = () => {
     // Chargement de la carte
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            posLat = position.coords.latitude;
-            posLng = position.coords.longitude;
-            mymap = L.map("detailsMap").setView([posLat, posLng], 6);
+            let coordLat = position.coords.latitude;
+            let coordLng = position.coords.longitude;
+            mymap = L.map("detailsMap").setView([coordLat, coordLng], 6);
         }, function () {
             mymap = L.map("detailsMap").setView([posLat, posLng], 6);
         })
