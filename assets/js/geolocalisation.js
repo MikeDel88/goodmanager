@@ -14,15 +14,17 @@ window.onload = () => {
 
 
     // Chargement de la carte
+    mymap = L.map("detailsMap");
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
             posLat = position.coords.latitude;
             posLng = position.coords.longitude;
-            mymap = L.map("detailsMap").setView([posLat, posLng], 2);
+            mymap.setView([posLat, posLng], 2);
         })
     } else {
-        mymap = L.map("detailsMap").setView([posLat, posLng], 6);
+        mymap.setView([posLat, posLng], 6);
     }
+
     L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
         attribution: "&copy; les contributeurs & contributrices OpenStreetMap sous licence libre ODBl. Fond de carte par OpenStreetMap France sous licence libre CC BY-SA",
         minZoom: 1,
