@@ -22,6 +22,7 @@ window.onload = () => {
             return coordonnees;
         })
     }
+    console.log(geoloc)
     mymap = L.map("detailsMap").setView(geoloc, 6);
     L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png", {
         attribution: "&copy; les contributeurs & contributrices OpenStreetMap sous licence libre ODBl. Fond de carte par OpenStreetMap France sous licence libre CC BY-SA",
