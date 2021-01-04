@@ -47,7 +47,6 @@ class Geolocalisation extends MY_Controller
     public function geolocalisationClient($lat, $lng, $distance) :void
     {
         $result = $this->Client_model->getGeolocalisationClients($lat, $lng, $distance);
-        
         header('Content-type: application/json');
         echo json_encode($result);
     }
