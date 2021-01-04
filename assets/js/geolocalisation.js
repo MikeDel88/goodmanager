@@ -1,14 +1,3 @@
-// let mymap 
-// let marqueur
-// let lat
-// let lng
-// let cercle
-// let json
-// let tableauMarqueurs = [];
-// let marqueurs
-// let posLat = 46.14939437647686;
-// let posLng = 2.1972656250000004;
-
 window.onload = () => {
 
     class Map {
@@ -47,7 +36,7 @@ window.onload = () => {
 
             // Récupère les coordonnées du clic
             let pos = e.latlng
-
+            console.log(pos)
 
             this.lat = pos.lat
             this.lng = pos.lng
@@ -56,7 +45,6 @@ window.onload = () => {
             let ville = await this.getAdresse(this.lat, this.lng)
             document.querySelector("#search").value = ville.display_name
             document.querySelector('#filtre').value = 'adresse'
-            console.log(ville)
             // Affiche le marqueur
             this.addMarker(pos);
             this.marqueur.bindPopup(`${ville.address.postcode}, ${ville.address.village}`)
@@ -162,7 +150,9 @@ window.onload = () => {
         navigator.geolocation.getCurrentPosition(function (position) {
             posLat = position.coords.latitude;
             posLng = position.coords.longitude;
-            new Map(posLat, posLng, 15);
+            let map = new Map(posLat, posLng, 15);
+            let myPos = { lat: posLat, lng: posLng };
+            map.addMarker(myPos);
         }, function () {
             new Map(46.14939437647686, 2.1972656250000004, 6);
         })
