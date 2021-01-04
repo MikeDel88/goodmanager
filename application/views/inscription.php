@@ -34,8 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button type="submit" class="waves-effect waves-light btn #0d47a1 blue darken-2  right-align">inscription</button>
         <div class="messages">
         <?= validation_errors('<div class="chip teal lighten-1 white-text">', '<i class="close material-icons">close</i></div><br>'); ?>
-        <?= (isset($confirm)) ? "<p class='chip teal ligthen-1 white-text'>Un mail vient d'être envoyé</p>" : '' ?>
-        <?= (isset($not_confirm)) ? "<p class='chip red white-text'>Un problème est survenue" : '' ?>
+        <?= (isset($confirm) && $confirm == true) ? "<p class='chip teal ligthen-1 white-text'>Un mail vient d'être envoyé</p>" : '' ?>
+        <?= (isset($confirm) && $confirm == false) ? "<p class='chip red white-text'>Un problème est survenue" : '' ?>
         </div>
     </div>
 

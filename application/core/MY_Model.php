@@ -38,6 +38,14 @@ class MY_Model extends CI_Model
     {
         return $this->db->select('*')->from($this->getTable())->where($fields, $data)->get()->custom_row_object(0, $class);
     }
+
+    public function check(string $fields, string $data) :int{
+        $this->db->select('*')
+        ->from($this->getTable())
+        ->where($fields, $data);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
     
     /**
      * selectAll

@@ -27,21 +27,21 @@ class Inscription extends CI_Controller
         $data = [];
         if ($this->form_validation->run()) {
 
-            $entreprise_id = $this->registerEntreprise();
-
-            if($entreprise_id !== 0){
-                $register = $this->register($entreprise_id);
-                
-                if($register == true){
-                    $data['confirm'] = 1;
-                }else{
-                    $data['not_confirm'] = 0;
-                }
-                
-            }else{
-                $data['not_confirm'] = 0;
+            // On vérifie si le nom de l'entreprise ou l'email est déjà présent en BDD
+            $inputEntreprise = $this->security->xss_clean($this->input->post("entreprise"));
+            $entrepriseExiste = $this->Entreprise_model->check('nom', $inputEntreprise);
+            $inputMail = $this->security->xss_clean($this->input->post("email"));
+            $emailExiste = $this->Utilisateur_model->check('email', $inputMail);
+             
+            if($emailExiste === 1 || $entrepriseExiste === 1){
+                $data['confirm'] = false;
             }
-            
+            else{
+                $entreprise_id = $this->registerEntreprise($inputEntreprise);
+                $register = $this->register($entreprise_id);
+                $data['confirm'] = ($register === true) ? true : false;
+            }
+
         }
 
         $this->layout->set_title("GoodManager | Inscription");
@@ -53,10 +53,10 @@ class Inscription extends CI_Controller
      *
      * @return int Enregistrement de l'entreprise avec son nom et on retourne l'id
      */
-    private function registerEntreprise(): int
+    private function registerEntreprise($nameEntreprise): int
     {
         $data = [];
-        $data['nom'] = strtolower($this->input->post("entreprise"));
+        $data['nom'] = strtolower($nameEntreprise);
         return $this->Entreprise_model->register($this->security->xss_clean($data));
     }
 
@@ -88,24 +88,37 @@ class Inscription extends CI_Controller
         $register_user = $this->Utilisateur_model->insert($this->security->xss_clean($data));
 
         if($register_user == false){
-
             return false;
-
         }else{ 
-            $lien = BASE_URL . "validation/" . $token;
-            $this->email->from(SMTP_USER, 'No-Reply');
-            $this->email->to($email);
-            $this->email->subject('Validation GoodManager');
-            $this->email->message("
-            <p>Bienvenue sur le site de GoodManager ! <br>Afin de valider votre inscription, il vous faut cliquer sur le lien ci-dessous</p>
-            <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation</a>
-            ");
-            $this->email->send();
-            
-            return ($this->email->send(false)) ? false : true;
+            $emailResult = $this->email($token, $token_validation, $email);
+            return ($emailResult && $register_user) ? true : false;
         }
 
-        
+    }
+    
+    
+    /**
+     * email
+     * Permet l'envoi d'un email à l'utilisateur en cours d'inscription
+     * @param  mixed $token
+     * @param  mixed $token_validation
+     * @param  mixed $email
+     * @return bool
+     */
+    private function email(string $token, string $token_validation, string $email) :bool{
+
+        $lien = BASE_URL . "validation/" . $token;
+        $token_validation_fr = date("d-m-Y à H:i:s", strtotime($token_validation));
+        $this->email->from(SMTP_USER, 'No-Reply');
+        $this->email->to($email);
+        $this->email->subject('Validation GoodManager');
+        $this->email->message("
+        <p>Bienvenue sur le site de GoodManager ! <br>Afin de valider votre inscription, il vous faut cliquer sur le lien ci-dessous</p>
+        <a href='$lien' target='_blank'>Lien de confirmation valable jusqu'au $token_validation_fr</a>
+        ");
+
+        return ($this->email->send()) ? true : false;
+
     }
    
     /**
